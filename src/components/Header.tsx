@@ -52,20 +52,23 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center justify-between h-16">
           {/* Brand Logo & Title */}
           <div className="flex items-center space-x-3">
-            <div className="p-2.5 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 text-white shadow-lg shadow-sky-500/20 ring-1 ring-white/20">
+            <div className="p-2.5 rounded-xl bg-gradient-to-tr from-teal-600 to-sky-600 text-white shadow-lg shadow-teal-500/20 ring-1 ring-white/20">
               <Plane className="w-6 h-6 transform -rotate-12" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
                 <h1 className="text-lg font-bold tracking-tight text-white flex items-center">
-                  MoSPI Airfare CPI Engine
+                  AirIntel India
                 </h1>
+                <span className="px-2 py-0.5 text-[10px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30 rounded-full font-mono">
+                  Team Rookie
+                </span>
                 <span className="px-2 py-0.5 text-[10px] font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/30 rounded-full font-mono">
                   SIH 26056
                 </span>
               </div>
               <p className="text-xs text-slate-400">
-                National Statistical Office • Ministry of Statistics & Programme Implementation
+                MoSPI Airfare Intelligence & CPI Command Center • National Statistical Office
               </p>
             </div>
           </div>

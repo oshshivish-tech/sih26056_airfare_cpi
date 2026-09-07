@@ -8,6 +8,12 @@ import { MethodologyDoc } from './components/MethodologyDoc';
 import { OutlierAnalysisModal } from './components/OutlierAnalysisModal';
 import { ExportModal } from './components/ExportModal';
 
+import { IndiaFlightMap } from './components/IndiaFlightMap';
+import { TransmissionChain } from './components/TransmissionChain';
+import { FuelPriceSimulator } from './components/FuelPriceSimulator';
+import { DailyCPIChart } from './components/DailyCPIChart';
+import { CorridorAvgTable } from './components/CorridorAvgTable';
+
 import { MOCK_CPI_HISTORICAL, MOCK_OUTLIERS, MOCK_ROUTE_WEIGHTS } from './data/mockData';
 import { MoSPICPIEngine } from './services/cpiEngine';
 import { scraperOrchestrator, ScrapingLogEntry } from './services/scraperEngine';
@@ -98,11 +104,21 @@ export const App: React.FC = () => {
         {/* Tab 1: Overview */}
         {activeTab === 'overview' && (
           <div className="space-y-6">
+            <TransmissionChain currentAirfareSurgePct={latestPoint.momInflationRate || 11.4} />
+
             <IndexChart
               data={historicalData}
               selectedLeadTime={selectedLeadTime}
               onSelectLeadTime={setSelectedLeadTime}
             />
+
+            <DailyCPIChart />
+
+            <FuelPriceSimulator baseJevonsIndex={latestPoint.jevonsIndex} />
+
+            <IndiaFlightMap corridorBreakdown={currentEngineResult.corridorBreakdown} />
+
+            <CorridorAvgTable corridorBreakdown={currentEngineResult.corridorBreakdown} />
 
             <RouteHeatmap corridorBreakdown={currentEngineResult.corridorBreakdown} />
           </div>

@@ -80,6 +80,16 @@ export interface OutlierRecord {
   timestamp: string;
 }
 
+export interface DailyFarePoint {
+  date: string;
+  dayLabel: string;
+  dailyJevonsIndex: number;
+  dailyAvgFare: number;
+  movingAverage7d: number;
+  scrapedQuotesCount: number;
+  isWeekend: boolean;
+}
+
 export interface MoSPIExportReport {
   generatedAt: string;
   baseYear: number;
