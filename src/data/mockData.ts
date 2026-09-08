@@ -215,7 +215,7 @@ export const MOCK_CPI_HISTORICAL: CPIIndexPoint[] = [
   { date: '2026-06', periodLabel: 'Jun 2026', jevonsIndex: 112.6, dutotIndex: 113.9, weightedLaspeyresIndex: 112.1, officialMoSPICPIBaseline: 110.8, sampleCount: 20500, leadTimeFilter: 'ALL', yoyInflationRate: 7.2, momInflationRate: -4.7 },
   { date: '2026-07', periodLabel: 'Jul 2026', jevonsIndex: 107.4, dutotIndex: 108.1, weightedLaspeyresIndex: 107.0, officialMoSPICPIBaseline: 106.5, sampleCount: 18900, leadTimeFilter: 'ALL', yoyInflationRate: 5.4, momInflationRate: -4.6 },
   { date: '2026-08', periodLabel: 'Aug 2026', jevonsIndex: 109.8, dutotIndex: 110.6, weightedLaspeyresIndex: 109.4, officialMoSPICPIBaseline: 108.2, sampleCount: 21400, leadTimeFilter: 'ALL', yoyInflationRate: 6.1, momInflationRate: 2.2 },
-  { date: '2026-09', periodLabel: 'Sep 2026 (Live)', jevonsIndex: 111.4, dutotIndex: 112.5, weightedLaspeyresIndex: 111.0, officialMoSPICPIBaseline: 109.5, sampleCount: 24850, leadTimeFilter: 'ALL', yoyInflationRate: 6.9, momInflationRate: 1.5 },
+  { date: '2026-09', periodLabel: 'Sep 2026 (Live - 08 Sep)', jevonsIndex: 111.4, dutotIndex: 112.5, weightedLaspeyresIndex: 111.0, officialMoSPICPIBaseline: 109.5, sampleCount: 25400, leadTimeFilter: 'ALL', yoyInflationRate: 6.9, momInflationRate: 1.5 },
   { date: '2026-10', periodLabel: 'Oct 2026 (Fcst)', jevonsIndex: 115.8, dutotIndex: 117.1, weightedLaspeyresIndex: 115.4, officialMoSPICPIBaseline: 113.8, sampleCount: 26000, leadTimeFilter: 'ALL', yoyInflationRate: 8.2, momInflationRate: 3.9 },
   { date: '2026-11', periodLabel: 'Nov 2026 (Fcst)', jevonsIndex: 119.4, dutotIndex: 121.0, weightedLaspeyresIndex: 118.9, officialMoSPICPIBaseline: 117.2, sampleCount: 27500, leadTimeFilter: 'ALL', yoyInflationRate: 9.5, momInflationRate: 3.1 },
   { date: '2026-12', periodLabel: 'Dec 2026 (Fcst)', jevonsIndex: 122.5, dutotIndex: 124.2, weightedLaspeyresIndex: 122.0, officialMoSPICPIBaseline: 120.1, sampleCount: 29000, leadTimeFilter: 'ALL', yoyInflationRate: 11.2, momInflationRate: 2.6 },
@@ -252,7 +252,8 @@ export const MOCK_DAILY_CPI: DailyFarePoint[] = [
   { date: '2026-09-04', dayLabel: '04 Sep (Fri)', dailyJevonsIndex: 114.8, dailyAvgFare: 5790, movingAverage7d: 5450, scrapedQuotesCount: 2200, isWeekend: true },
   { date: '2026-09-05', dayLabel: '05 Sep (Sat)', dailyJevonsIndex: 116.2, dailyAvgFare: 5950, movingAverage7d: 5470, scrapedQuotesCount: 2310, isWeekend: true },
   { date: '2026-09-06', dayLabel: '06 Sep (Sun)', dailyJevonsIndex: 115.5, dailyAvgFare: 5880, movingAverage7d: 5490, scrapedQuotesCount: 2260, isWeekend: true },
-  { date: '2026-09-07', dayLabel: '07 Sep (Mon - Today)', dailyJevonsIndex: 111.4, dailyAvgFare: 5420, movingAverage7d: 5520, scrapedQuotesCount: 2480, isWeekend: false },
+  { date: '2026-09-07', dayLabel: '07 Sep (Mon)', dailyJevonsIndex: 111.4, dailyAvgFare: 5420, movingAverage7d: 5520, scrapedQuotesCount: 2480, isWeekend: false },
+  { date: '2026-09-08', dayLabel: '08 Sep (Tue - Today)', dailyJevonsIndex: 110.9, dailyAvgFare: 5350, movingAverage7d: 5540, scrapedQuotesCount: 2540, isWeekend: false },
 ];
 
 // Sample Outliers Detected & Excluded by Algorithm
