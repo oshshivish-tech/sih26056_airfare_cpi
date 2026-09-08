@@ -119,7 +119,8 @@ class AirfareScraperEngine:
 def main():
     parser = argparse.ArgumentParser(description="MoSPI Airfare Production Scraper")
     parser.add_argument("--route", type=str, default="DEL-BOM", help="Origin-Destination (e.g. DEL-BOM)")
-    parser.add_argument("--date", type=str, default="2026-09-15", help="Departure date YYYY-MM-DD")
+    default_date = (datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d")
+    parser.add_argument("--date", type=str, default=default_date, help="Departure date YYYY-MM-DD")
     args = parser.parse_args()
 
     origin, dest = args.route.split("-") if "-" in args.route else ("DEL", "BOM")

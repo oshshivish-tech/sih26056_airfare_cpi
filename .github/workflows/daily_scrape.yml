@@ -27,7 +27,7 @@ jobs:
 
       - name: Run Automated Airfare Scraping Engine & CPI Computation
         run: |
-          python backend/scraper_engine_real.py --route DEL-BOM --date $(date -d "+7 days" +%Y-%m-%d)
+          python backend/scraper_engine_real.py --route DEL-BOM
 
       - name: Commit & Push Updated Daily CPI Index Dataset
         run: |
