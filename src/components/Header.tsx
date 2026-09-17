@@ -1,11 +1,12 @@
 import React from 'react';
-import { Activity, Plane, Download, RefreshCw, Layers, ShieldCheck, BarChart3, Database } from 'lucide-react';
+import { Activity, Plane, Download, RefreshCw, Layers, ShieldCheck, BarChart3, Database, Lock } from 'lucide-react';
 
 interface HeaderProps {
   activeTab: 'overview' | 'corridors' | 'scraper' | 'methodology';
   setActiveTab: (tab: 'overview' | 'corridors' | 'scraper' | 'methodology') => void;
   onRunScrape: () => void;
   onOpenExport: () => void;
+  onOpenProvenance: () => void;
   isScraping: boolean;
   latestIndex: number;
   yoyInflation: number;
@@ -16,6 +17,7 @@ export const Header: React.FC<HeaderProps> = ({
   setActiveTab,
   onRunScrape,
   onOpenExport,
+  onOpenProvenance,
   isScraping,
   latestIndex,
   yoyInflation,
@@ -126,6 +128,15 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-3">
+            <button
+              onClick={onOpenProvenance}
+              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-teal-300 bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 transition-all"
+              title="View SHA-256 Cryptographic Audit Trail"
+            >
+              <Lock className="w-3.5 h-3.5 text-teal-400" />
+              <span>Provenance Vault</span>
+            </button>
+
             <button
               onClick={onRunScrape}
               disabled={isScraping}

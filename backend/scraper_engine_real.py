@@ -118,36 +118,44 @@ class AirfareScraperEngine:
 
 import os
 
+import re
+
 def update_mockdata_file(all_fares):
     mockdata_path = os.path.join(os.path.dirname(__file__), "..", "src", "data", "mockData.ts")
     if not os.path.exists(mockdata_path):
         print(f"[-] mockData.ts not found at {mockdata_path}")
         return
 
-    today_str = datetime.now().strftime("%Y-%m-%d")
-    day_label = datetime.now().strftime("%d %b (%a - Today)")
-    
+    now = datetime.now()
+    today_str = now.strftime("%Y-%m-%d")
+    day_label = now.strftime("%d %b (%a - Today)")
+    day_short = now.strftime("%d %b")
+    month_short = now.strftime("%b %Y")
+
     with open(mockdata_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    if f"date: '{today_str}'" in content:
-        print(f"[+] Today's date {today_str} is already present in mockData.ts.")
-        return
+    # Clean up previous " - Today)" labels
+    content = content.replace(" - Today)", ")")
+
+    # Update periodLabel in MOCK_CPI_HISTORICAL for current month
+    new_period_label = f"periodLabel: '{month_short} (Live - {day_short})'"
+    content = re.sub(r"periodLabel:\s*'[^']*Live[^']*'", new_period_label, content)
 
     avg_fare = round(sum(f["total_fare"] for f in all_fares) / len(all_fares)) if all_fares else 5450
     jevons_index = round(100.0 * (avg_fare / 4850.0), 1)
-    
-    new_entry = f"  {{ date: '{today_str}', dayLabel: '{day_label}', dailyJevonsIndex: {jevons_index}, dailyAvgFare: {avg_fare}, movingAverage7d: {avg_fare + 50}, scrapedQuotesCount: {len(all_fares) * 350 + 1200}, isWeekend: false }},\n];"
-    
-    if "];\n\n// Sample Outliers" in content:
-        updated_content = content.replace("];\n\n// Sample Outliers", f"{new_entry}\n\n// Sample Outliers")
+
+    if f"date: '{today_str}'" not in content:
+        new_entry = f"  {{ date: '{today_str}', dayLabel: '{day_label}', dailyJevonsIndex: {jevons_index}, dailyAvgFare: {avg_fare}, movingAverage7d: {avg_fare + 50}, scrapedQuotesCount: {len(all_fares) * 350 + 1200}, isWeekend: false }},\n];"
+        if "];\n\n// Sample Outliers" in content:
+            content = content.replace("];\n\n// Sample Outliers", f"{new_entry}\n\n// Sample Outliers")
     else:
-        updated_content = content
+        print(f"[+] Today's date {today_str} is already present in mockData.ts.")
 
     with open(mockdata_path, "w", encoding="utf-8") as f:
-        f.write(updated_content)
-    
-    print(f"[+] Successfully appended today's daily CPI entry ({today_str}) to mockData.ts!")
+        f.write(content)
+
+    print(f"[+] Successfully updated daily CPI dataset ({today_str}) in mockData.ts!")
 
 def main():
     parser = argparse.ArgumentParser(description="MoSPI Airfare Production Scraper")

@@ -7,6 +7,7 @@ import { LiveScraperMonitor } from './components/LiveScraperMonitor';
 import { MethodologyDoc } from './components/MethodologyDoc';
 import { OutlierAnalysisModal } from './components/OutlierAnalysisModal';
 import { ExportModal } from './components/ExportModal';
+import { ProvenanceVaultModal } from './components/ProvenanceVaultModal';
 
 import { IndiaFlightMap } from './components/IndiaFlightMap';
 import { TransmissionChain } from './components/TransmissionChain';
@@ -30,6 +31,7 @@ export const App: React.FC = () => {
 
   const [isOutlierModalOpen, setIsOutlierModalOpen] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+  const [isProvenanceModalOpen, setIsProvenanceModalOpen] = useState(false);
 
   const latestPoint = historicalData[historicalData.length - 1];
 
@@ -86,6 +88,7 @@ export const App: React.FC = () => {
         setActiveTab={setActiveTab}
         onRunScrape={handleRunScrape}
         onOpenExport={() => setIsExportModalOpen(true)}
+        onOpenProvenance={() => setIsProvenanceModalOpen(true)}
         isScraping={isScraping}
         latestIndex={latestPoint.jevonsIndex}
         yoyInflation={latestPoint.yoyInflationRate}
@@ -147,7 +150,7 @@ export const App: React.FC = () => {
       <footer className="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <div>
-            <strong>MoSPI Airfare CPI Engine</strong> • Smart India Hackathon (SIH) 2026 Problem Statement 26056
+            <strong>AirIntel India</strong> • Team Rookie • SIH 2026 Problem Statement 26056
           </div>
           <div className="text-slate-400 font-mono">
             National Statistical Office (NSO) Augmentation Framework
@@ -166,6 +169,12 @@ export const App: React.FC = () => {
         isOpen={isExportModalOpen}
         onClose={() => setIsExportModalOpen(false)}
         historicalData={historicalData}
+        currentPoint={latestPoint}
+      />
+
+      <ProvenanceVaultModal
+        isOpen={isProvenanceModalOpen}
+        onClose={() => setIsProvenanceModalOpen(false)}
         currentPoint={latestPoint}
       />
     </div>

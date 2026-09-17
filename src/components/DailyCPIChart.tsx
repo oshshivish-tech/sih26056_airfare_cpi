@@ -15,6 +15,10 @@ import { MOCK_DAILY_CPI } from '../data/mockData';
 import { Calendar, TrendingUp, DollarSign } from 'lucide-react';
 
 export const DailyCPIChart: React.FC = () => {
+  const latestDaily = MOCK_DAILY_CPI[MOCK_DAILY_CPI.length - 1];
+  const todayAvgFare = latestDaily ? `₹${latestDaily.dailyAvgFare.toLocaleString()}` : '₹5,420';
+  const movingAvgFare = latestDaily ? `₹${latestDaily.movingAverage7d.toLocaleString()}` : '₹5,520';
+
   return (
     <div className="glass-panel p-6 rounded-2xl mb-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -36,11 +40,11 @@ export const DailyCPIChart: React.FC = () => {
         <div className="flex items-center space-x-4 text-xs font-mono">
           <div className="text-right">
             <span className="text-slate-400 text-[10px] uppercase block">Today's Avg Fare</span>
-            <span className="text-white font-bold text-sm">₹5,420</span>
+            <span className="text-white font-bold text-sm">{todayAvgFare}</span>
           </div>
           <div className="text-right">
             <span className="text-slate-400 text-[10px] uppercase block">7-Day Moving Avg</span>
-            <span className="text-sky-400 font-bold text-sm">₹5,520</span>
+            <span className="text-sky-400 font-bold text-sm">{movingAvgFare}</span>
           </div>
         </div>
       </div>
