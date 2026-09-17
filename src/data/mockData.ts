@@ -268,6 +268,19 @@ export const MOCK_DAILY_CPI: DailyFarePoint[] = [
 // Sample Outliers Detected & Excluded by Algorithm
 export const MOCK_OUTLIERS: OutlierRecord[] = [
   {
+    id: 'out-105',
+    flightNumber: '6E-5012',
+    corridor: 'DEL ↔ BOM',
+    airline: 'IndiGo',
+    observedFare: 26800,
+    expectedRouteMedianFare: 5350,
+    zScore: 5.12,
+    iqrBounds: [3300, 8000],
+    action: 'EXCLUDED_FROM_INDEX',
+    reason: 'LAST_MINUTE_SCALPING',
+    timestamp: '2026-09-17 02:00:15'
+  },
+  {
     id: 'out-101',
     flightNumber: '6E-2041',
     corridor: 'DEL ↔ BOM',
@@ -278,7 +291,7 @@ export const MOCK_OUTLIERS: OutlierRecord[] = [
     iqrBounds: [3200, 7800],
     action: 'EXCLUDED_FROM_INDEX',
     reason: 'LAST_MINUTE_SCALPING',
-    timestamp: '2026-09-06 18:45:12'
+    timestamp: '2026-09-16 18:45:12'
   },
   {
     id: 'out-102',
@@ -291,7 +304,7 @@ export const MOCK_OUTLIERS: OutlierRecord[] = [
     iqrBounds: [3400, 8100],
     action: 'EXCLUDED_FROM_INDEX',
     reason: 'FIRST_CLASS_ANOMALY',
-    timestamp: '2026-09-06 17:30:05'
+    timestamp: '2026-09-15 17:30:05'
   },
   {
     id: 'out-103',
@@ -304,7 +317,7 @@ export const MOCK_OUTLIERS: OutlierRecord[] = [
     iqrBounds: [2800, 6200],
     action: 'ADJUSTED',
     reason: 'PROMOTIONAL_DISCOUNT',
-    timestamp: '2026-09-06 16:10:44'
+    timestamp: '2026-09-14 16:10:44'
   },
   {
     id: 'out-104',
@@ -317,7 +330,7 @@ export const MOCK_OUTLIERS: OutlierRecord[] = [
     iqrBounds: [3600, 8400],
     action: 'EXCLUDED_FROM_INDEX',
     reason: 'FLEXI_SURGE_PRICING',
-    timestamp: '2026-09-06 15:22:00'
+    timestamp: '2026-09-13 15:22:00'
   }
 ];
 
