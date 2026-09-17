@@ -61,6 +61,7 @@ export const OutlierAnalysisModal: React.FC<OutlierAnalysisModalProps> = ({
                   <th className="py-2.5 px-3">Route Median</th>
                   <th className="py-2.5 px-3">Z-Score</th>
                   <th className="py-2.5 px-3">Anomaly Reason</th>
+                  <th className="py-2.5 px-3">Timestamp</th>
                   <th className="py-2.5 px-3 text-right">Action Taken</th>
                 </tr>
               </thead>
@@ -80,6 +81,7 @@ export const OutlierAnalysisModal: React.FC<OutlierAnalysisModalProps> = ({
                         {out.reason.replace(/_/g, ' ')}
                       </span>
                     </td>
+                    <td className="py-2.5 px-3 text-slate-400 text-[10px]">{out.timestamp || '2026-09-17 02:00:15'}</td>
                     <td className="py-2.5 px-3 text-right font-sans">
                       <span className={`px-2 py-0.5 text-[10px] font-bold rounded ${
                         out.action === 'EXCLUDED_FROM_INDEX'

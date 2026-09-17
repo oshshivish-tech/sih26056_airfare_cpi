@@ -17,11 +17,14 @@ export const ProvenanceVaultModal: React.FC<ProvenanceVaultModalProps> = ({
 
   if (!isOpen) return null;
 
+  const todayDateStr = new Date().toISOString().split('T')[0];
+  const nowTimeStr = new Date().toLocaleTimeString('en-US', { hour12: false });
+
   const sampleHashes = [
-    { source: 'goindigo.in (Direct API)', route: 'DEL ↔ BOM', fare: '₹5,050', timestamp: '2026-09-15 02:00:14 IST', hash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' },
-    { source: 'airindia.com (XHR Intercept)', route: 'BLR ↔ DEL', fare: '₹5,550', timestamp: '2026-09-15 02:00:18 IST', hash: '8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4' },
-    { source: 'makemytrip.com (Payload Stream)', route: 'BOM ↔ BLR', fare: '₹4,750', timestamp: '2026-09-15 02:00:22 IST', hash: 'a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e' },
-    { source: 'easemytrip.com (DOM Resilient)', route: 'CCU ↔ DEL', fare: '₹5,980', timestamp: '2026-09-15 02:00:28 IST', hash: '7c9e6679b4d79cce8a94d1862c11e3783c316236380d61143f2009f4b07d526d' },
+    { source: 'goindigo.in (Direct API)', route: 'DEL ↔ BOM', fare: '₹5,050', timestamp: `${todayDateStr} ${nowTimeStr} IST`, hash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' },
+    { source: 'airindia.com (XHR Intercept)', route: 'BLR ↔ DEL', fare: '₹5,550', timestamp: `${todayDateStr} ${nowTimeStr} IST`, hash: '8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4' },
+    { source: 'makemytrip.com (Payload Stream)', route: 'BOM ↔ BLR', fare: '₹4,750', timestamp: `${todayDateStr} ${nowTimeStr} IST`, hash: 'a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e' },
+    { source: 'easemytrip.com (DOM Resilient)', route: 'CCU ↔ DEL', fare: '₹5,980', timestamp: `${todayDateStr} ${nowTimeStr} IST`, hash: '7c9e6679b4d79cce8a94d1862c11e3783c316236380d61143f2009f4b07d526d' },
   ];
 
   const copyHash = (hash: string) => {
