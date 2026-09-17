@@ -15,7 +15,7 @@ import { FuelPriceSimulator } from './components/FuelPriceSimulator';
 import { DailyCPIChart } from './components/DailyCPIChart';
 import { CorridorAvgTable } from './components/CorridorAvgTable';
 
-import { MOCK_CPI_HISTORICAL, MOCK_OUTLIERS, MOCK_ROUTE_WEIGHTS } from './data/mockData';
+import { MOCK_CPI_HISTORICAL, MOCK_OUTLIERS, MOCK_ROUTE_WEIGHTS, generateLiveScrapedFares } from './data/mockData';
 import { MoSPICPIEngine } from './services/cpiEngine';
 import { scraperOrchestrator, ScrapingLogEntry } from './services/scraperEngine';
 import { FlightFare, CPIIndexPoint, LeadTimeHorizon, OutlierRecord } from './types';
@@ -35,8 +35,9 @@ export const App: React.FC = () => {
 
   const latestPoint = historicalData.find(p => p.periodLabel.includes('Live')) || historicalData[11] || historicalData[historicalData.length - 1];
 
-  // Calculate live breakdown metrics from current data
-  const currentEngineResult = MoSPICPIEngine.calculateIndex([], MOCK_ROUTE_WEIGHTS, selectedLeadTime);
+  // Calculate live breakdown metrics from baseline fare dataset
+  const [liveFares, setLiveFares] = useState<FlightFare[]>(() => generateLiveScrapedFares());
+  const currentEngineResult = MoSPICPIEngine.calculateIndex(liveFares, MOCK_ROUTE_WEIGHTS, selectedLeadTime);
 
   // Subscribe to live scraping log events
   useEffect(() => {
@@ -48,6 +49,7 @@ export const App: React.FC = () => {
         const result = MoSPICPIEngine.calculateIndex(newFares, MOCK_ROUTE_WEIGHTS, selectedLeadTime);
         const { outliers: newOutliers } = MoSPICPIEngine.filterOutliers(newFares);
 
+        setLiveFares(newFares);
         setOutliers(prev => [...newOutliers, ...prev]);
 
         // Update live point in index series with EMA exponential smoothing
