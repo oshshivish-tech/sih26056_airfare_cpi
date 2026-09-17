@@ -50,17 +50,24 @@ export const App: React.FC = () => {
 
         setOutliers(prev => [...newOutliers, ...prev]);
 
-        // Update live point in index series
+        // Update live point in index series with EMA exponential smoothing
         setHistoricalData(prev => {
           const updated = [...prev];
           const liveIdx = updated.findIndex(p => p.periodLabel.includes('Live'));
           const targetIdx = liveIdx !== -1 ? liveIdx : 11;
+          const currentPoint = updated[targetIdx];
+          
+          // 85% established index weight + 15% new live batch weight for statistical stability
+          const smoothedJevons = Number(((currentPoint.jevonsIndex * 0.85) + (result.jevonsIndex * 0.15)).toFixed(1));
+          const smoothedDutot = Number(((currentPoint.dutotIndex * 0.85) + (result.dutotIndex * 0.15)).toFixed(1));
+          const smoothedLaspeyres = Number(((currentPoint.weightedLaspeyresIndex * 0.85) + (result.weightedLaspeyresIndex * 0.15)).toFixed(1));
+
           updated[targetIdx] = {
-            ...updated[targetIdx],
-            jevonsIndex: result.jevonsIndex,
-            dutotIndex: result.dutotIndex,
-            weightedLaspeyresIndex: result.weightedLaspeyresIndex,
-            sampleCount: updated[targetIdx].sampleCount + newFares.length
+            ...currentPoint,
+            jevonsIndex: smoothedJevons,
+            dutotIndex: smoothedDutot,
+            weightedLaspeyresIndex: smoothedLaspeyres,
+            sampleCount: currentPoint.sampleCount + newFares.length
           };
           return updated;
         });
