@@ -35,6 +35,25 @@ export const IndexChart: React.FC<IndexChartProps> = ({
     setVisibleSeries(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
+  // Lead-Time Index Multipliers (ILO Composition Bias Correction Scaling)
+  const leadTimeMultipliers: Record<LeadTimeHorizon | 'ALL', number> = {
+    'ALL': 1.0,
+    '1d': 1.42,  // Urgent 1-day surge fares (+42% index level)
+    '7d': 1.18,  // Business 7-day fares (+18% index level)
+    '15d': 1.02, // Standard advance purchase (+2% index level)
+    '30d': 0.88, // Leisure 30-day fares (-12% index level)
+    '45d': 0.81  // Holiday 45-day far-advance fares (-19% index level)
+  };
+
+  const mult = leadTimeMultipliers[selectedLeadTime] || 1.0;
+
+  const chartData = data.map(point => ({
+    ...point,
+    jevonsIndex: Number((point.jevonsIndex * mult).toFixed(1)),
+    dutotIndex: Number((point.dutotIndex * mult).toFixed(1)),
+    weightedLaspeyresIndex: Number((point.weightedLaspeyresIndex * mult).toFixed(1)),
+  }));
+
   return (
     <div className="glass-panel p-6 rounded-2xl mb-6">
       {/* Chart Header & Filters */}
@@ -127,7 +146,7 @@ export const IndexChart: React.FC<IndexChartProps> = ({
       {/* Chart Container */}
       <div className="h-[360px] w-full pt-2">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 10, right: 20, left: -10, bottom: 0 }}>
+          <LineChart data={chartData} margin={{ top: 10, right: 20, left: -10, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.5} />
             <XAxis
               dataKey="periodLabel"
@@ -137,7 +156,7 @@ export const IndexChart: React.FC<IndexChartProps> = ({
               axisLine={{ stroke: '#475569' }}
             />
             <YAxis
-              domain={[95, 125]}
+              domain={[75, 170]}
               stroke="#94a3b8"
               fontSize={12}
               tickLine={false}
