@@ -33,7 +33,7 @@ export const App: React.FC = () => {
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const [isProvenanceModalOpen, setIsProvenanceModalOpen] = useState(false);
 
-  const latestPoint = historicalData[historicalData.length - 1];
+  const latestPoint = historicalData.find(p => p.periodLabel.includes('Live')) || historicalData[11] || historicalData[historicalData.length - 1];
 
   // Calculate live breakdown metrics from current data
   const currentEngineResult = MoSPICPIEngine.calculateIndex([], MOCK_ROUTE_WEIGHTS, selectedLeadTime);
@@ -50,16 +50,17 @@ export const App: React.FC = () => {
 
         setOutliers(prev => [...newOutliers, ...prev]);
 
-        // Update latest point in index series
+        // Update live point in index series
         setHistoricalData(prev => {
           const updated = [...prev];
-          const lastIdx = updated.length - 1;
-          updated[lastIdx] = {
-            ...updated[lastIdx],
+          const liveIdx = updated.findIndex(p => p.periodLabel.includes('Live'));
+          const targetIdx = liveIdx !== -1 ? liveIdx : 11;
+          updated[targetIdx] = {
+            ...updated[targetIdx],
             jevonsIndex: result.jevonsIndex,
             dutotIndex: result.dutotIndex,
             weightedLaspeyresIndex: result.weightedLaspeyresIndex,
-            sampleCount: updated[lastIdx].sampleCount + newFares.length
+            sampleCount: updated[targetIdx].sampleCount + newFares.length
           };
           return updated;
         });
