@@ -1,0 +1,219 @@
+=== PAGE 1 ===
+Dimensions: 1440.0 x 809.9999929999999
+SMART INDIA HACKATHON 2025
+Problem Statement ID – SIH25042  
+Problem Statement Title- Identifying Taxonomy
+and Assessing Biodiversity from eDNA Datasets
+Theme- Miscellaneous 
+PS Category- Software
+Team ID- 60180
+Team Name- Code-Ons
+
+=== PAGE 2 ===
+Dimensions: 1440.0 x 809.9999929999999
+PHYLO-DIVE 
+2
+Code-Ons
+Deep-sea biodiversity is poorly
+represented in reference
+databases.
+BLAST/QIIME pipelines → slow,
+alignment-heavy, and biased.
+Millions of eDNA reads remain
+unclassified.
+Real-time analysis at sea is
+limited by high compute
+demands.
+Accurate, scalable, and faster
+biodiversity analysis.
+Works even for organisms
+missing in reference databases.
+Converts raw eDNA into
+actionable ecological insights.
+PROBLEM
+PROBLEM
+Our solution
+Key Value Proposition
+Why different
+ Diving into phylogeny with AI
+     An AI-driven unified pipeline that:
+Processes raw eDNA → NGS reads.
+Uses metabarcoding markers (18S rRNA,
+COI).
+Performs AI clustering + taxonomy
+classification.
+Constructs phylogenetic trees and
+calculates biodiversity indices.
+Flags novel taxa instead of discarding them
+Sequencing
+Taxonomy Phylogeny
+Detects biodiversity at the molecular
+level, even unseen species.
+CNN-powered AI ensures rapid and
+accurate species identification.
+Converts data into actionable
+insights for research, conservation,
+and policy
+
+=== PAGE 3 ===
+Dimensions: 1440.0 x 809.9999929999999
+TECHNICAL APPROACH
+Code-Ons
+Tech Stack Used:
+Python
+TensorFlow
+Keras
+Scikit-learn
+Biopython
+SQLite
+HTML5
+Tailwind CSS
+React
+Three.js
+Express.js
+Node.js
+Process Flowchart
+System Architecture
+
+=== PAGE 4 ===
+Dimensions: 1440.0 x 809.9999929999999
+FEASIBILITY AND VIABILITY
+4
+Code-Ons
+Technical feasibility
+eDNA extraction from water using
+standard molecular protocols
+High-throughput sequencing via
+Illumina NGS or Oxford Nanopore
+CNN-based model: DNA sequences
+encoded as vectors, motifs captured
+via multi-layer CNN for accurate
+taxonomy classification.
+Risk assessment and mitigation
+Risk assessment and mitigation
+GPU-enabled systems
+Open source Bioinformatics tools (QIIME2,
+MEGA, SILVA, PR2)
+AI frameworks (TensorFlow, PyTorch)
+5–10 TB of secure storage to host the
+sequencing data
+Resource Requirements
+Proven Frameworks
+Cuts down wasted sequencing costs
+(currently, 60–90% reads are lost)
+Reduces manpower by automating
+classification
+Can be monetized as subscription
+SaaS for universities, research labs,
+industries
+Economic Approach
+Solution:Semi supervised
++ uncertainity estimation
+Solution: Cloud
+deployment
+Solution: Benchmark with
+SILVA, GenBank, PR2
+datasets.
+
+=== PAGE 5 ===
+Dimensions: 1440.0 x 809.9999929999999
+IMPACT AND BENEFITS
+@SIH Idea submission- Template
+Code-Ons
+FUTURE PROSPECTS
+Disease Prediction: Extend to human
+genomics for detecting
+      disease genes, cancer risks, infections.
+Global Biodiversity: Expand from
+marine to terrestrial, freshwater, and air
+eDNA for real-time biosurveillance.
+Personalized Medicine: Identify genetic
+variants for early diagnostics & precision
+healthcare.
+National Database: Build an Indian
+marine DNA reference database to
+reduce Western dependency.
+Cross-Domain Use: Apply in agriculture,
+environmental health and forensics.
+IMPACTS
+“FROM THE DEPTH OF THE OCEAN TO THE FUTURE
+OF MEDICINE” |
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
+Helps in protecting fragile
+ecosystems by identifying
+indicator species
+Conservation impact
+Enables discovery of novel
+deep sea species,filling gaps
+in biodiversity knowledge
+Scientific Impact
+Economic and Industrial
+Impact
+Opens avenues for
+biotechnology,pharma and
+marine resource utilization 
+National Impact
+Builds India’s first reference 
+pipeline for marine
+biodiversity, supporting Blue
+Economy initiatives.
+Technical Impact
+Demonstrates how AI can 
+outperform database-dependent
+methods in biodiversity science.
+
+=== PAGE 6 ===
+Dimensions: 1440.0 x 809.9999929999999
+DEMO/PROTOTYPE
+@SIH Idea submission- Template
+Code-Ons
+RESULT
+DEMO
+Here’s the link to PhyloDive — your gateway to eDNA exploration: 
+https://phylodive.vercel.app
+
+=== PAGE 7 ===
+Dimensions: 1440.0 x 809.9999929999999
+@SIH Idea submission- Template
+SUPPORTING RESEARCH PAPERS
+DATA SOURCES
+MARKET RESEARCH TECHNICAL DOCUMENTATION
+Yang et al. (2024). AI-assisted eDNA
+metabarcoding. JMSE. DOI:
+10.3390/jmse12101729
+ Keck et al. (2023). ML + eDNA in community
+ecology. Mol. Ecol. DOI: 10.1111/mec.17073
+ https://ftp.ncbi.nlm.nih.gov/blast/db/
+https://ucedna.com/reference-databases-for-metabarcoding
+https://ftp.ncbi.nlm.nih.gov/blast/db/SSU_eukaryote_rRNA.tar.gz 
+https://ftp.ncbi.nlm.nih.gov/blast/db/LSU_prokaryote_rRNA.tar.gz
+https://ftp.ncbi.nlm.nih.gov/blast/db/ITS_eukaryote_sequences.tar.gz
+Databases Used: SILVA, PR2, NCBI GenBank, Tara
+Oceans datasets.
+Frameworks & Tools: QIIME2, DADA2, Nextflow, Docker,
+TensorFlow/PyTorch.
+Pipeline Flow: Input DNA → Preprocessing → AI model →
+Phylogenetic Tree → Dashboard.
+Deployment: Offline (ship mode) + Cloud sync for
+scalability.
+Global eDNA Market is projected to grow at ~15% CAGR (2024–
+2030), driven by conservation, fisheries, and disease monitoring.
+Marine biodiversity monitoring is a high-demand segment under
+the Blue Economy initiatives .
+Few tools exist for AI-driven, database-light eDNA analysis → our
+solution fills this gap.
+Growing relevance in disease prediction and precision medicine
+→ expanding market scope.
+RESEARCH AND REFERENCES
+
