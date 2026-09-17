@@ -171,12 +171,15 @@ export const IndexChart: React.FC<IndexChartProps> = ({
                 color: '#f8fafc',
                 boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)'
               }}
-              formatter={(value: any, name: string) => [
-                `${Number(value).toFixed(2)} (Base=100)`,
-                name === 'jevonsIndex' ? 'Jevons (Geometric)' :
-                name === 'weightedLaspeyresIndex' ? 'DGCA Weighted Index' :
-                name === 'officialMoSPICPIBaseline' ? 'Manual MoSPI Baseline' : 'Dutot Index'
-              ]}
+              formatter={(value: any, name: string, item: any) => {
+                const key = item?.dataKey || name;
+                const displayName = 
+                  key === 'jevonsIndex' || name.includes('Jevons') ? 'Jevons Index (Geometric)' :
+                  key === 'weightedLaspeyresIndex' || name.includes('DGCA') ? 'DGCA Weighted Index' :
+                  key === 'officialMoSPICPIBaseline' || name.includes('MoSPI') ? 'Manual MoSPI Baseline' :
+                  'Dutot Index (Arithmetic)';
+                return [`${Number(value).toFixed(2)} (Base=100)`, displayName];
+              }}
             />
             <Legend verticalAlign="top" height={36} wrapperStyle={{ color: '#cbd5e1', fontSize: '12px' }} />
             <ReferenceLine y={100} stroke="#64748b" strokeDasharray="3 3" label={{ value: 'Base Year = 100', fill: '#64748b', fontSize: 10 }} />
