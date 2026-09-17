@@ -262,7 +262,7 @@ export const MOCK_DAILY_CPI: DailyFarePoint[] = [
   { date: '2026-09-14', dayLabel: '14 Sep (Mon)', dailyJevonsIndex: 110.1, dailyAvgFare: 5360, movingAverage7d: 5440, scrapedQuotesCount: 2700, isWeekend: false },
   { date: '2026-09-15', dayLabel: '15 Sep (Tue)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5420, scrapedQuotesCount: 3650, isWeekend: false },
   { date: '2026-09-16', dayLabel: '16 Sep (Wed)', dailyJevonsIndex: 109.2, dailyAvgFare: 5290, movingAverage7d: 5400, scrapedQuotesCount: 3680, isWeekend: false },
-  { date: '2026-09-17', dayLabel: '17 Sep (Thu - Today)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5380, scrapedQuotesCount: 3720, isWeekend: false }
+  { date: '2026-09-17', dayLabel: '17 Sep (Thu)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5380, scrapedQuotesCount: 3720, isWeekend: false }
 ];
 
 // Sample Outliers Detected & Excluded by Algorithm
