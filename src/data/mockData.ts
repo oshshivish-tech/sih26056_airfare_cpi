@@ -354,10 +354,10 @@ export const generateLiveScrapedFares = (): FlightFare[] => {
       const horizonMultiplier = horizon === '1d' ? 1.65 : horizon === '7d' ? 1.25 : horizon === '15d' ? 1.05 : horizon === '30d' ? 0.90 : 0.82;
 
       airlines.forEach((air, aIdx) => {
-        // Inject intentional surge pricing outliers on 1d horizon for first 2 routes
-        const isSurgeOutlier = (horizon === '1d' && rIdx < 2 && aIdx === 0 && Math.random() > 0.3);
+        // Inject intentional surge pricing outliers on 1d horizon for first route
+        const isSurgeOutlier = (horizon === '1d' && rIdx === 0 && aIdx === 0);
         const base = isSurgeOutlier 
-          ? Math.round(route.baseYearPrice * 4.8) 
+          ? Math.round(route.baseYearPrice * 5.2) 
           : Math.round((route.baseYearPrice * horizonMultiplier) * (0.92 + (Math.random() * 0.16)));
         
         const fuel = Math.round(base * 0.18);
