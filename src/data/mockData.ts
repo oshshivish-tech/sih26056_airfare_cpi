@@ -354,11 +354,18 @@ export const generateLiveScrapedFares = (): FlightFare[] => {
       const horizonMultiplier = horizon === '1d' ? 1.65 : horizon === '7d' ? 1.25 : horizon === '15d' ? 1.05 : horizon === '30d' ? 0.90 : 0.82;
 
       airlines.forEach((air, aIdx) => {
-        const base = Math.round((route.baseYearPrice * horizonMultiplier) * (0.92 + (Math.random() * 0.16)));
+        // Inject intentional surge pricing outliers on 1d horizon for first 2 routes
+        const isSurgeOutlier = (horizon === '1d' && rIdx < 2 && aIdx === 0 && Math.random() > 0.3);
+        const base = isSurgeOutlier 
+          ? Math.round(route.baseYearPrice * 4.8) 
+          : Math.round((route.baseYearPrice * horizonMultiplier) * (0.92 + (Math.random() * 0.16)));
+        
         const fuel = Math.round(base * 0.18);
         const userFee = 450;
         const gst = Math.round((base + fuel + userFee) * 0.05);
         const total = base + fuel + userFee + gst;
+
+        const nowTs = new Date().toISOString().replace('T', ' ').substring(0, 19);
 
         results.push({
           id: `fare-${rIdx}-${horizon}-${aIdx}-${Date.now()}`,
@@ -371,7 +378,7 @@ export const generateLiveScrapedFares = (): FlightFare[] => {
           destinationName: route.corridorName.split('↔')[1].trim(),
           corridor: route.corridorId,
           departureDate: new Date(Date.now() + (horizon === '1d' ? 86400000 : horizon === '7d' ? 7*86400000 : horizon === '15d' ? 15*86400000 : horizon === '30d' ? 30*86400000 : 45*86400000)).toISOString().split('T')[0],
-          scrapingTimestamp: new Date().toISOString(),
+          scrapingTimestamp: nowTs,
           leadTimeHorizon: horizon,
           baseFare: base,
           fuelSurcharge: fuel,
@@ -386,6 +393,5 @@ export const generateLiveScrapedFares = (): FlightFare[] => {
       });
     });
   });
-
   return results;
 };
