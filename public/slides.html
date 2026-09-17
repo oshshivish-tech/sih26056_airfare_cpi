@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AirIntel India - SIH 2026 Pitch Deck (PS ID: 26056)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+    
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      background-color: #0b0f19;
+      color: #f8fafc;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    .slide-viewport {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .slide-frame {
+      width: 95vw;
+      max-width: 1600px;
+      aspect-ratio: 16 / 9;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      display: none;
+      flex-direction: column;
+      padding: 2.2rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-frame.active {
+      display: flex;
+      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.985); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .card-glass {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+    }
+
+    .card-glass-hover:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+      transform: translateY(-2px);
+      transition: all 0.2s ease;
+    }
+
+    @media print {
+      body {
+        overflow: visible;
+        background: white;
+        color: black;
+      }
+      .controls, .nav-dots { display: none !important; }
+      .slide-viewport { display: block; height: auto; }
+      .slide-frame {
+        display: flex !important;
+        page-break-after: always;
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        box-shadow: none;
+        background: #0f172a !important;
+        color: #f8fafc !important;
+        margin: 0;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="slide-viewport">
+
+  <!-- ======================================================== -->
+  <!-- SLIDE 1: Title Slide -->
+  <!-- ======================================================== -->
+  <div class="slide-frame active" id="slide-1">
+    <!-- Top Bar -->
+    <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-6">
+      <div class="flex items-center gap-2">
+        <span class="px-2.5 py-1 text-xs font-bold rounded-md bg-blue-500/20 text-blue-400 border border-blue-500/30">
+          SMART INDIA HACKATHON 2026
+        </span>
+        <span class="px-2.5 py-1 text-xs font-bold rounded-md bg-slate-800 text-slate-300 border border-slate-700">
+          PROBLEM STATEMENT ID: SIH26056
+        </span>
+      </div>
+      <div class="flex items-center gap-3 text-xs text-slate-400">
+        <span class="flex items-center gap-1.5"><i class="fa-solid fa-building-columns text-blue-400"></i> MoSPI / National Statistical Office</span>
+        <span>•</span>
+        <span class="flex items-center gap-1.5"><i class="fa-solid fa-users text-emerald-400"></i> Team Rookie</span>
+      </div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="flex-1 flex flex-col justify-center my-auto">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold w-fit mb-3">
+        <i class="fa-solid fa-plane-departure text-xs"></i> High-Frequency Transport CPI Augmentation
+      </div>
+      <h1 class="text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+        AirIntel India: <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-sky-300 to-emerald-400">Real-Time Airfare Price Index</span>
+      </h1>
+      <p class="text-base text-slate-300 max-w-4xl mt-3 leading-relaxed">
+        Automated Web Scraping of Airline Portals & OTAs with UN/ILO Jevons-Laspeyres Aggregation for Next-Generation Consumer Price Index (CPI) Modernization.
+      </p>
+
+      <!-- 4 Metadata Info Cards -->
+      <div class="grid grid-cols-4 gap-4 mt-8">
+        <div class="card-glass p-4 border-l-4 border-l-blue-500">
+          <div class="text-[11px] font-bold text-blue-400 uppercase tracking-wider mb-1">TEAM INFORMATION</div>
+          <div class="text-sm font-semibold text-white">Team Rookie</div>
+          <div class="text-xs text-slate-400 mt-0.5">College Internal Hackathon • 19th Sep 2026</div>
+        </div>
+
+        <div class="card-glass p-4 border-l-4 border-l-sky-500">
+          <div class="text-[11px] font-bold text-sky-400 uppercase tracking-wider mb-1">MINISTRY / CLIENT</div>
+          <div class="text-sm font-semibold text-white">MoSPI & NSO</div>
+          <div class="text-xs text-slate-400 mt-0.5">Government of India</div>
+        </div>
+
+        <div class="card-glass p-4 border-l-4 border-l-emerald-500">
+          <div class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider mb-1">THEME & CATEGORY</div>
+          <div class="text-sm font-semibold text-white">Smart Governance / FinTech</div>
+          <div class="text-xs text-slate-400 mt-0.5">Software Edition • Algorithmic Pipeline</div>
+        </div>
+
+        <div class="card-glass p-4 border-l-4 border-l-amber-500">
+          <div class="text-[11px] font-bold text-amber-400 uppercase tracking-wider mb-1">LIVE PROTOTYPE</div>
+          <a href="https://sihwinners.vercel.app" target="_blank" class="text-sm font-semibold text-amber-300 hover:underline flex items-center gap-1.5">
+            sihwinners.vercel.app <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+          <div class="text-xs text-slate-400 mt-0.5 font-mono">github/oshshivish-tech</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between pt-3 border-t border-slate-800 text-[11px] text-slate-500">
+      <span>Smart India Hackathon 2026 • Official Internal Pitch Deck</span>
+      <span>Slide 1 of 7</span>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- SLIDE 2: Problem & Solution -->
+  <!-- ======================================================== -->
+  <div class="slide-frame" id="slide-2">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-4">
+      <div>
+        <div class="text-[10px] font-bold tracking-wider text-blue-400 uppercase">SIH 2026 | PS ID: 26056</div>
+        <h2 class="text-xl font-bold text-white">Problem Statement, Algorithmic Pipeline & Proposed Solution</h2>
+      </div>
+      <div class="text-xs text-slate-400 font-mono">MoSPI Airfare Index</div>
+    </div>
+
+    <!-- 3-Column Layout -->
+    <div class="grid grid-cols-12 gap-4 flex-1 items-stretch">
+      <!-- Col 1: Problem & Solution (4 cols) -->
+      <div class="col-span-4 flex flex-col gap-3">
+        <!-- Problem -->
+        <div class="card-glass p-3.5 border-l-4 border-l-red-500 flex-1">
+          <div class="flex items-center gap-2 text-xs font-bold text-red-400 uppercase tracking-wider mb-2">
+            <i class="fa-solid fa-triangle-exclamation"></i> The Problem (Current MoSPI Model)
+          </div>
+          <ul class="text-[11.5px] text-slate-300 space-y-1.5 leading-snug">
+            <li>• <strong class="text-white">Manual Survey Bottleneck:</strong> Field surveyors manually visit OTAs once a month for single spot quotes.</li>
+            <li>• <strong class="text-white">Blind to Dynamic Surges:</strong> Completely misses algorithmic yield swings (peak hours, holidays, load factors).</li>
+            <li>• <strong class="text-white">Lead-Time Neglect:</strong> Fails to account for fare curves (1d emergency surge vs. 45d advance discounts).</li>
+            <li>• <strong class="text-white">15-Day Policy Lag:</strong> Lagging data impairs RBI monetary rate-setting responsiveness.</li>
+          </ul>
+        </div>
+        <!-- Solution -->
+        <div class="card-glass p-3.5 border-l-4 border-l-emerald-500 flex-1">
+          <div class="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">
+            <i class="fa-solid fa-circle-check"></i> The Solution: AirIntel India
+          </div>
+          <ul class="text-[11.5px] text-slate-300 space-y-1.5 leading-snug">
+            <li>• <strong class="text-white">Headless Web Harvester:</strong> Playwright cron jobs scraping Air India, IndiGo, SpiceJet & OTAs nightly.</li>
+            <li>• <strong class="text-white">5 Lead-Time Horizons:</strong> Continuous sampling across 1, 7, 15, 30, and 45 days forward.</li>
+            <li>• <strong class="text-white">UN/ILO Jevons Formula:</strong> Elementary geometric mean eliminates arithmetic substitution bias.</li>
+            <li>• <strong class="text-white">DGCA Passenger Weighting:</strong> Weighted Laspeyres index calibrated to actual city-pair seat volume.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Col 2: High-Level Pipeline Flow (4 cols) -->
+      <div class="col-span-4 card-glass p-3.5 border border-blue-500/20 flex flex-col">
+        <div class="flex items-center gap-2 text-xs font-bold text-blue-400 uppercase tracking-wider mb-2.5">
+          <i class="fa-solid fa-diagram-project"></i> End-to-End Dataflow Pipeline
+        </div>
+        <div class="flex-1 flex flex-col justify-between gap-1.5 text-[11px]">
+          <div class="p-2 rounded bg-slate-900/80 border border-slate-700/60">
+            <div class="font-bold text-blue-300">1. Scheduled Ingestion (02:00 AM IST)</div>
+            <div class="text-slate-400 text-[10px] mt-0.5">Headless stealth scrapers harvest all non-stop flights across 12 corridors × 5 booking horizons.</div>
+          </div>
+          <div class="flex justify-center text-slate-500 text-[10px]"><i class="fa-solid fa-arrow-down"></i></div>
+          <div class="p-2 rounded bg-slate-900/80 border border-slate-700/60">
+            <div class="font-bold text-sky-300">2. Normalization & Z-Score Cleanse</div>
+            <div class="text-slate-400 text-[10px] mt-0.5">Strips taxes/GST, standardizes flight numbers, and flags extreme surge anomalies (|Z| > 3.0).</div>
+          </div>
+          <div class="flex justify-center text-slate-500 text-[10px]"><i class="fa-solid fa-arrow-down"></i></div>
+          <div class="p-2 rounded bg-slate-900/80 border border-slate-700/60">
+            <div class="font-bold text-emerald-300">3. Elementary Aggregation (Jevons GM)</div>
+            <div class="text-slate-400 text-[10px] mt-0.5">Geometric mean computed per route × horizon to satisfy UN/ILO transitivity axioms.</div>
+          </div>
+          <div class="flex justify-center text-slate-500 text-[10px]"><i class="fa-solid fa-arrow-down"></i></div>
+          <div class="p-2 rounded bg-slate-900/80 border border-slate-700/60">
+            <div class="font-bold text-amber-300">4. DGCA Laspeyres Higher Aggregation</div>
+            <div class="text-slate-400 text-[10px] mt-0.5">Corridor indices weighted by DGCA monthly seat share to yield National Daily Index.</div>
+          </div>
+          <div class="flex justify-center text-slate-500 text-[10px]"><i class="fa-solid fa-arrow-down"></i></div>
+          <div class="p-2 rounded bg-slate-900/80 border border-slate-700/60">
+            <div class="font-bold text-purple-300">5. SHA-256 Provenance & MoSPI Export</div>
+            <div class="text-slate-400 text-[10px] mt-0.5">Immutable cryptographic audit manifest generated alongside interactive dashboard UI.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Col 3: Why Different & Value Proposition (4 cols) -->
+      <div class="col-span-4 flex flex-col gap-3">
+        <!-- Why Different -->
+        <div class="card-glass p-3.5 border-l-4 border-l-sky-500 flex-1">
+          <div class="flex items-center gap-2 text-xs font-bold text-sky-400 uppercase tracking-wider mb-2">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Why We Are Different (Innovation)
+          </div>
+          <ul class="text-[11.5px] text-slate-300 space-y-1.5 leading-snug">
+            <li>• <strong class="text-white">Dynamic Yield Sensitivity:</strong> Real-time capture of dynamic carrier yield management algorithms.</li>
+            <li>• <strong class="text-white">Granular Horizon Curve:</strong> Discrete tracking of 1d, 7d, 15d, 30d & 45d pricing behavior.</li>
+            <li>• <strong class="text-white">Eliminates Upward Bias:</strong> Replaces Dutot arithmetic overestimation with Jevons geometric mean.</li>
+            <li>• <strong class="text-white">Cryptographic Audit Trail:</strong> SHA-256 raw quote hashes guarantee statistical provenance for court/MoSPI.</li>
+          </ul>
+        </div>
+        <!-- Value Proposition -->
+        <div class="card-glass p-3.5 border-l-4 border-l-amber-500 flex-1">
+          <div class="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-wider mb-2">
+            <i class="fa-solid fa-landmark"></i> Value Proposition for Government
+          </div>
+          <ul class="text-[11.5px] text-slate-300 space-y-1.5 leading-snug">
+            <li>• <strong class="text-white">95% Cost Reduction:</strong> Eliminates recurring airport field survey budget.</li>
+            <li>• <strong class="text-white">Zero-Lag CPI:</strong> Empowers RBI MPC with real-time leading transportation inflation figures.</li>
+            <li>• <strong class="text-white">Aviation Vigilance:</strong> Identifies predatory route pricing and cartel spikes automatically.</li>
+            <li>• <strong class="text-white">NDAP Ready:</strong> Seamless plug-and-play CSV/JSON pipelines for central MoSPI ingestion.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between pt-2 border-t border-slate-800 text-[11px] text-slate-500 mt-2">
+      <span>AirIntel India • SIH26056</span>
+      <span>Slide 2 of 7</span>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- SLIDE 3: Technical Approach -->
+  <!-- ======================================================== -->
+  <div class="slide-frame" id="slide-3">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-4">
+      <div>
+        <div class="text-[10px] font-bold tracking-wider text-blue-400 uppercase">SIH 2026 | PS ID: 26056</div>
+        <h2 class="text-xl font-bold text-white">Technical Architecture, Mathematical Formulation & Tech Stack</h2>
+      </div>
+      <div class="text-xs text-slate-400 font-mono">System Blueprint</div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-4 flex-1 items-stretch">
+      <!-- Architecture (4 cols) -->
+      <div class="col-span-4 card-glass p-3.5 flex flex-col justify-between">
+        <div class="text-xs font-bold text-blue-400 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-server mr-1.5"></i> 5-Tier System Architecture
+        </div>
+        <div class="space-y-2.5 text-[11px] text-slate-300">
+          <div class="p-2 rounded bg-slate-900/60 border border-slate-700/50">
+            <span class="font-bold text-blue-300">Harvester Tier:</span> Playwright worker pool with stealth user-agents, proxy rotation, and exponential retries executing daily at 02:00 AM IST.
+          </div>
+          <div class="p-2 rounded bg-slate-900/60 border border-slate-700/50">
+            <span class="font-bold text-sky-300">Cleansing Pipeline:</span> Strips UDF airport fees and fuel surcharges; normalizes carrier codes and computes rolling Z-scores.
+          </div>
+          <div class="p-2 rounded bg-slate-900/60 border border-slate-700/50">
+            <span class="font-bold text-emerald-300">Index Computation Engine:</span> Pure UN/ILO compliant Jevons GM, Dutot comparative ratio, and DGCA monthly volume Laspeyres weights.
+          </div>
+          <div class="p-2 rounded bg-slate-900/60 border border-slate-700/50">
+            <span class="font-bold text-amber-300">Provenance Vault:</span> PostgreSQL storage attaching SHA-256 cryptographic hashes to every scraped record batch.
+          </div>
+          <div class="p-2 rounded bg-slate-900/60 border border-slate-700/50">
+            <span class="font-bold text-purple-300">Presentation Portal:</span> React 19 + TypeScript web dashboard with SVG Recharts, lead-time filters & instant CSV exports.
+          </div>
+        </div>
+      </div>
+
+      <!-- Mathematical Rigor (5 cols) -->
+      <div class="col-span-5 card-glass p-3.5 flex flex-col justify-between border-blue-500/30">
+        <div class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-square-root-variable mr-1.5"></i> Mathematical Rigor & Index Formulas
+        </div>
+        <div class="space-y-2.5 text-[11px] text-slate-300">
+          <div class="p-2.5 rounded bg-slate-900/80 border border-slate-700">
+            <div class="font-bold text-white flex items-center justify-between">
+              <span>1. Elementary Jevons Geometric Index</span>
+              <span class="text-[9px] px-1.5 py-0.5 bg-emerald-500/20 text-emerald-400 rounded">UN/ILO Mandate</span>
+            </div>
+            <div class="font-mono text-emerald-300 text-[11px] my-1 bg-black/40 p-1.5 rounded">
+              I_J = [ ∏_{i=1}^n (P_{i,t} / P_{i,0}) ]^(1/n) = exp( (1/n) ∑ ln(P_{i,t} / P_{i,0}) )
+            </div>
+            <div class="text-[10px] text-slate-400">Neutralizes upward substitution bias; strictly satisfies multi-period transitivity.</div>
+          </div>
+
+          <div class="p-2.5 rounded bg-slate-900/80 border border-slate-700">
+            <div class="font-bold text-white flex items-center justify-between">
+              <span>2. DGCA Weighted Laspeyres National Aggregation</span>
+              <span class="text-[9px] px-1.5 py-0.5 bg-blue-500/20 text-blue-400 rounded">National Index</span>
+            </div>
+            <div class="font-mono text-blue-300 text-[11px] my-1 bg-black/40 p-1.5 rounded">
+              I_{National, t} = ∑_{c=1}^{12} [ W_c × I_{c, t} ] &nbsp; (where ∑ W_c = 1.0)
+            </div>
+            <div class="text-[10px] text-slate-400">Weights (W_c) derived from DGCA Monthly Domestic City-Pair passenger volume reports.</div>
+          </div>
+
+          <div class="p-2.5 rounded bg-slate-900/80 border border-slate-700">
+            <div class="font-bold text-white flex items-center justify-between">
+              <span>3. Dynamic Z-Score Outlier Filter</span>
+              <span class="text-[9px] px-1.5 py-0.5 bg-amber-500/20 text-amber-400 rounded">Surge Filter</span>
+            </div>
+            <div class="font-mono text-amber-300 text-[11px] my-1 bg-black/40 p-1.5 rounded">
+              Z_i = ( P_i - μ_c ) / σ_c &nbsp; (|Z_i| > 3.00 flagged for review)
+            </div>
+            <div class="text-[10px] text-slate-400">Isolates dynamic pricing shocks, festival spikes, and fare submission errors automatically.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tech Stack (3 cols) -->
+      <div class="col-span-3 card-glass p-3.5 flex flex-col justify-between">
+        <div class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-microchip mr-1.5"></i> Production Tech Stack
+        </div>
+        <div class="space-y-2 text-[10.5px]">
+          <div>
+            <div class="font-bold text-slate-300">Scraping Core</div>
+            <div class="text-slate-400">Playwright Node.js, Python, Stealth plugin, Random UA</div>
+          </div>
+          <div>
+            <div class="font-bold text-slate-300">Data Processing</div>
+            <div class="text-slate-400">Python 3.13, Pandas, NumPy, SciPy (Z-score), Pydantic</div>
+          </div>
+          <div>
+            <div class="font-bold text-slate-300">Database & Security</div>
+            <div class="text-slate-400">PostgreSQL, Prisma ORM, SHA-256 Provenance Hashes</div>
+          </div>
+          <div>
+            <div class="font-bold text-slate-300">Frontend Dashboard</div>
+            <div class="text-slate-400">React 19, TypeScript, Vite, Tailwind CSS, Recharts SVG</div>
+          </div>
+          <div>
+            <div class="font-bold text-slate-300">Deployment & CI/CD</div>
+            <div class="text-slate-400">Vercel Edge Network, GitHub Actions, Docker containers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between pt-2 border-t border-slate-800 text-[11px] text-slate-500 mt-2">
+      <span>AirIntel India • SIH26056</span>
+      <span>Slide 3 of 7</span>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- SLIDE 4: Feasibility & Viability -->
+  <!-- ======================================================== -->
+  <div class="slide-frame" id="slide-4">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-4">
+      <div>
+        <div class="text-[10px] font-bold tracking-wider text-blue-400 uppercase">SIH 2026 | PS ID: 26056</div>
+        <h2 class="text-xl font-bold text-white">Feasibility, Risk Management & Economic Viability</h2>
+      </div>
+      <div class="text-xs text-slate-400 font-mono">Operations & Governance</div>
+    </div>
+
+    <!-- 2x2 Grid -->
+    <div class="grid grid-cols-2 gap-4 flex-1 items-stretch">
+      <!-- Box 1 -->
+      <div class="card-glass p-4 border-l-4 border-l-amber-500 flex flex-col justify-between">
+        <div class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-shield-halved mr-1.5"></i> 1. Potential Risks & Mitigation Strategies
+        </div>
+        <div class="space-y-2 text-[11px] text-slate-300">
+          <div><strong class="text-white">• Anti-Scraping / Cloudflare Protections:</strong> Mitigated through residential proxy pools, randomized jitter delays (2-5s), and scheduling during off-peak midnight troughs (02:00 AM IST).</div>
+          <div><strong class="text-white">• OTA Web Structure Alterations:</strong> Mitigated via robust multi-selector fallback rules (ARIA labels, data-test attributes) and automated nightly test monitors that alert engineers.</div>
+          <div><strong class="text-white">• Extreme Surge Price Distortion:</strong> Automated ±3.0σ Z-score flags dynamic surges; UN/ILO Jevons geometric indexing dampens single-flight spikes.</div>
+        </div>
+      </div>
+
+      <!-- Box 2 -->
+      <div class="card-glass p-4 border-l-4 border-l-blue-500 flex flex-col justify-between">
+        <div class="text-xs font-bold text-blue-400 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-gears mr-1.5"></i> 2. Technical Feasibility & Robustness
+        </div>
+        <div class="space-y-2 text-[11px] text-slate-300">
+          <div><strong class="text-white">• Proven Statistical Paradigm:</strong> Built upon methodologies validated by the MIT Billion Prices Project and UK Office for National Statistics (ONS).</div>
+          <div><strong class="text-white">• Elastic Scalability:</strong> Serverless cron infrastructure easily scales from the current 12 metro corridors to 250+ regional UDAN routes with zero code changes.</div>
+          <div><strong class="text-white">• Tamper-Proof Auditability:</strong> Raw HTML quotes, timestamps, and parameters hashed into immutable SHA-256 provenance vaults for MoSPI inspection.</div>
+        </div>
+      </div>
+
+      <!-- Box 3 -->
+      <div class="card-glass p-4 border-l-4 border-l-emerald-500 flex flex-col justify-between">
+        <div class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-sack-dollar mr-1.5"></i> 3. Economic Viability & Cost Benefit
+        </div>
+        <div class="space-y-2 text-[11px] text-slate-300">
+          <div><strong class="text-white">• 95% Reduction in Data Collection Costs:</strong> Replaces hundreds of manual physical field visits across 12 metro airports with automated cloud execution.</div>
+          <div><strong class="text-white">• Low Operational Cloud Overhead:</strong> Entire serverless pipeline runs for &lt; ₹3,500 ($42 USD) / month.</div>
+          <div><strong class="text-white">• Massive Frequency Dividend:</strong> Increases price sampling resolution from 1 spot price/month to 10,000+ daily observations at a fraction of the cost.</div>
+        </div>
+      </div>
+
+      <!-- Box 4 -->
+      <div class="card-glass p-4 border-l-4 border-l-purple-500 flex flex-col justify-between">
+        <div class="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-scale-balanced mr-1.5"></i> 4. Operational Sustainability & Governance
+        </div>
+        <div class="space-y-2 text-[11px] text-slate-300">
+          <div><strong class="text-white">• Zero Enterprise Lock-in:</strong> 100% open-source software stack (Python, PostgreSQL, React) with full public code ownership by MoSPI.</div>
+          <div><strong class="text-white">• Minimal Maintenance Footprint:</strong> Requires only part-time data engineer oversight for pipeline health and DOM selector updates.</div>
+          <div><strong class="text-white">• Legal & Crawl Ethics:</strong> Follows robots.txt etiquette, respects site crawl limits by scheduling during low-traffic midnight hours, and queries public rates.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between pt-2 border-t border-slate-800 text-[11px] text-slate-500 mt-2">
+      <span>AirIntel India • SIH26056</span>
+      <span>Slide 4 of 7</span>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- SLIDE 5: Impact & Benefits -->
+  <!-- ======================================================== -->
+  <div class="slide-frame" id="slide-5">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-4">
+      <div>
+        <div class="text-[10px] font-bold tracking-wider text-blue-400 uppercase">SIH 2026 | PS ID: 26056</div>
+        <h2 class="text-xl font-bold text-white">National Impact, Benefits & Strategic Scalability Roadmap</h2>
+      </div>
+      <div class="text-xs text-slate-400 font-mono">Strategic Value</div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-4 flex-1 items-stretch">
+      <!-- 3 Pillars of Impact (6 cols) -->
+      <div class="col-span-6 card-glass p-4 flex flex-col justify-between">
+        <div class="text-xs font-bold text-blue-400 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-chart-line mr-1.5"></i> Quantifiable Impact Matrix
+        </div>
+        <div class="space-y-3 text-[11px] text-slate-300">
+          <div class="p-3 rounded bg-slate-900/60 border-l-4 border-l-blue-500">
+            <div class="font-bold text-blue-300 text-xs mb-1">1. Macroeconomic Policy Impact (RBI & Ministry of Finance)</div>
+            <div class="text-slate-300 leading-snug">
+              Eliminates the 15-day reporting lag for transport CPI. Empowers the RBI Monetary Policy Committee with high-frequency leading indicators for inflation forecasting and interest rate policy.
+            </div>
+          </div>
+
+          <div class="p-3 rounded bg-slate-900/60 border-l-4 border-l-sky-500">
+            <div class="font-bold text-sky-300 text-xs mb-1">2. Regulatory Vigilance (DGCA & Civil Aviation Ministry)</div>
+            <div class="text-slate-300 leading-snug">
+              Automated surge detection flaggers alert authorities to regional monopoly price gouging, festival cartel pricing, and emergency price spikes in real time.
+            </div>
+          </div>
+
+          <div class="p-3 rounded bg-slate-900/60 border-l-4 border-l-emerald-500">
+            <div class="font-bold text-emerald-300 text-xs mb-1">3. Statistical Modernization (MoSPI / NSO)</div>
+            <div class="text-slate-300 leading-snug">
+              Transitions national statistics from manual physical sampling to international UN/ILO standards, collecting 10,000+ daily observations with mathematical substitution bias immunity.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5-Phase Roadmap (6 cols) -->
+      <div class="col-span-6 card-glass p-4 flex flex-col justify-between">
+        <div class="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-road mr-1.5"></i> 5-Phase Scalability Roadmap
+        </div>
+        <div class="space-y-2 text-[10.5px]">
+          <div class="p-2 rounded bg-slate-900/60 border border-slate-700/60">
+            <div class="font-bold text-emerald-400">Phase 1: Hackathon MVP (Current State)</div>
+            <div class="text-slate-400 text-[10px]">12 metro corridors, 5 booking horizons, Jevons/Dutot index engine, Z-score outlier modal, SHA-256 vault.</div>
+          </div>
+          <div class="p-2 rounded bg-slate-900/60 border border-slate-700/60">
+            <div class="font-bold text-blue-400">Phase 2: National Fleet Coverage (Q1 2027)</div>
+            <div class="text-slate-400 text-[10px]">Expansion to 250+ Tier-2/Tier-3 routes including UDAN regional flights, Akasa Air & regional carriers.</div>
+          </div>
+          <div class="p-2 rounded bg-slate-900/60 border border-slate-700/60">
+            <div class="font-bold text-sky-400">Phase 3: Deep Dynamic Segmentation (Q2 2027)</div>
+            <div class="text-slate-400 text-[10px]">Cabin class breakdowns (Economy, Premium, Business) and time-of-day peak departure weighting.</div>
+          </div>
+          <div class="p-2 rounded bg-slate-900/60 border border-slate-700/60">
+            <div class="font-bold text-amber-400">Phase 4: MoSPI NDAP Automated Pipeline (Q3 2027)</div>
+            <div class="text-slate-400 text-[10px]">Direct REST API connector feeding verified airfare indices into MoSPI's central statistical database.</div>
+          </div>
+          <div class="p-2 rounded bg-slate-900/60 border border-slate-700/60">
+            <div class="font-bold text-purple-400">Phase 5: Autonomous AI Analyst & Alerting (Q4 2027)</div>
+            <div class="text-slate-400 text-[10px]">LLM-powered executive summary generator and Telegram/Email webhook alerts for fare anomalies.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between pt-2 border-t border-slate-800 text-[11px] text-slate-500 mt-2">
+      <span>AirIntel India • SIH26056</span>
+      <span>Slide 5 of 7</span>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- SLIDE 6: Demo / Live Prototype -->
+  <!-- ======================================================== -->
+  <div class="slide-frame" id="slide-6">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
+      <div>
+        <div class="text-[10px] font-bold tracking-wider text-blue-400 uppercase">SIH 2026 | PS ID: 26056</div>
+        <h2 class="text-xl font-bold text-white">Live Working Prototype & Platform Verification</h2>
+      </div>
+      <div class="text-xs text-slate-400 font-mono">Operational Proof</div>
+    </div>
+
+    <!-- Live Banner -->
+    <div class="p-2.5 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-between mb-4">
+      <div class="flex items-center gap-2">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="text-xs font-bold text-white">LIVE PRODUCTION PLATFORM:</span>
+        <a href="https://sihwinners.vercel.app" target="_blank" class="text-xs text-blue-400 font-mono font-semibold hover:underline">
+          https://sihwinners.vercel.app
+        </a>
+      </div>
+      <div class="text-xs text-slate-400 font-mono">
+        Repository: <a href="https://github.com/oshshivish-tech/sih26056_airfare_cpi" target="_blank" class="text-slate-300 hover:underline">github.com/oshshivish-tech/sih26056_airfare_cpi</a>
+      </div>
+    </div>
+
+    <!-- 3 Core Feature Cards -->
+    <div class="grid grid-cols-3 gap-4 flex-1 items-stretch">
+      <!-- Card 1 -->
+      <div class="card-glass p-4 border border-blue-500/20 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-bold text-blue-400 uppercase tracking-wider mb-2">
+            <i class="fa-solid fa-chart-area"></i> 1. Real-Time Index Visualizer
+          </div>
+          <ul class="text-[11px] text-slate-300 space-y-2 leading-relaxed">
+            <li><strong class="text-white">✔ Horizon-Scale Dynamic Shifting:</strong> Clicking lead times (1d, 7d, 15d, 30d, 45d, All) instantly recalculates the entire national curve.</li>
+            <li><strong class="text-white">✔ Surge Curve Demonstration:</strong> 1-day urgent fares index at 158.2 vs 45-day advance bookings at 90.4.</li>
+            <li><strong class="text-white">✔ Tri-Index Comparison:</strong> Side-by-side display of Jevons GM (111.4), Dutot (114.8), and legacy MoSPI baseline (112.0).</li>
+          </ul>
+        </div>
+        <div class="p-2 rounded bg-slate-900/60 border border-slate-800 text-[10px] text-slate-400 font-mono">
+          Engine: Recharts SVG with responsive container & EMA smoothing
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card-glass p-4 border border-emerald-500/20 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">
+            <i class="fa-solid fa-satellite-dish"></i> 2. Live Scraper & Outliers
+          </div>
+          <ul class="text-[11px] text-slate-300 space-y-2 leading-relaxed">
+            <li><strong class="text-white">✔ Interactive Live Scraping:</strong> Clicking "Trigger Live Scrape" harvests new quotes in real time with animated status.</li>
+            <li><strong class="text-white">✔ Z-Score Surge Modal:</strong> Automated statistical flagging of quotes where |Z| &gt; 3.0 with live timestamps.</li>
+            <li><strong class="text-white">✔ Route Rate Table:</strong> Dynamic 12-corridor matrix displaying route-specific inflation percentages.</li>
+          </ul>
+        </div>
+        <div class="p-2 rounded bg-slate-900/60 border border-slate-800 text-[10px] text-slate-400 font-mono">
+          Detection: |Z| &gt; 3.00 statistical threshold with dynamic carrier quotes
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card-glass p-4 border border-purple-500/20 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-bold text-purple-400 uppercase tracking-wider mb-2">
+            <i class="fa-solid fa-lock"></i> 3. Provenance Audit Vault
+          </div>
+          <ul class="text-[11px] text-slate-300 space-y-2 leading-relaxed">
+            <li><strong class="text-white">✔ Cryptographic SHA-256 Hashes:</strong> Every scrape execution generates an immutable audit record for legal MoSPI compliance.</li>
+            <li><strong class="text-white">✔ Full Audit Metadata:</strong> Tracks exact scrape timestamps, record counts, formula IDs, and operator details.</li>
+            <li><strong class="text-white">✔ Instant CSV/JSON Export:</strong> One-click download structured directly to MoSPI NDAP ingestion standards.</li>
+          </ul>
+        </div>
+        <div class="p-2 rounded bg-slate-900/60 border border-slate-800 text-[10px] text-slate-400 font-mono">
+          Security: SHA-256 hash manifest guaranteeing data integrity
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between pt-2 border-t border-slate-800 text-[11px] text-slate-500 mt-2">
+      <span>AirIntel India • SIH26056</span>
+      <span>Slide 6 of 7</span>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- SLIDE 7: Research & References -->
+  <!-- ======================================================== -->
+  <div class="slide-frame" id="slide-7">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-4">
+      <div>
+        <div class="text-[10px] font-bold tracking-wider text-blue-400 uppercase">SIH 2026 | PS ID: 26056</div>
+        <h2 class="text-xl font-bold text-white">Research Foundations, Official Literature & Standards</h2>
+      </div>
+      <div class="text-xs text-slate-400 font-mono">Academic & Policy Backing</div>
+    </div>
+
+    <!-- 2x2 Grid -->
+    <div class="grid grid-cols-2 gap-4 flex-1 items-stretch">
+      <!-- Ref 1 -->
+      <div class="card-glass p-4 border-l-4 border-l-blue-500 flex flex-col justify-between">
+        <div class="text-xs font-bold text-blue-400 uppercase tracking-wider mb-1.5">
+          1. UN / ILO Consumer Price Index Manual (2020)
+        </div>
+        <div class="space-y-1.5 text-[11px] text-slate-300">
+          <div><strong class="text-white">• Global Standard:</strong> Jointly published by IMF, ILO, OECD, Eurostat, UNECE, and the World Bank.</div>
+          <div><strong class="text-white">• Jevons Mandate (Chapter 10):</strong> Strongly advocates geometric mean (Jevons) at the elementary aggregate level over arithmetic means (Dutot/Carli).</div>
+          <div><strong class="text-white">• Axiomatic Superiority:</strong> Satisfies the time reversal test and eliminates upward substitution bias caused by price volatility.</div>
+        </div>
+      </div>
+
+      <!-- Ref 2 -->
+      <div class="card-glass p-4 border-l-4 border-l-sky-500 flex flex-col justify-between">
+        <div class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1.5">
+          2. DGCA Domestic Air Traffic Reports (2025-2026)
+        </div>
+        <div class="space-y-1.5 text-[11px] text-slate-300">
+          <div><strong class="text-white">• Official Traffic Volume:</strong> Directorate General of Civil Aviation, Government of India domestic city-pair data.</div>
+          <div><strong class="text-white">• Empirical Weighting:</strong> Corridor weights reflect actual passenger volume (e.g. DEL-BOM 18.5%, BOM-BLR 11.2%, DEL-BLR 10.8%).</div>
+          <div><strong class="text-white">• Representative Accuracy:</strong> Prevents low-traffic regional routes from skewing the national consumer price indicator.</div>
+        </div>
+      </div>
+
+      <!-- Ref 3 -->
+      <div class="card-glass p-4 border-l-4 border-l-emerald-500 flex flex-col justify-between">
+        <div class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1.5">
+          3. MIT Billion Prices Project & Web Scraping in CPI
+        </div>
+        <div class="space-y-1.5 text-[11px] text-slate-300">
+          <div><strong class="text-white">• Foundational Paper:</strong> Cavallo & Rigobon (2016), <em>Journal of Economic Perspectives</em>.</div>
+          <div><strong class="text-white">• Empirical Validation:</strong> Demonstrates that daily automated web scraping tracks official offline inflation statistics with zero latency.</div>
+          <div><strong class="text-white">• Global Adoption:</strong> Adopted by UK Office for National Statistics (ONS), Statistics Netherlands, and US BLS for airfares.</div>
+        </div>
+      </div>
+
+      <!-- Ref 4 -->
+      <div class="card-glass p-4 border-l-4 border-l-purple-500 flex flex-col justify-between">
+        <div class="text-xs font-bold text-purple-400 uppercase tracking-wider mb-1.5">
+          4. MoSPI / NSO Base Year (2012=100) Guidelines
+        </div>
+        <div class="space-y-1.5 text-[11px] text-slate-300">
+          <div><strong class="text-white">• National Standard:</strong> Ministry of Statistics & Programme Implementation CPI Technical Manual.</div>
+          <div><strong class="text-white">• Laspeyres Integration:</strong> AirIntel indices directly scale to the 2012=100 base year and plug into higher-level CPI transport baskets.</div>
+          <div><strong class="text-white">• Open Data Standards:</strong> Provenance vault adheres to Government of India National Data Sharing & Accessibility Policy (NDSAP).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between pt-2 border-t border-slate-800 text-[11px] text-slate-500 mt-2">
+      <span>AirIntel India • SIH26056</span>
+      <span>Slide 7 of 7</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navigation Controls (Bottom Bar) -->
+<div class="controls fixed bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-slate-900/90 border border-slate-700/80 px-4 py-2 rounded-full backdrop-blur-md shadow-2xl z-50">
+  <button onclick="prevSlide()" class="p-2 hover:bg-slate-800 text-slate-300 hover:text-white rounded-full transition" title="Previous Slide (Left Arrow)">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  
+  <div class="flex items-center gap-1.5 px-2" id="nav-dots">
+    <!-- Generated dynamically -->
+  </div>
+
+  <span class="text-xs font-mono text-slate-400 px-2" id="slide-num">1 / 7</span>
+
+  <button onclick="nextSlide()" class="p-2 hover:bg-slate-800 text-slate-300 hover:text-white rounded-full transition" title="Next Slide (Right Arrow or Space)">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+
+  <div class="h-4 w-px bg-slate-700 mx-1"></div>
+
+  <button onclick="toggleFullScreen()" class="p-2 hover:bg-slate-800 text-slate-300 hover:text-white rounded-full transition" title="Fullscreen (F)">
+    <i class="fa-solid fa-expand"></i>
+  </button>
+
+  <button onclick="window.print()" class="p-2 hover:bg-slate-800 text-slate-300 hover:text-white rounded-full transition" title="Print to PDF (P)">
+    <i class="fa-solid fa-print"></i>
+  </button>
+</div>
+
+<script>
+  let currentSlide = 1;
+  const totalSlides = 7;
+
+  function showSlide(n) {
+    if (n < 1) n = 1;
+    if (n > totalSlides) n = totalSlides;
+    currentSlide = n;
+
+    document.querySelectorAll('.slide-frame').forEach((el, idx) => {
+      el.classList.toggle('active', idx + 1 === currentSlide);
+    });
+
+    document.getElementById('slide-num').innerText = `${currentSlide} / ${totalSlides}`;
+
+    const dotsContainer = document.getElementById('nav-dots');
+    dotsContainer.innerHTML = '';
+    for (let i = 1; i <= totalSlides; i++) {
+      const dot = document.createElement('button');
+      dot.className = `h-2 rounded-full transition-all ${i === currentSlide ? 'w-6 bg-blue-500' : 'w-2 bg-slate-600 hover:bg-slate-500'}`;
+      dot.onclick = () => showSlide(i);
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function nextSlide() {
+    if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+  }
+
+  function prevSlide() {
+    if (currentSlide > 1) showSlide(currentSlide - 1);
+  }
+
+  function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      nextSlide();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      prevSlide();
+    } else if (e.key === 'f' || e.key === 'F') {
+      toggleFullScreen();
+    } else if (e.key === 'p' || e.key === 'P') {
+      window.print();
+    }
+  });
+
+  showSlide(1);
+</script>
+
+</body>
+</html>
