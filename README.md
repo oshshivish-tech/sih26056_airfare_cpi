@@ -1,4 +1,4 @@
-﻿# VayuSuchak (वायु सूचक) ✈️
+# VayuSuchak (वायु सूचक) ✈️
 ### Real-Time Airfare Price Index & Automated Ingestion Engine for MoSPI eSankhyiki
 **Smart India Hackathon (SIH 2026) • Problem Statement ID: 26056**
 
@@ -50,3 +50,10 @@ India's domestic civil aviation sector experiences rapid algorithmic dynamic pri
 * **Frontend Dashboard**: React 19, TypeScript, Vite, Tailwind CSS, Recharts SVG
 * **Database & Storage**: PostgreSQL (TimescaleDB time-series partitioning)
 * **Automation & CI/CD**: GitHub Actions Scheduled Cron (04:00 AM IST) + Vercel Edge CDN
+
+---
+
+## 👨‍💻 Project Maintainer
+* **Author**: [oshshivish-tech](https://github.com/oshshivish-tech)
+* **Email**: oshshivish@gmail.com
+
