@@ -55,8 +55,8 @@ export const CPIMetricsOverview: React.FC<CPIMetricsOverviewProps> = ({
           <span className="text-xs text-slate-400 font-medium">vs Sep 2025</span>
         </div>
         <div className="text-xs text-slate-400 mt-3 flex items-center justify-between">
-          <span>Manual MoSPI Lag: <strong className="text-slate-200">~30 Days</strong></span>
-          <span className="text-emerald-400 font-medium">Our Lag: Real-time</span>
+          <span>eSankhyiki Release Lag: <strong className="text-slate-200">~30 Days</strong></span>
+          <span className="text-emerald-400 font-medium">Our Pipeline: Real-Time</span>
         </div>
       </div>
 

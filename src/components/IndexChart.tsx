@@ -76,7 +76,7 @@ export const IndexChart: React.FC<IndexChartProps> = ({
             )}
           </div>
           <p className="text-xs text-slate-400 mt-0.5">
-            Comparison of Automated Real-Time Index (Jevons/Laspeyres) vs. Manual MoSPI Benchmark
+            Comparison of Automated Real-Time Index (Jevons/Laspeyres) vs. Official MoSPI eSankhyiki Benchmark (esankhyiki.mospi.gov.in)
           </p>
         </div>
 
@@ -184,7 +184,7 @@ export const IndexChart: React.FC<IndexChartProps> = ({
                 const displayName = 
                   key === 'jevonsIndex' || name.includes('Jevons') ? 'Jevons Index (Geometric)' :
                   key === 'weightedLaspeyresIndex' || name.includes('DGCA') ? 'DGCA Weighted Index' :
-                  key === 'officialMoSPICPIBaseline' || name.includes('MoSPI') ? 'Manual MoSPI Baseline' :
+                  key === 'officialMoSPICPIBaseline' || name.includes('MoSPI') || name.includes('eSankhyiki') ? 'MoSPI eSankhyiki Baseline' :
                   'Dutot Index (Arithmetic)';
                 return [`${Number(value).toFixed(2)} (Base=100)`, displayName];
               }}
@@ -220,7 +220,7 @@ export const IndexChart: React.FC<IndexChartProps> = ({
               <Line
                 type="monotone"
                 dataKey="officialMoSPICPIBaseline"
-                name="Manual MoSPI Baseline"
+                name="MoSPI eSankhyiki Baseline"
                 stroke="#c084fc"
                 strokeWidth={2}
                 strokeDasharray="6 3"

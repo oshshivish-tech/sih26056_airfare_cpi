@@ -232,8 +232,8 @@ export const App: React.FC = () => {
           <div>
             <strong>AirIntel India</strong> • Team Rookie • SIH 2026 Problem Statement 26056
           </div>
-          <div className="text-slate-400 font-mono">
-            National Statistical Office (NSO) Augmentation Framework
+          <div className="text-slate-400 font-mono text-[11px]">
+            National Statistical Office (NSO) Augmentation Framework • Benchmarked against <a href="https://esankhyiki.mospi.gov.in/" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300 underline">MoSPI eSankhyiki</a>
           </div>
         </div>
       </footer>

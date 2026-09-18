@@ -46,6 +46,8 @@ export const Header: React.FC<HeaderProps> = ({
           <span>Target Coverage: <strong className="text-emerald-400">IndiGo, Air India, Akasa, MMT, EaseMyTrip</strong></span>
           <span className="text-slate-400">|</span>
           <span>DGCA Corridor Weights: <strong className="text-sky-300">12 Benchmark Corridors Monitored</strong></span>
+          <span className="text-slate-400">|</span>
+          <span>Official Benchmark: <a href="https://esankhyiki.mospi.gov.in/" target="_blank" rel="noopener noreferrer" className="text-purple-300 hover:text-purple-200 underline font-mono">MoSPI eSankhyiki Portal</a></span>
         </div>
       </div>
 
@@ -67,6 +69,9 @@ export const Header: React.FC<HeaderProps> = ({
                 </span>
                 <span className="px-2 py-0.5 text-[10px] font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/30 rounded-full font-mono">
                   SIH 26056
+                </span>
+                <span className="hidden sm:inline-flex px-2 py-0.5 text-[10px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-full font-mono">
+                  eSankhyiki Augmented
                 </span>
               </div>
               <p className="text-xs text-slate-400">
