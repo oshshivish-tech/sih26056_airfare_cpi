@@ -37,7 +37,7 @@ jobs:
 
       - name: Commit & Push Updated Daily CPI Index Dataset
         run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
+          git config --global user.email "oshshivish@gmail.com"
+          git config --global user.name "oshshivish-tech"
           git add src/data/mockData.ts backend/
           git diff-index --quiet HEAD || (git commit -m "Automated Daily Airfare CPI Ingestion - $(TZ='Asia/Kolkata' date +%Y-%m-%d)" && git push)
