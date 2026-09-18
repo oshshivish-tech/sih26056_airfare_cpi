@@ -16,7 +16,7 @@ import json
 import random
 import time
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 # User-Agent rotation pool for anti-bot stealth
 USER_AGENTS = [
@@ -126,7 +126,9 @@ def update_mockdata_file(all_fares):
         print(f"[-] mockData.ts not found at {mockdata_path}")
         return
 
-    now = datetime.now()
+    # Always use Indian Standard Time (IST: UTC+5:30) for MoSPI datasets
+    ist = timezone(timedelta(hours=5, minutes=30))
+    now = datetime.now(ist)
     today_str = now.strftime("%Y-%m-%d")
     day_label = now.strftime("%d %b (%a - Today)")
     day_short = now.strftime("%d %b")
@@ -146,11 +148,14 @@ def update_mockdata_file(all_fares):
     jevons_index = round(100.0 * (avg_fare / 4850.0), 1)
 
     if f"date: '{today_str}'" not in content:
-        # Ensure preceding array element has a trailing comma
-        content = re.sub(r"}(\s*)\];", r"},\1];", content)
-        new_entry = f"  {{ date: '{today_str}', dayLabel: '{day_label}', dailyJevonsIndex: {jevons_index}, dailyAvgFare: {avg_fare}, movingAverage7d: {avg_fare + 50}, scrapedQuotesCount: {len(all_fares) * 350 + 1200}, isWeekend: false }},\n];"
-        if "];\n\n// Sample Outliers" in content:
-            content = content.replace("];\n\n// Sample Outliers", f"{new_entry}\n\n// Sample Outliers")
+        def repl(match):
+            body = match.group(1).rstrip()
+            if not body.endswith(','):
+                body += ','
+            new_item = f"  {{ date: '{today_str}', dayLabel: '{day_label}', dailyJevonsIndex: {jevons_index}, dailyAvgFare: {avg_fare}, movingAverage7d: {avg_fare + 50}, scrapedQuotesCount: {len(all_fares) * 350 + 1200}, isWeekend: false }}"
+            return f"{body}\n{new_item}\n];"
+
+        content = re.sub(r"(export const MOCK_DAILY_CPI:\s*DailyFarePoint\[\]\s*=\s*\[[\s\S]*?)\r?\n\];", repl, content, count=1)
     else:
         print(f"[+] Today's date {today_str} is already present in mockData.ts.")
 
