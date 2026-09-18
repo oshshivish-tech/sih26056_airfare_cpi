@@ -120,13 +120,19 @@ export const DailyCPIChart: React.FC<DailyCPIChartProps> = ({
                 color: '#f8fafc',
                 boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)'
               }}
-              formatter={(value: any, name: string) => [
-                name === 'dailyJevonsIndex' ? `${Number(value).toFixed(1)} (Base=100)` :
-                name === 'dailyAvgFare' ? `₹${Number(value).toLocaleString()}` :
-                `₹${Number(value).toLocaleString()}`,
-                name === 'dailyJevonsIndex' ? 'Daily Jevons Index' :
-                name === 'dailyAvgFare' ? 'Daily National Avg Fare' : '7-Day Moving Avg'
-              ]}
+              formatter={(value: any, name: string, item: any) => {
+                const key = item?.dataKey || name;
+                const isJevons = key === 'dailyJevonsIndex' || (typeof name === 'string' && name.toLowerCase().includes('jevons'));
+                const isAvgFare = key === 'dailyAvgFare' || (typeof name === 'string' && name.toLowerCase().includes('national avg'));
+
+                if (isJevons) {
+                  return [`${Number(value).toFixed(1)} (Base=100)`, 'Daily Jevons CPI Index'];
+                }
+                if (isAvgFare) {
+                  return [`₹${Number(value).toLocaleString()}`, 'Daily National Avg Fare (₹)'];
+                }
+                return [`₹${Number(value).toLocaleString()}`, '7-Day Moving Average (₹)'];
+              }}
             />
             
             <Legend verticalAlign="top" height={36} wrapperStyle={{ color: '#cbd5e1', fontSize: '12px' }} />
