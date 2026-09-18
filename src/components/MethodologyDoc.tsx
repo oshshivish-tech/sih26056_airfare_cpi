@@ -92,7 +92,7 @@ export const MethodologyDoc: React.FC = () => {
             <span>5. Official Benchmark Source: MoSPI eSankhyiki Portal</span>
           </div>
           <p className="text-xs text-slate-300 mt-1 max-w-3xl leading-relaxed">
-            Our historical baseline series and macro weights are calibrated against the official <strong>Consumer Price Index (CPI)</strong> published on the Government of India's statistical data platform <strong>eSankhyiki (<code className="text-purple-300">esankhyiki.mospi.gov.in</code>)</strong>. Our automated web scraping pipeline directly addresses the SIH 26056 mandate by eliminating eSankhyiki's traditional 30-day manual survey lag with daily, automated quote ingestion.
+            Our historical baseline series and macro weights are calibrated against the official <strong>Consumer Price Index (CPI Base = 100)</strong> published on the Government of India's statistical data platform <strong>eSankhyiki (<code className="text-purple-300">esankhyiki.mospi.gov.in</code>)</strong>. Our automated web scraping pipeline directly addresses the SIH 26056 mandate by eliminating eSankhyiki's traditional 30-day manual survey lag with daily, automated quote ingestion.
           </p>
         </div>
         <a

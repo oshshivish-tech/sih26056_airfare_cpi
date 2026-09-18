@@ -37,7 +37,7 @@ export const IndiaFlightMap: React.FC<IndiaFlightMapProps> = ({ corridorBreakdow
           <div className="flex items-center space-x-2">
             <h3 className="text-base font-bold text-white tracking-tight flex items-center">
               <Navigation className="w-5 h-5 text-sky-400 mr-2" />
-              AirIntel India — Domestic Flight Network & Fare Heatmap
+              VayuSuchak (वायु सूचक) — Domestic Flight Network & Fare Heatmap
             </h3>
             <span className="px-2 py-0.5 text-[10px] font-mono bg-teal-500/20 text-teal-300 border border-teal-500/30 rounded">
               12 Corridors

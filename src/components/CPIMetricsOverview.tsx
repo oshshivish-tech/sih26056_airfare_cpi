@@ -30,7 +30,7 @@ export const CPIMetricsOverview: React.FC<CPIMetricsOverviewProps> = ({
           <span className="text-3xl font-extrabold tracking-tight text-white font-mono">
             {currentPoint.jevonsIndex.toFixed(1)}
           </span>
-          <span className="text-xs text-slate-400 font-medium">Base (2025=100)</span>
+          <span className="text-xs text-slate-400 font-medium">(Base = 100)</span>
         </div>
         <div className="flex items-center text-xs mt-3 space-x-1 text-emerald-400 font-medium">
           <ArrowUpRight className="w-4 h-4" />

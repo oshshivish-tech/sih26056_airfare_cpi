@@ -39,7 +39,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
     const jsonString = JSON.stringify({
       title: "MoSPI Airfare Consumer Price Index (CPI) Report - SIH 26056",
       generatedAt: new Date().toISOString(),
-      baseYear: 2025,
+      baseYear: 2024,
       currentPeriod: currentPoint,
       seriesData: historicalData
     }, null, 2);
@@ -54,7 +54,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
   };
 
   const copyDataToClipboard = () => {
-    const summaryText = `MoSPI Airfare CPI Report (SIH 26056)\nGenerated: ${new Date().toLocaleString()}\nCurrent Index: ${currentPoint.jevonsIndex.toFixed(1)} (Base 2025=100)\nYoY Inflation: +${currentPoint.yoyInflationRate}%\nScraped Quotes Verified: ${currentPoint.sampleCount.toLocaleString()}`;
+    const summaryText = `MoSPI Airfare CPI Report (SIH 26056)\nGenerated: ${new Date().toLocaleString()}\nCurrent Index: ${currentPoint.jevonsIndex.toFixed(1)} (Base = 100)\nYoY Inflation: +${currentPoint.yoyInflationRate}%\nScraped Quotes Verified: ${currentPoint.sampleCount.toLocaleString()}`;
     navigator.clipboard.writeText(summaryText);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);

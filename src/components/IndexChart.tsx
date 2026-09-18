@@ -186,7 +186,7 @@ export const IndexChart: React.FC<IndexChartProps> = ({
                   key === 'weightedLaspeyresIndex' || name.includes('DGCA') ? 'DGCA Weighted Index' :
                   key === 'officialMoSPICPIBaseline' || name.includes('MoSPI') || name.includes('eSankhyiki') ? 'MoSPI eSankhyiki Baseline' :
                   'Dutot Index (Arithmetic)';
-                return [`${Number(value).toFixed(2)} (Base=100)`, displayName];
+                return [`${Number(value).toFixed(2)} (Base = 100)`, displayName];
               }}
             />
             <Legend verticalAlign="top" height={36} wrapperStyle={{ color: '#cbd5e1', fontSize: '12px' }} />

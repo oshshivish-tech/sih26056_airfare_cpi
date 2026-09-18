@@ -32,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
             </span>
-            LIVE MOSPI AIRFARE CPI: <strong className="ml-1 text-white">{latestIndex.toFixed(1)}</strong> (Base=100)
+            LIVE MOSPI AIRFARE CPI: <strong className="ml-1 text-white">{latestIndex.toFixed(1)}</strong> (Base = 100)
           </span>
           <span className="text-slate-400">|</span>
           <span className="text-slate-300">
@@ -61,15 +61,15 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <h1 className="text-base sm:text-lg font-bold tracking-tight text-white">
-                  AirIntel India
+                <h1 className="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-1.5">
+                  VayuSuchak <span className="text-xs font-normal text-sky-400 font-sans hidden sm:inline">(वायु सूचक)</span>
                 </h1>
                 <span className="px-2 py-0.5 text-[10px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-full font-mono">
                   eSankhyiki Augmented
                 </span>
               </div>
               <p className="text-[11px] text-slate-400">
-                MoSPI Airfare Intelligence & CPI Command Center • National Statistical Office
+                MoSPI Airfare CPI Intelligence & Ingestion Platform • National Statistical Office
               </p>
             </div>
           </div>

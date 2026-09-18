@@ -126,7 +126,7 @@ export const DailyCPIChart: React.FC<DailyCPIChartProps> = ({
                 const isAvgFare = key === 'dailyAvgFare' || (typeof name === 'string' && name.toLowerCase().includes('national avg'));
 
                 if (isJevons) {
-                  return [`${Number(value).toFixed(1)} (Base=100)`, 'Daily Jevons CPI Index'];
+                  return [`${Number(value).toFixed(1)} (Base = 100)`, 'Daily Jevons CPI Index'];
                 }
                 if (isAvgFare) {
                   return [`₹${Number(value).toLocaleString()}`, 'Daily National Avg Fare (₹)'];
