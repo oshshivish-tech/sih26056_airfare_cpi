@@ -254,44 +254,73 @@
     </div>
 
     <div class="grid grid-cols-12 gap-6 flex-1 items-stretch">
-      <!-- Left Side: System Architecture + Process Flowchart -->
-      <div class="col-span-7 flex flex-col justify-between gap-3">
-        <div>
-          <div class="inline-block bg-yellow-200 text-slate-900 font-black text-xs px-3 py-1 rounded-full mb-1.5 shadow-sm">
-            System Architecture
+      <!-- Left Side: System Architecture + Process Flowchart (Enlarged) -->
+      <div class="col-span-8 flex flex-col justify-between gap-3 h-full">
+        <div class="flex-1 flex flex-col justify-center">
+          <div class="flex items-center justify-between mb-1">
+            <span class="inline-block bg-yellow-200 text-slate-900 font-black text-xs px-3 py-1 rounded-full shadow-sm">
+              System Architecture
+            </span>
+            <span class="text-[11px] text-slate-500 font-semibold">End-to-End Pipeline & Storage</span>
           </div>
-          <img src="/presentation/architecture_diagram.png" alt="System Architecture Diagram" class="w-full h-44 object-contain rounded-lg border border-slate-200" />
+          <div class="bg-slate-50 rounded-xl p-1.5 border border-slate-200 shadow-sm flex items-center justify-center flex-1">
+            <img src="/presentation/architecture_diagram.png" alt="System Architecture Diagram" class="w-full max-h-[255px] object-contain rounded-lg" />
+          </div>
         </div>
 
-        <div>
-          <div class="inline-block bg-yellow-200 text-slate-900 font-black text-xs px-3 py-1 rounded-full mb-1.5 shadow-sm">
-            Process Flowchart
+        <div class="flex-1 flex flex-col justify-center">
+          <div class="flex items-center justify-between mb-1">
+            <span class="inline-block bg-yellow-200 text-slate-900 font-black text-xs px-3 py-1 rounded-full shadow-sm">
+              Process Flowchart
+            </span>
+            <span class="text-[11px] text-slate-500 font-semibold">Algorithmic Ingestion & Indexing</span>
           </div>
-          <img src="/presentation/flowchart_diagram.png" alt="Process Flowchart Diagram" class="w-full h-40 object-contain rounded-lg border border-slate-200" />
+          <div class="bg-slate-50 rounded-xl p-1.5 border border-slate-200 shadow-sm flex items-center justify-center flex-1">
+            <img src="/presentation/flowchart_diagram.png" alt="Process Flowchart Diagram" class="w-full max-h-[240px] object-contain rounded-lg" />
+          </div>
         </div>
       </div>
 
-      <!-- Right Side: Large Rounded Tech Stack Card -->
-      <div class="col-span-5 border-4 border-slate-300 rounded-3xl p-6 bg-white flex flex-col justify-between shadow-sm">
-        <div class="text-center font-black text-3xl text-[#7c3aed] mb-4">
-          Tech Stack Used:
+      <!-- Right Side: Tech Stack Card + Live Prototype Link -->
+      <div class="col-span-4 flex flex-col justify-between gap-3 h-full">
+        <!-- Tech Stack Card -->
+        <div class="border-[3px] border-slate-300 rounded-2xl p-4 bg-white flex flex-col justify-between shadow-sm flex-1">
+          <div>
+            <div class="text-center font-black text-2xl text-[#7c3aed] mb-3">
+              Tech Stack Used:
+            </div>
+            <div class="grid grid-cols-2 gap-y-2 text-center text-xs font-bold text-slate-900">
+              <div>• Python 3.13</div>
+              <div>• Playwright</div>
+              <div>• Pandas & NumPy</div>
+              <div>• SciPy (Z-score)</div>
+              <div>• Jevons Engine</div>
+              <div>• PostgreSQL</div>
+              <div>• React 19</div>
+              <div>• TypeScript</div>
+              <div>• Tailwind CSS</div>
+              <div>• Recharts SVG</div>
+              <div>• FastAPI & Node</div>
+              <div>• Docker & Vercel</div>
+            </div>
+          </div>
+          <div class="text-center text-[11px] font-semibold text-slate-500 pt-2 border-t border-slate-200 mt-2">
+            100% Open Source • Zero Licensing Lock-In
+          </div>
         </div>
-        <div class="grid grid-cols-2 gap-y-2.5 text-center text-sm font-bold text-slate-900">
-          <div>• Python 3.13</div>
-          <div>• Playwright</div>
-          <div>• Pandas & NumPy</div>
-          <div>• SciPy (Z-score)</div>
-          <div>• UN/ILO Jevons Engine</div>
-          <div>• PostgreSQL</div>
-          <div>• React 19</div>
-          <div>• TypeScript</div>
-          <div>• Tailwind CSS</div>
-          <div>• Recharts SVG</div>
-          <div>• FastAPI & Node.js</div>
-          <div>• Docker & Vercel</div>
-        </div>
-        <div class="text-center text-xs font-semibold text-slate-500 pt-3 border-t border-slate-200 mt-3">
-          100% Open Source • Zero Enterprise Licensing Lock-In
+
+        <!-- Live Prototype Banner -->
+        <div class="border-2 border-blue-500/50 rounded-2xl p-3 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-sm text-center">
+          <div class="flex items-center justify-center space-x-1.5 text-xs font-black text-blue-900 uppercase tracking-wide mb-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span>Live Working Prototype</span>
+          </div>
+          <a href="https://sih26056-airfare-cpi.vercel.app/" target="_blank" class="text-xs sm:text-sm font-black text-blue-700 hover:text-blue-900 underline break-all block py-0.5">
+            https://sih26056-airfare-cpi.vercel.app/
+          </a>
+          <p class="text-[10px] text-slate-500 font-medium mt-1">
+            Explore live CPI charts, scraper telemetry & corridors
+          </p>
         </div>
       </div>
     </div>
@@ -489,8 +518,8 @@
       <div class="text-base font-black text-black">
         Here’s the link to VayuSuchak (वायु सूचक) — your gateway to real-time airfare CPI intelligence:
       </div>
-      <a href="https://sihwinners.vercel.app" target="_blank" class="text-2xl font-black text-blue-700 hover:underline">
-        https://sihwinners.vercel.app
+      <a href="https://sih26056-airfare-cpi.vercel.app/" target="_blank" class="text-2xl font-black text-blue-700 hover:underline">
+        https://sih26056-airfare-cpi.vercel.app/
       </a>
     </div>
   </div>
