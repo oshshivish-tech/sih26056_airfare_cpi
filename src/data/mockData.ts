@@ -351,20 +351,28 @@ export const generateLiveScrapedFares = (): FlightFare[] => {
 
   MOCK_ROUTE_WEIGHTS.forEach((route, rIdx) => {
     horizons.forEach(horizon => {
-      // Add multiplier based on lead time horizon (closer = pricier)
-      const horizonMultiplier = horizon === '1d' ? 1.65 : horizon === '7d' ? 1.25 : horizon === '15d' ? 1.05 : horizon === '30d' ? 0.90 : 0.82;
+      // Realistic advance-purchase lead time multipliers (1d last-minute to 45d advance)
+      const horizonMultiplier = 
+        horizon === '1d' ? 1.18 :
+        horizon === '7d' ? 1.08 :
+        horizon === '15d' ? 1.01 :
+        horizon === '30d' ? 0.94 : 0.89;
 
       airlines.forEach((air, aIdx) => {
-        // Inject intentional surge pricing outliers on 1d horizon for first route
+        // Intentional surge pricing outlier on 1d horizon for first route to demonstrate IQR algorithm
         const isSurgeOutlier = (horizon === '1d' && rIdx === 0 && aIdx === 0);
-        const base = isSurgeOutlier 
-          ? Math.round(route.baseYearPrice * 5.2) 
-          : Math.round((route.baseYearPrice * horizonMultiplier) * (0.92 + (Math.random() * 0.16)));
-        
-        const fuel = Math.round(base * 0.18);
-        const userFee = 450;
-        const gst = Math.round((base + fuel + userFee) * 0.05);
-        const total = base + fuel + userFee + gst;
+
+        // Current market price incorporates ~10.5% inflation over 2025 base price (Index ~110.5)
+        const targetTotal = isSurgeOutlier
+          ? Math.round(route.baseYearPrice * 4.2)
+          : Math.round(route.baseYearPrice * 1.085 * horizonMultiplier * (0.97 + Math.random() * 0.06));
+
+        // Deconstruct total price into realistic components backwards (Base ~78%, Fuel ~14%, UDF/PSF ~4%, GST ~4%)
+        const base = Math.round(targetTotal * 0.78);
+        const fuel = Math.round(targetTotal * 0.14);
+        const udf = Math.round(targetTotal * 0.04);
+        const gst = targetTotal - base - fuel - udf;
+        const total = targetTotal;
 
         const nowTs = new Date().toISOString().replace('T', ' ').substring(0, 19);
 
@@ -383,7 +391,7 @@ export const generateLiveScrapedFares = (): FlightFare[] => {
           leadTimeHorizon: horizon,
           baseFare: base,
           fuelSurcharge: fuel,
-          airportUserFee: userFee,
+          airportUserFee: udf,
           gstAndTaxes: gst,
           totalFare: total,
           source: sources[Math.floor(Math.random() * sources.length)],
