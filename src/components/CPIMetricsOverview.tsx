@@ -77,7 +77,7 @@ export const CPIMetricsOverview: React.FC<CPIMetricsOverviewProps> = ({
         </div>
         <div className="text-xs text-slate-400 mt-3 flex items-center justify-between">
           <span>Target Sources: <strong className="text-slate-200">5 Portals</strong></span>
-          <span className="text-sky-400 font-medium">50 Corridors</span>
+          <span className="text-sky-400 font-medium">12 Corridors</span>
         </div>
       </div>
 

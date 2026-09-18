@@ -45,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({
           <span className="text-slate-400">|</span>
           <span>Target Coverage: <strong className="text-emerald-400">IndiGo, Air India, Akasa, MMT, EaseMyTrip</strong></span>
           <span className="text-slate-400">|</span>
-          <span>DGCA Corridor Weights: <strong className="text-sky-300">50 Top Indian Corridors Monitored</strong></span>
+          <span>DGCA Corridor Weights: <strong className="text-sky-300">12 Benchmark Corridors Monitored</strong></span>
         </div>
       </div>
 

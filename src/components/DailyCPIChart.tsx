@@ -171,7 +171,7 @@ export const DailyCPIChart: React.FC<DailyCPIChartProps> = ({
           Weekend Surge Finding:
         </span>
         <span>
-          Friday–Sunday airfares average <strong className="text-white font-mono">+11.5% higher</strong> than Tuesday–Wednesday mid-week discount fares across all 50 domestic corridors.
+          Friday–Sunday airfares average <strong className="text-white font-mono">+11.5% higher</strong> than Tuesday–Wednesday mid-week discount fares across all 12 domestic corridors.
         </span>
       </div>
     </div>

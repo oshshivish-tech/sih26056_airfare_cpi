@@ -40,7 +40,7 @@ export const IndiaFlightMap: React.FC<IndiaFlightMapProps> = ({ corridorBreakdow
               AirIntel India — Domestic Flight Network & Fare Heatmap
             </h3>
             <span className="px-2 py-0.5 text-[10px] font-mono bg-teal-500/20 text-teal-300 border border-teal-500/30 rounded">
-              50 Corridors
+              12 Corridors
             </span>
           </div>
           <p className="text-xs text-slate-400 mt-0.5">

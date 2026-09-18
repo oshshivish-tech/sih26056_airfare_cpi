@@ -48,7 +48,7 @@ export const RouteHeatmap: React.FC<RouteHeatmapProps> = ({ corridorBreakdown })
             onChange={(e: any) => setFilterCategory(e.target.value)}
             className="bg-slate-900 text-xs text-slate-200 border border-slate-700 rounded-lg px-3 py-1.5 focus:outline-none focus:border-sky-500"
           >
-            <option value="ALL">All Categories (50 Corridors)</option>
+            <option value="ALL">All Categories (12 Corridors)</option>
             <option value="METRO_METRO">Metro ↔ Metro Corridors</option>
             <option value="METRO_TIER2">Metro ↔ Tier 2 Corridors</option>
             <option value="UDAN_REGIONAL">UDAN Regional Routes</option>

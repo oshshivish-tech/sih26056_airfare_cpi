@@ -51,7 +51,7 @@ export class ScraperOrchestrator {
       timestamp: now(),
       source: 'ORCHESTRATOR',
       level: 'INFO',
-      message: 'Initializing multi-threaded scraping job across 5 target portals & 50 domestic corridors...'
+      message: 'Initializing multi-threaded scraping job across 5 target portals & 12 domestic corridors...'
     };
     logs.push(initLog);
     this.emit(initLog);
