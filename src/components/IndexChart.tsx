@@ -17,12 +17,14 @@ interface IndexChartProps {
   data: CPIIndexPoint[];
   selectedLeadTime: LeadTimeHorizon | 'ALL';
   onSelectLeadTime: (horizon: LeadTimeHorizon | 'ALL') => void;
+  isLiveScraped?: boolean;
 }
 
 export const IndexChart: React.FC<IndexChartProps> = ({
   data,
   selectedLeadTime,
-  onSelectLeadTime
+  onSelectLeadTime,
+  isLiveScraped = false
 }) => {
   const [visibleSeries, setVisibleSeries] = useState({
     jevons: true,
@@ -59,13 +61,19 @@ export const IndexChart: React.FC<IndexChartProps> = ({
       {/* Chart Header & Filters */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
         <div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center flex-wrap gap-2">
             <h2 className="text-lg font-bold text-white tracking-tight">
               Consumer Price Index (CPI) Airfare Trajectory
             </h2>
             <span className="px-2 py-0.5 text-[10px] font-mono bg-sky-500/20 text-sky-300 border border-sky-500/30 rounded">
               Base Year 2025 = 100
             </span>
+            {isLiveScraped && (
+              <span className="px-2 py-0.5 text-[10px] font-mono bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 rounded-full flex items-center gap-1.5 animate-pulse">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                Live Index Ingestion Active (Sep 2026)
+              </span>
+            )}
           </div>
           <p className="text-xs text-slate-400 mt-0.5">
             Comparison of Automated Real-Time Index (Jevons/Laspeyres) vs. Manual MoSPI Benchmark

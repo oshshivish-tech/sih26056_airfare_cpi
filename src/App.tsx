@@ -15,16 +15,19 @@ import { FuelPriceSimulator } from './components/FuelPriceSimulator';
 import { DailyCPIChart } from './components/DailyCPIChart';
 import { CorridorAvgTable } from './components/CorridorAvgTable';
 
-import { MOCK_CPI_HISTORICAL, MOCK_OUTLIERS, MOCK_ROUTE_WEIGHTS, generateLiveScrapedFares } from './data/mockData';
+import { MOCK_CPI_HISTORICAL, MOCK_DAILY_CPI, MOCK_OUTLIERS, MOCK_ROUTE_WEIGHTS, generateLiveScrapedFares } from './data/mockData';
 import { MoSPICPIEngine } from './services/cpiEngine';
 import { scraperOrchestrator, ScrapingLogEntry } from './services/scraperEngine';
-import { FlightFare, CPIIndexPoint, LeadTimeHorizon, OutlierRecord } from './types';
+import { FlightFare, CPIIndexPoint, LeadTimeHorizon, OutlierRecord, DailyFarePoint } from './types';
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'corridors' | 'scraper' | 'methodology'>('overview');
   const [selectedLeadTime, setSelectedLeadTime] = useState<LeadTimeHorizon | 'ALL'>('ALL');
   
   const [historicalData, setHistoricalData] = useState<CPIIndexPoint[]>(MOCK_CPI_HISTORICAL);
+  const [dailyData, setDailyData] = useState<DailyFarePoint[]>(MOCK_DAILY_CPI);
+  const [hasLiveScraped, setHasLiveScraped] = useState(false);
+  const [scrapeNotification, setScrapeNotification] = useState<string | null>(null);
   const [outliers, setOutliers] = useState<OutlierRecord[]>(MOCK_OUTLIERS);
   const [logs, setLogs] = useState<ScrapingLogEntry[]>([]);
   const [isScraping, setIsScraping] = useState(false);
@@ -51,24 +54,53 @@ export const App: React.FC = () => {
 
         setLiveFares(newFares);
         setOutliers(prev => [...newOutliers, ...prev]);
+        setHasLiveScraped(true);
 
-        // Update live point in index series with EMA exponential smoothing
+        const activeFares = newFares.filter(f => selectedLeadTime === 'ALL' || f.leadTimeHorizon === selectedLeadTime);
+        const faresToUse = activeFares.length > 0 ? activeFares : newFares;
+        const batchAvgFare = Math.round(faresToUse.reduce((sum, f) => sum + f.totalFare, 0) / faresToUse.length);
+        const batchJevons = Number(result.jevonsIndex.toFixed(1));
+
+        setScrapeNotification(
+          `Live Scrape Ingested: +${newFares.length} verified quotes across 12 corridors. Real-time Jevons Index updated to ${batchJevons} (Avg Fare ₹${batchAvgFare.toLocaleString()})`
+        );
+
+        // Update Day-Wise Daily Series
+        setDailyData(prev => {
+          const updated = [...prev];
+          const todayStr = '2026-09-18';
+          const idx = updated.findIndex(d => d.date === todayStr);
+          const targetIdx = idx !== -1 ? idx : updated.length - 1;
+          const oldPoint = updated[targetIdx];
+
+          const last6 = updated.slice(Math.max(0, targetIdx - 6), targetIdx);
+          const moving7d = Math.round((last6.reduce((acc, p) => acc + p.dailyAvgFare, 0) + batchAvgFare) / (last6.length + 1));
+
+          updated[targetIdx] = {
+            ...oldPoint,
+            date: todayStr,
+            dayLabel: '18 Sep (Fri - Live)',
+            dailyAvgFare: batchAvgFare,
+            dailyJevonsIndex: batchJevons,
+            movingAverage7d: moving7d,
+            scrapedQuotesCount: (oldPoint?.scrapedQuotesCount || 3650) + newFares.length
+          };
+          return updated;
+        });
+
+        // Update Monthly Index Series
         setHistoricalData(prev => {
           const updated = [...prev];
           const liveIdx = updated.findIndex(p => p.periodLabel.includes('Live'));
           const targetIdx = liveIdx !== -1 ? liveIdx : 11;
           const currentPoint = updated[targetIdx];
-          
-          // 85% established index weight + 15% new live batch weight for statistical stability
-          const smoothedJevons = Number(((currentPoint.jevonsIndex * 0.85) + (result.jevonsIndex * 0.15)).toFixed(1));
-          const smoothedDutot = Number(((currentPoint.dutotIndex * 0.85) + (result.dutotIndex * 0.15)).toFixed(1));
-          const smoothedLaspeyres = Number(((currentPoint.weightedLaspeyresIndex * 0.85) + (result.weightedLaspeyresIndex * 0.15)).toFixed(1));
 
           updated[targetIdx] = {
             ...currentPoint,
-            jevonsIndex: smoothedJevons,
-            dutotIndex: smoothedDutot,
-            weightedLaspeyresIndex: smoothedLaspeyres,
+            periodLabel: 'Sep 2026 (Live - 18 Sep)',
+            jevonsIndex: batchJevons,
+            dutotIndex: Number(result.dutotIndex.toFixed(1)),
+            weightedLaspeyresIndex: Number(result.weightedLaspeyresIndex.toFixed(1)),
             sampleCount: currentPoint.sampleCount + newFares.length
           };
           return updated;
@@ -117,15 +149,33 @@ export const App: React.FC = () => {
         {/* Tab 1: Overview */}
         {activeTab === 'overview' && (
           <div className="space-y-6">
+            {scrapeNotification && (
+              <div className="bg-emerald-500/15 border border-emerald-500/40 rounded-xl p-4 flex items-center justify-between shadow-lg shadow-emerald-950/40 animate-pulse">
+                <div className="flex items-center space-x-3">
+                  <span className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                  </span>
+                  <span className="text-sm font-semibold text-emerald-300">
+                    {scrapeNotification}
+                  </span>
+                </div>
+                <span className="text-xs font-mono text-emerald-400 bg-emerald-500/20 px-2.5 py-1 rounded-md border border-emerald-500/30">
+                  Graphs Updated Live
+                </span>
+              </div>
+            )}
+
             <TransmissionChain currentAirfareSurgePct={latestPoint.momInflationRate || 11.4} />
 
             <IndexChart
               data={historicalData}
               selectedLeadTime={selectedLeadTime}
               onSelectLeadTime={setSelectedLeadTime}
+              isLiveScraped={hasLiveScraped}
             />
 
-            <DailyCPIChart />
+            <DailyCPIChart data={dailyData} isLiveScraped={hasLiveScraped} />
 
             <FuelPriceSimulator baseJevonsIndex={latestPoint.jevonsIndex} />
 

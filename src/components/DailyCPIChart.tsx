@@ -12,10 +12,20 @@ import {
   ReferenceLine
 } from 'recharts';
 import { MOCK_DAILY_CPI } from '../data/mockData';
-import { Calendar, TrendingUp, DollarSign } from 'lucide-react';
+import { DailyFarePoint } from '../types';
+import { Calendar, TrendingUp, DollarSign, Activity } from 'lucide-react';
 
-export const DailyCPIChart: React.FC = () => {
-  const latestDaily = MOCK_DAILY_CPI[MOCK_DAILY_CPI.length - 1];
+interface DailyCPIChartProps {
+  data?: DailyFarePoint[];
+  isLiveScraped?: boolean;
+}
+
+export const DailyCPIChart: React.FC<DailyCPIChartProps> = ({
+  data = MOCK_DAILY_CPI,
+  isLiveScraped = false
+}) => {
+  const chartData = data && data.length > 0 ? data : MOCK_DAILY_CPI;
+  const latestDaily = chartData[chartData.length - 1];
   const todayAvgFare = latestDaily ? `₹${latestDaily.dailyAvgFare.toLocaleString()}` : '₹5,420';
   const movingAvgFare = latestDaily ? `₹${latestDaily.movingAverage7d.toLocaleString()}` : '₹5,520';
 
@@ -23,7 +33,7 @@ export const DailyCPIChart: React.FC = () => {
     <div className="glass-panel p-6 rounded-2xl mb-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center flex-wrap gap-2">
             <h3 className="text-base font-bold text-white tracking-tight flex items-center">
               <Calendar className="w-5 h-5 text-emerald-400 mr-2" />
               Day-Wise (Daily) Airfare CPI & Average Fare Tracking
@@ -31,6 +41,13 @@ export const DailyCPIChart: React.FC = () => {
             <span className="px-2 py-0.5 text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded">
               30-Day Daily Series
             </span>
+            {isLiveScraped && (
+              <span className="px-2 py-0.5 text-[10px] font-mono bg-emerald-500/30 text-emerald-200 border border-emerald-400/60 rounded-full flex items-center gap-1.5 animate-pulse">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <Activity className="w-3 h-3 text-emerald-400" />
+                Live Scrape Ingested ({latestDaily?.dayLabel})
+              </span>
+            )}
           </div>
           <p className="text-xs text-slate-400 mt-0.5">
             Daily price granularity revealing Friday–Sunday weekend surge vs. Tuesday–Wednesday discount cycles
@@ -52,7 +69,7 @@ export const DailyCPIChart: React.FC = () => {
       {/* Dual Axis Area/Line Chart */}
       <div className="h-[320px] w-full pt-2">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={MOCK_DAILY_CPI} margin={{ top: 10, right: 20, left: -10, bottom: 0 }}>
+          <AreaChart data={chartData} margin={{ top: 10, right: 20, left: -10, bottom: 0 }}>
             <defs>
               <linearGradient id="fareFill" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#10b981" stopOpacity={0.4} />

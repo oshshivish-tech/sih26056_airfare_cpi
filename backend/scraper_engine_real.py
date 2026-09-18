@@ -146,6 +146,8 @@ def update_mockdata_file(all_fares):
     jevons_index = round(100.0 * (avg_fare / 4850.0), 1)
 
     if f"date: '{today_str}'" not in content:
+        # Ensure preceding array element has a trailing comma
+        content = re.sub(r"}(\s*)\];", r"},\1];", content)
         new_entry = f"  {{ date: '{today_str}', dayLabel: '{day_label}', dailyJevonsIndex: {jevons_index}, dailyAvgFare: {avg_fare}, movingAverage7d: {avg_fare + 50}, scrapedQuotesCount: {len(all_fares) * 350 + 1200}, isWeekend: false }},\n];"
         if "];\n\n// Sample Outliers" in content:
             content = content.replace("];\n\n// Sample Outliers", f"{new_entry}\n\n// Sample Outliers")
