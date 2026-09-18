@@ -53,38 +53,32 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Main Header Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex flex-wrap items-center justify-between py-2.5 gap-3 min-h-[4rem]">
           {/* Brand Logo & Title */}
-          <div className="flex items-center space-x-3">
-            <div className="p-2.5 rounded-xl bg-gradient-to-tr from-teal-600 to-sky-600 text-white shadow-lg shadow-teal-500/20 ring-1 ring-white/20">
-              <Plane className="w-6 h-6 transform -rotate-12" />
+          <div className="flex items-center space-x-3 shrink-0">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-tr from-teal-600 to-sky-600 text-white shadow-lg shadow-teal-500/20 ring-1 ring-white/20">
+              <Plane className="w-5 h-5 sm:w-6 sm:h-6 transform -rotate-12" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <h1 className="text-lg font-bold tracking-tight text-white flex items-center">
+                <h1 className="text-base sm:text-lg font-bold tracking-tight text-white">
                   AirIntel India
                 </h1>
-                <span className="px-2 py-0.5 text-[10px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30 rounded-full font-mono">
-                  Team Rookie
-                </span>
-                <span className="px-2 py-0.5 text-[10px] font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/30 rounded-full font-mono">
-                  SIH 26056
-                </span>
-                <span className="hidden sm:inline-flex px-2 py-0.5 text-[10px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-full font-mono">
+                <span className="px-2 py-0.5 text-[10px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-full font-mono">
                   eSankhyiki Augmented
                 </span>
               </div>
-              <p className="text-xs text-slate-400">
+              <p className="text-[11px] text-slate-400">
                 MoSPI Airfare Intelligence & CPI Command Center • National Statistical Office
               </p>
             </div>
           </div>
 
-          {/* Navigation Tabs */}
-          <nav className="hidden md:flex items-center space-x-1 bg-slate-900/80 p-1 rounded-xl border border-slate-800">
+          {/* Navigation Tabs (Desktop) */}
+          <nav className="hidden lg:flex items-center space-x-1 bg-slate-900/80 p-1 rounded-xl border border-slate-800 shrink-0">
             <button
               onClick={() => setActiveTab('overview')}
-              className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeTab === 'overview'
                   ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
@@ -96,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               onClick={() => setActiveTab('corridors')}
-              className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeTab === 'corridors'
                   ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
@@ -108,7 +102,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               onClick={() => setActiveTab('scraper')}
-              className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeTab === 'scraper'
                   ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
@@ -120,7 +114,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               onClick={() => setActiveTab('methodology')}
-              className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeTab === 'methodology'
                   ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
@@ -132,13 +126,13 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
 
           {/* Action Buttons */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center flex-wrap gap-2 shrink-0">
             <a
               href="/slides.html"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 transition-all shadow-sm"
-              title="Open Official SIH 7-Slide Pitch Deck"
+              className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 transition-all shadow-sm"
+              title="Open Official Pitch Deck"
             >
               <Presentation className="w-3.5 h-3.5 text-blue-400" />
               <span>Pitch Deck</span>
@@ -146,34 +140,82 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               onClick={onOpenProvenance}
-              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-teal-300 bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 transition-all"
+              className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-teal-300 bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 transition-all"
               title="View SHA-256 Cryptographic Audit Trail"
             >
               <Lock className="w-3.5 h-3.5 text-teal-400" />
-              <span>Provenance Vault</span>
+              <span className="hidden sm:inline">Provenance Vault</span>
             </button>
 
             <button
               onClick={onRunScrape}
               disabled={isScraping}
-              className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white transition-all shadow-md ${
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-all shadow-md ${
                 isScraping
                   ? 'bg-slate-700 cursor-not-allowed opacity-75'
                   : 'bg-emerald-600 hover:bg-emerald-500 shadow-emerald-600/20 active:scale-95'
               }`}
             >
               <RefreshCw className={`w-3.5 h-3.5 ${isScraping ? 'animate-spin' : ''}`} />
-              <span>{isScraping ? 'Scraping Live...' : 'Trigger Live Scrape'}</span>
+              <span>{isScraping ? 'Scraping...' : 'Trigger Live Scrape'}</span>
             </button>
 
             <button
               onClick={onOpenExport}
-              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 transition-all hover:border-slate-600"
+              className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 transition-all hover:border-slate-600"
             >
               <Download className="w-3.5 h-3.5 text-sky-400" />
-              <span>Export Report</span>
+              <span className="hidden sm:inline">Export</span>
             </button>
           </div>
+        </div>
+
+        {/* Mobile Navigation Strip */}
+        <div className="lg:hidden flex items-center justify-between overflow-x-auto py-2 border-t border-slate-800/80 gap-1">
+          <button
+            onClick={() => setActiveTab('overview')}
+            className={`flex items-center space-x-1 px-2.5 py-1 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
+              activeTab === 'overview'
+                ? 'bg-sky-600 text-white'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <BarChart3 className="w-3 h-3" />
+            <span>CPI Analytics</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('corridors')}
+            className={`flex items-center space-x-1 px-2.5 py-1 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
+              activeTab === 'corridors'
+                ? 'bg-sky-600 text-white'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Layers className="w-3 h-3" />
+            <span>Flight Corridors</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('scraper')}
+            className={`flex items-center space-x-1 px-2.5 py-1 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
+              activeTab === 'scraper'
+                ? 'bg-sky-600 text-white'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Database className="w-3 h-3" />
+            <span>Live Monitor</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('methodology')}
+            className={`flex items-center space-x-1 px-2.5 py-1 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
+              activeTab === 'methodology'
+                ? 'bg-sky-600 text-white'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <ShieldCheck className="w-3 h-3" />
+            <span>Methodology</span>
+          </button>
         </div>
       </div>
     </header>
