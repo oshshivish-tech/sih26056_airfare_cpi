@@ -37,14 +37,14 @@ export const IndexChart: React.FC<IndexChartProps> = ({
     setVisibleSeries(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
-  // Lead-Time Index Multipliers (ILO Composition Bias Correction Scaling)
+  // Lead-Time Index Multipliers (Empirical Spread based on Booking Advance Horizons)
   const leadTimeMultipliers: Record<LeadTimeHorizon | 'ALL', number> = {
     'ALL': 1.0,
-    '1d': 1.42,  // Urgent 1-day surge fares (+42% index level)
-    '7d': 1.18,  // Business 7-day fares (+18% index level)
-    '15d': 1.02, // Standard advance purchase (+2% index level)
-    '30d': 0.88, // Leisure 30-day fares (-12% index level)
-    '45d': 0.81  // Holiday 45-day far-advance fares (-19% index level)
+    '1d': 1.14,  // Urgent 1-day bookings (+14% over composite market)
+    '7d': 1.07,  // Near-term 7-day bookings (+7% over composite market)
+    '15d': 1.01, // Standard 15-day advance (+1% near composite market)
+    '30d': 0.94, // Advance 30-day leisure booking (-6% discount)
+    '45d': 0.90  // Early-bird 45-day discount booking (-10% discount)
   };
 
   const mult = leadTimeMultipliers[selectedLeadTime] || 1.0;
@@ -164,7 +164,7 @@ export const IndexChart: React.FC<IndexChartProps> = ({
               axisLine={{ stroke: '#475569' }}
             />
             <YAxis
-              domain={[75, 170]}
+              domain={[85, 145]}
               stroke="#94a3b8"
               fontSize={12}
               tickLine={false}

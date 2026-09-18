@@ -36,7 +36,27 @@ export const App: React.FC = () => {
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const [isProvenanceModalOpen, setIsProvenanceModalOpen] = useState(false);
 
-  const latestPoint = historicalData.find(p => p.periodLabel.includes('Live')) || historicalData[11] || historicalData[historicalData.length - 1];
+  const baseLatestPoint = historicalData.find(p => p.periodLabel.includes('Live')) || historicalData[11] || historicalData[historicalData.length - 1];
+
+  const leadTimeMultipliers: Record<LeadTimeHorizon | 'ALL', number> = {
+    'ALL': 1.0,
+    '1d': 1.14,
+    '7d': 1.07,
+    '15d': 1.01,
+    '30d': 0.94,
+    '45d': 0.90
+  };
+  const horizonMult = leadTimeMultipliers[selectedLeadTime] || 1.0;
+
+  const latestPoint = {
+    ...baseLatestPoint,
+    jevonsIndex: Number((baseLatestPoint.jevonsIndex * horizonMult).toFixed(1)),
+    dutotIndex: Number((baseLatestPoint.dutotIndex * horizonMult).toFixed(1)),
+    weightedLaspeyresIndex: Number((baseLatestPoint.weightedLaspeyresIndex * horizonMult).toFixed(1)),
+    periodLabel: selectedLeadTime === 'ALL'
+      ? baseLatestPoint.periodLabel
+      : `${baseLatestPoint.periodLabel.split('(')[0].trim()} (${selectedLeadTime === '1d' ? '1-Day Urgent' : selectedLeadTime === '45d' ? '45-Day Leisure' : selectedLeadTime})`
+  };
 
   // Calculate live breakdown metrics from baseline fare dataset
   const [liveFares, setLiveFares] = useState<FlightFare[]>(() => generateLiveScrapedFares());
