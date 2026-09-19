@@ -88,10 +88,13 @@ export const App: React.FC = () => {
         // Update Day-Wise Daily Series
         setDailyData(prev => {
           const updated = [...prev];
-          const todayStr = '2026-09-18';
-          const idx = updated.findIndex(d => d.date === todayStr);
-          const targetIdx = idx !== -1 ? idx : updated.length - 1;
+          const targetIdx = updated.length - 1;
           const oldPoint = updated[targetIdx];
+          const todayStr = oldPoint.date;
+          
+          const rawLabel = oldPoint.dayLabel.replace(' - Today)', '').replace(' - Live)', '').replace(')', '');
+          const liveDayLabel = `${rawLabel} - Live)`;
+          const shortDate = rawLabel.split('(')[0].trim();
 
           const last6 = updated.slice(Math.max(0, targetIdx - 6), targetIdx);
           const moving7d = Math.round((last6.reduce((acc, p) => acc + p.dailyAvgFare, 0) + batchAvgFare) / (last6.length + 1));
@@ -99,7 +102,7 @@ export const App: React.FC = () => {
           updated[targetIdx] = {
             ...oldPoint,
             date: todayStr,
-            dayLabel: '18 Sep (Fri - Live)',
+            dayLabel: liveDayLabel,
             dailyAvgFare: batchAvgFare,
             dailyJevonsIndex: batchJevons,
             movingAverage7d: moving7d,
@@ -115,9 +118,12 @@ export const App: React.FC = () => {
           const targetIdx = liveIdx !== -1 ? liveIdx : 11;
           const currentPoint = updated[targetIdx];
 
+          const shortDate = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+          const livePeriodLabel = `Sep 2026 (Live - ${shortDate})`;
+
           updated[targetIdx] = {
             ...currentPoint,
-            periodLabel: 'Sep 2026 (Live - 18 Sep)',
+            periodLabel: livePeriodLabel,
             jevonsIndex: batchJevons,
             dutotIndex: Number(result.dutotIndex.toFixed(1)),
             weightedLaspeyresIndex: Number(result.weightedLaspeyresIndex.toFixed(1)),
