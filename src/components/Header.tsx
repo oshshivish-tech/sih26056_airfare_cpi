@@ -150,6 +150,16 @@ export const Header: React.FC<HeaderProps> = ({
               <span>Pitch Deck</span>
             </a>
 
+            <a
+              href="/AirIntel_India_SIH26056_Presentation.pptx"
+              download="AirIntel_India_SIH26056_Presentation.pptx"
+              className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 transition-all shadow-sm"
+              title="Download Official PowerPoint Presentation (.pptx)"
+            >
+              <Download className="w-3.5 h-3.5 text-amber-400" />
+              <span>Download PPT</span>
+            </a>
+
             <button
               onClick={onOpenRestApi}
               className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-purple-300 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 transition-all shadow-sm"

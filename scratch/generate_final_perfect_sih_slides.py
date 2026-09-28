@@ -103,8 +103,7 @@ def create_final_presentation(output_path):
     if os.path.exists(sih_bulb_graphic):
         s1.shapes.add_picture(sih_bulb_graphic, Inches(7.6), Inches(1.3), Inches(4.8), Inches(5.8))
 
-    # Bullets on the left directly on the white canvas (no card border)
-    tb_s1_bullets = s1.shapes.add_textbox(Inches(0.65), Inches(1.5), Inches(7.6), Inches(5.6))
+    tb_s1_bullets = s1.shapes.add_textbox(Inches(0.65), Inches(1.40), Inches(7.5), Inches(5.7))
     tf_s1 = tb_s1_bullets.text_frame
     tf_s1.word_wrap = True
     tf_s1.margin_left = tf_s1.margin_top = tf_s1.margin_right = tf_s1.margin_bottom = 0
@@ -112,28 +111,29 @@ def create_final_presentation(output_path):
     s1_items = [
         ("• Problem Statement ID –", "SIH26056", False),
         ("• Problem Statement Title-", "Development of a Real-time Airfare Price Index for India through Automated Web Scraping", True),
-        ("• Theme-", "Smart Governance / Miscellaneous", False),
-        ("• PS Category-", "Software", False),
-        ("• Team ID-", "168405", False),
+        ("• Department –", "Data Informatics & Innovation Division (DIID)", False),
+        ("• Category –", "Software", False),
+        ("• Theme –", "Smart Automation", False),
+        ("• Team ID –", "168405", False),
         ("• Team Name –", "Roorkies", False)
     ]
 
     for idx, (label, val, is_red) in enumerate(s1_items):
         p = tf_s1.add_paragraph() if idx > 0 else tf_s1.paragraphs[0]
-        p.space_before = Pt(10)
-        p.space_after = Pt(10)
+        p.space_before = Pt(8)
+        p.space_after = Pt(8)
 
         r_lbl = p.add_run()
         r_lbl.text = label + " "
         r_lbl.font.name = "Arial"
-        r_lbl.font.size = Pt(16.5)
+        r_lbl.font.size = Pt(15.5)
         r_lbl.font.bold = True
         r_lbl.font.color.rgb = C_BLACK
 
         r_val = p.add_run()
         r_val.text = val
         r_val.font.name = "Arial"
-        r_val.font.size = Pt(16.5)
+        r_val.font.size = Pt(15.5)
         r_val.font.bold = True
         r_val.font.color.rgb = C_RED_TEMPLATE if is_red else C_BLACK
 
