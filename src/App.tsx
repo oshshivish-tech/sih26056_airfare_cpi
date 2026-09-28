@@ -18,7 +18,6 @@ import { CorridorAvgTable } from './components/CorridorAvgTable';
 import { LeadTimeElasticityCard } from './components/LeadTimeElasticityCard';
 import { DgcaBacktestComparison } from './components/DgcaBacktestComparison';
 import { RestApiExplorerModal } from './components/RestApiExplorerModal';
-import { VideoDemoGuideModal } from './components/VideoDemoGuideModal';
 
 import { MOCK_CPI_HISTORICAL, MOCK_DAILY_CPI, MOCK_OUTLIERS, MOCK_ROUTE_WEIGHTS, generateLiveScrapedFares } from './data/mockData';
 import { MoSPICPIEngine } from './services/cpiEngine';
@@ -43,7 +42,6 @@ export const App: React.FC = () => {
   const [isProvenanceModalOpen, setIsProvenanceModalOpen] = useState(false);
   const [isLiveAPIModalOpen, setIsLiveAPIModalOpen] = useState(false);
   const [isRestApiModalOpen, setIsRestApiModalOpen] = useState(false);
-  const [isVideoGuideOpen, setIsVideoGuideOpen] = useState(false);
   const [isLiveAPIConnected, setIsLiveAPIConnected] = useState(() => Boolean(AmadeusFlightService.getStoredCredentials()));
 
   const baseLatestPoint = historicalData.find(p => p.periodLabel.includes('Live')) || historicalData[11] || historicalData[historicalData.length - 1];
@@ -223,7 +221,6 @@ export const App: React.FC = () => {
         onOpenProvenance={() => setIsProvenanceModalOpen(true)}
         onOpenLiveAPI={() => setIsLiveAPIModalOpen(true)}
         onOpenRestApi={() => setIsRestApiModalOpen(true)}
-        onOpenVideoGuide={() => setIsVideoGuideOpen(true)}
         isLiveAPIConnected={isLiveAPIConnected}
         isScraping={isScraping}
         latestIndex={latestPoint.jevonsIndex}
@@ -361,16 +358,6 @@ export const App: React.FC = () => {
       <RestApiExplorerModal
         isOpen={isRestApiModalOpen}
         onClose={() => setIsRestApiModalOpen(false)}
-      />
-
-      <VideoDemoGuideModal
-        isOpen={isVideoGuideOpen}
-        onClose={() => setIsVideoGuideOpen(false)}
-        onOpenProvenance={() => setIsProvenanceModalOpen(true)}
-        onOpenRestApi={() => setIsRestApiModalOpen(true)}
-        onOpenExport={() => setIsExportModalOpen(true)}
-        onOpenOutlierModal={() => setIsOutlierModalOpen(true)}
-        setActiveTab={setActiveTab}
       />
     </div>
   );
