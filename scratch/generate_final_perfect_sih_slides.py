@@ -317,190 +317,67 @@ def create_final_presentation(output_path):
 
     add_template_top_bar(s3, "TECHNICAL APPROACH", title_font_size=25, is_serif=True)
 
-    col_y = Inches(1.15)
-    col_h = Inches(5.95)
+    # Main Architecture Diagram Card: Spans width to maximize diagram size and text legibility
+    card_x = Inches(0.55)
+    card_w = Inches(12.23)
+    card_y = Inches(1.10)
+    card_h = Inches(4.90)
 
-    # 1. Left Column: Categorized Technology Stack (Width: 3.85 inches)
-    col_w_l = Inches(3.85)
-    box_l = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.55), col_y, col_w_l, col_h)
-    box_l.fill.solid()
-    box_l.fill.fore_color.rgb = RGBColor(248, 250, 252) # soft slate-50
-    box_l.line.color.rgb = C_BLUE_TEMPLATE
-    box_l.line.width = Pt(1.5)
+    card = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, card_x, card_y, card_w, card_h)
+    card.fill.solid()
+    card.fill.fore_color.rgb = C_WHITE
+    card.line.color.rgb = RGBColor(203, 213, 225) # soft slate-300 border
+    card.line.width = Pt(1.2)
 
-    tb_l = s3.shapes.add_textbox(Inches(0.70), col_y + Inches(0.12), col_w_l - Inches(0.30), col_h - Inches(0.24))
-    tf_l = tb_l.text_frame
-    tf_l.word_wrap = True
-    tf_l.margin_left = tf_l.margin_top = tf_l.margin_right = tf_l.margin_bottom = 0
-
-    p_lh = tf_l.paragraphs[0]
-    p_lh.text = "Technologies Used:"
-    p_lh.font.name = "Arial"
-    p_lh.font.size = Pt(16)
-    p_lh.font.bold = True
-    p_lh.font.color.rgb = C_BLUE_TEMPLATE
-    p_lh.space_after = Pt(8)
-
-    tech_sections = [
-        (
-            "Languages & Runtimes:",
-            RGBColor(220, 38, 38),
-            [
-                "Python 3.13 (Async Harvester & Engine)",
-                "TypeScript & React 19 (Dashboard UI)",
-                "SQL (PostgreSQL Time-Series & SQLite)"
-            ]
-        ),
-        (
-            "Extraction & Cleansing:",
-            RGBColor(30, 64, 175),
-            [
-                "Playwright Headless (Anti-Bot Crawlers)",
-                "SciPy & NumPy (Dynamic IQR Filter)"
-            ]
-        ),
-        (
-            "Index Calculation & Crypto:",
-            RGBColor(124, 58, 237),
-            [
-                "UN/ILO Jevons Index Formula (GMI)",
-                "SHA-256 Batch Merkle Audit Ledger"
-            ]
-        ),
-        (
-            "API, Cloud & Standards:",
-            RGBColor(16, 185, 129),
-            [
-                "FastAPI & Uvicorn (Sub-10ms REST APIs)",
-                "Vercel Edge & GitHub Actions Cron",
-                "NDSAP Open Data & UN/ILO Ch. 10"
-            ]
-        )
-    ]
-
-    for sec_title, sec_color, sec_items in tech_sections:
-        p_sec = tf_l.add_paragraph()
-        p_sec.space_before = Pt(6)
-        p_sec.space_after = Pt(2)
-        r_sec = p_sec.add_run()
-        r_sec.text = sec_title
-        r_sec.font.name = "Arial"
-        r_sec.font.size = Pt(11)
-        r_sec.font.bold = True
-        r_sec.font.color.rgb = sec_color
-
-        for item in sec_items:
-            p_item = tf_l.add_paragraph()
-            p_item.space_after = Pt(2.5)
-            r_dot = p_item.add_run()
-            r_dot.text = "• "
-            r_dot.font.name = "Arial"
-            r_dot.font.size = Pt(9.5)
-            r_dot.font.bold = True
-            r_dot.font.color.rgb = C_TEXT_DARK
-
-            r_txt = p_item.add_run()
-            r_txt.text = item
-            r_txt.font.name = "Arial"
-            r_txt.font.size = Pt(9.2)
-            r_txt.font.bold = False
-            r_txt.font.color.rgb = C_TEXT_DARK
-
-    # 2. Right Section: Architecture Flowchart (Cropped top 14% to remove duplicate SIH logo/title)
-    flow_x = Inches(4.55)
-    flow_w = Inches(8.23)
-    flow_h = Inches(3.55)
+    # Diagram centered inside card at maximum crisp aspect ratio
+    diag_w = Inches(11.35)
+    diag_h = Inches(11.35 / 2.3432) # ~4.84 inches
+    diag_x = card_x + (card_w - diag_w) / 2
+    diag_y = card_y + (card_h - diag_h) / 2
 
     if os.path.exists(arch_img):
-        s3.shapes.add_picture(arch_img, flow_x, col_y, flow_w, flow_h)
+        s3.shapes.add_picture(arch_img, diag_x, diag_y, diag_w, diag_h)
 
-    # 3. Underneath Flowchart: Non-Repetitive Engineering Deep-Dives
-    sub_y = col_y + flow_h + Inches(0.12)
-    sub_h = col_h - flow_h - Inches(0.12) # ~2.28 inches
-    card_w = Inches(4.04)
+    # Bottom Ribbon: Clean 4-Pillar Technologies Architecture (matching card_x and card_w)
+    bar_y = Inches(6.12)
+    bar_h = Inches(1.08)
 
-    # --- Card A: Mathematical Formulation & Axiomatic Rigor ---
-    card_a = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, flow_x, sub_y, card_w, sub_h)
-    card_a.fill.solid()
-    card_a.fill.fore_color.rgb = RGBColor(240, 249, 255) # soft sky-50
-    card_a.line.color.rgb = RGBColor(2, 132, 199)
-    card_a.line.width = Pt(1.4)
+    bar = s3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, card_x, bar_y, card_w, bar_h)
+    bar.adjustments[0] = 0.12
+    bar.fill.solid()
+    bar.fill.fore_color.rgb = RGBColor(248, 250, 252)
+    bar.line.color.rgb = C_BLUE_TEMPLATE
+    bar.line.width = Pt(1.5)
 
-    tb_ca = s3.shapes.add_textbox(flow_x + Inches(0.14), sub_y + Inches(0.10), card_w - Inches(0.28), sub_h - Inches(0.20))
-    tf_ca = tb_ca.text_frame
-    tf_ca.word_wrap = True
-    tf_ca.margin_left = tf_ca.margin_top = tf_ca.margin_right = tf_ca.margin_bottom = 0
-
-    p_cah = tf_ca.paragraphs[0]
-    p_cah.text = "📐 Mathematical Formulation (UN/ILO Ch. 10)"
-    p_cah.font.name = "Arial"
-    p_cah.font.size = Pt(11)
-    p_cah.font.bold = True
-    p_cah.font.color.rgb = RGBColor(2, 132, 199)
-    p_cah.space_after = Pt(4)
-
-    math_pts = [
-        ("Elementary Jevons Geometric Mean:", " J = ∏ (pt,i / p0,i)^(1/n)"),
-        ("Axiomatic Proof:", " Eliminates Dutot arithmetic upward substitution bias (~25 bps distortion removed)."),
-        ("DGCA Laspeyres Aggregation:", " It = ∑ Wr · Jr,t across corridors weighted by official passenger volume shares.")
+    cols_data = [
+        ('Languages & Runtimes', RGBColor(220, 38, 38), ['Python 3.13 (Async Harvester & Engine)', 'TypeScript & React 19 (Dashboard UI)', 'SQL (PostgreSQL Time-Series & SQLite)']),
+        ('Extraction & Cleansing', RGBColor(30, 64, 175), ['Playwright Headless Stealth Crawlers', 'T+1..T+45 Advance Booking Horizons', 'SciPy & NumPy Dynamic IQR Filter']),
+        ('Index Engine & Crypto', RGBColor(124, 58, 237), ['UN/ILO Jevons Geometric Mean (GMI)', 'DGCA Official Corridor Volume Weights', 'SHA-256 Batch Merkle Audit Ledger']),
+        ('API, Cloud & Standards', RGBColor(16, 185, 129), ['FastAPI & Uvicorn Sub-10ms REST APIs', 'Vercel Edge & GitHub Actions Daily Cron', 'NDSAP Open Data & UN/ILO Ch. 10 Ready'])
     ]
-    for m_head, m_desc in math_pts:
-        p = tf_ca.add_paragraph()
-        p.space_after = Pt(3.5)
-        p.line_spacing = 1.15
-        r1 = p.add_run()
-        r1.text = "• " + m_head
-        r1.font.name = "Arial"
-        r1.font.size = Pt(9.2)
-        r1.font.bold = True
-        r1.font.color.rgb = C_BLACK
-        r2 = p.add_run()
-        r2.text = m_desc
-        r2.font.name = "Arial"
-        r2.font.size = Pt(8.8)
-        r2.font.color.rgb = C_TEXT_DARK
 
-    # --- Card B: System Benchmarks & Engineering SLAs ---
-    card_b_x = flow_x + card_w + Inches(0.15)
-    card_b = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, card_b_x, sub_y, card_w, sub_h)
-    card_b.fill.solid()
-    card_b.fill.fore_color.rgb = RGBColor(240, 253, 244) # soft emerald-50
-    card_b.line.color.rgb = RGBColor(22, 163, 74)
-    card_b.line.width = Pt(1.4)
-
-    tb_cb = s3.shapes.add_textbox(card_b_x + Inches(0.14), sub_y + Inches(0.10), card_w - Inches(0.28), sub_h - Inches(0.20))
-    tf_cb = tb_cb.text_frame
-    tf_cb.word_wrap = True
-    tf_cb.margin_left = tf_cb.margin_top = tf_cb.margin_right = tf_cb.margin_bottom = 0
-
-    p_cbh = tf_cb.paragraphs[0]
-    p_cbh.text = "⚙️ Production Benchmarks & Engineering SLAs"
-    p_cbh.font.name = "Arial"
-    p_cbh.font.size = Pt(11)
-    p_cbh.font.bold = True
-    p_cbh.font.color.rgb = RGBColor(21, 128, 61)
-    p_cbh.space_after = Pt(4)
-
-    eng_pts = [
-        ("Harvester Throughput:", " 10,000+ daily live quotes captured across 12 sectors in under 18 minutes."),
-        ("Dynamic IQR Outlier Filter:", " SciPy dynamically purges bottom 2.5% phantom taxes and top 5% surge anomalies."),
-        ("Sub-10ms REST API:", " Fully automated JSON/CSV endpoints ready for MoSPI eSankhyiki & RBI integration.")
-    ]
-    for e_head, e_desc in eng_pts:
-        p = tf_cb.add_paragraph()
-        p.space_after = Pt(3.5)
-        p.line_spacing = 1.15
-        r1 = p.add_run()
-        r1.text = "• " + e_head
-        r1.font.name = "Arial"
-        r1.font.size = Pt(9.2)
-        r1.font.bold = True
-        r1.font.color.rgb = C_BLACK
-        r2 = p.add_run()
-        r2.text = e_desc
-        r2.font.name = "Arial"
-        r2.font.size = Pt(8.8)
-        r2.font.color.rgb = C_TEXT_DARK
+    col_w = (card_w - Inches(0.40)) / 4
+    for i, (c_title, c_color, c_items) in enumerate(cols_data):
+        cx = card_x + Inches(0.20) + i * col_w
+        tb = s3.shapes.add_textbox(cx, bar_y + Inches(0.06), col_w - Inches(0.10), bar_h - Inches(0.12))
+        tf = tb.text_frame
+        tf.word_wrap = True
+        tf.margin_left = tf.margin_top = tf.margin_right = tf.margin_bottom = 0
+        p0 = tf.paragraphs[0]
+        p0.text = c_title
+        p0.font.name = 'Arial'
+        p0.font.size = Pt(9.8)
+        p0.font.bold = True
+        p0.font.color.rgb = c_color
+        p0.space_after = Pt(2)
+        for it in c_items:
+            p = tf.add_paragraph()
+            p.space_after = Pt(1.5)
+            r = p.add_run()
+            r.text = '• ' + it
+            r.font.name = 'Arial'
+            r.font.size = Pt(8.2)
+            r.font.color.rgb = C_TEXT_DARK
 
     add_template_footer(s3, 3)
 
