@@ -36,6 +36,7 @@ def create_final_presentation(output_path):
     proto_chart = os.path.join(pres_dir, "vayusuchak_prototype_chart.png")
     proto_table = os.path.join(pres_dir, "vayusuchak_prototype_table.png")
     runway_banner = os.path.join(pres_dir, "runway_skyline_banner.png")
+    workflow_strip_img = os.path.join(pres_dir, "workflow_circular_nodes.png")
 
     def add_template_top_bar(slide, title_line1, title_line2=None, is_title_page=False, title_font_size=25, title_color=C_BLACK, is_serif=False):
         # 1. Team Name Pill on top-left (Oval pill like MegaZroN in template)
@@ -162,27 +163,26 @@ def create_final_presentation(output_path):
     p_s2_sub.font.bold = True
     p_s2_sub.font.color.rgb = C_BLUE_TEMPLATE
 
-    # --- TOP ROW: PROBLEM vs SOLUTION CARDS ---
-    top_y = Inches(1.48)
-    top_h = Inches(2.62)
+    # 3. Top Row: Problem & Solution Cards (Matching user mockup)
+    top_y = Inches(1.42)
+    top_h = Inches(2.95)
     col_w = Inches(5.95)
 
-    # Left: The Problem Card (Red Border / Light Red Accent)
+    # --- Problem Card (Left) ---
     box_prob = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), top_y, col_w, top_h)
     box_prob.adjustments[0] = 0.04
     box_prob.fill.solid()
-    box_prob.fill.fore_color.rgb = RGBColor(254, 242, 242) # soft red
+    box_prob.fill.fore_color.rgb = RGBColor(248, 250, 252) # sleek metallic slate-50
     box_prob.line.color.rgb = RGBColor(220, 38, 38)
     box_prob.line.width = Pt(1.5)
 
-    # Problem Card Header Banner
     hdr_prob = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), top_y, col_w, Inches(0.42))
     hdr_prob.adjustments[0] = 0.2
     hdr_prob.fill.solid()
     hdr_prob.fill.fore_color.rgb = RGBColor(220, 38, 38)
     hdr_prob.line.fill.background()
     p_ph = hdr_prob.text_frame.paragraphs[0]
-    p_ph.text = "⚠️ THE PROBLEM (Current MoSPI Manual Survey)"
+    p_ph.text = "▲ THE PROBLEM (Current MoSPI Manual Survey)"
     p_ph.font.name = "Arial"
     p_ph.font.size = Pt(11.5)
     p_ph.font.bold = True
@@ -196,27 +196,26 @@ def create_final_presentation(output_path):
     prob_points = [
         ("15-Day Information Lag: ", "Manual surveyor visits delay CPI reporting by 2 weeks, missing high-frequency price volatility."),
         ("Static Single Snapshot: ", "Only 1 quote collected per route/month, failing to capture 10,000+ daily dynamic algorithmic fares."),
-        ("Dutot Upward Bias: ", "Arithmetic mean formula overstates airfare transport inflation by 20–30 bps (substitution bias)."),
+        ("Dutot Upward Bias: ", "Arithmetic mean formula overstates airfare transport inflation by 20-30 bps."),
         ("High Operational Cost: ", "Multi-crore physical surveyor logistics across airports with zero cryptographic audit trail.")
     ]
-
     for idx, (head, desc) in enumerate(prob_points):
         p = tf_prob.paragraphs[0] if idx == 0 else tf_prob.add_paragraph()
-        p.space_after = Pt(3.5)
+        p.space_after = Pt(5)
         p.line_spacing = 1.15
         r1 = p.add_run()
         r1.text = "• " + head
         r1.font.name = "Arial"
-        r1.font.size = Pt(10)
+        r1.font.size = Pt(10.2)
         r1.font.bold = True
         r1.font.color.rgb = RGBColor(185, 28, 28)
         r2 = p.add_run()
         r2.text = desc
         r2.font.name = "Arial"
-        r2.font.size = Pt(9.5)
+        r2.font.size = Pt(9.8)
         r2.font.color.rgb = C_TEXT_DARK
 
-    # Right: How VayuSuchak Solves It Card (Emerald Border / Soft Green Accent)
+    # --- Solution Card (Right) ---
     r_x = Inches(6.83)
     box_sol = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, r_x, top_y, col_w, top_h)
     box_sol.adjustments[0] = 0.04
@@ -225,14 +224,13 @@ def create_final_presentation(output_path):
     box_sol.line.color.rgb = RGBColor(22, 163, 74)
     box_sol.line.width = Pt(1.5)
 
-    # Solution Card Header Banner
     hdr_sol = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, r_x, top_y, col_w, Inches(0.42))
     hdr_sol.adjustments[0] = 0.2
     hdr_sol.fill.solid()
     hdr_sol.fill.fore_color.rgb = RGBColor(22, 163, 74)
     hdr_sol.line.fill.background()
     p_sh = hdr_sol.text_frame.paragraphs[0]
-    p_sh.text = "💡 HOW OUR APP SOLVES IT (VayuSuchak Engine)"
+    p_sh.text = "▶ HOW OUR APP SOLVES IT (VayuSuchak Engine)"
     p_sh.font.name = "Arial"
     p_sh.font.size = Pt(11.5)
     p_sh.font.bold = True
@@ -249,145 +247,59 @@ def create_final_presentation(output_path):
         ("UN/ILO Jevons Index: ", "Geometric mean formulation mathematically eliminates Dutot upward substitution distortion."),
         ("SHA-256 Audit Ledger: ", "Immutable cryptographic fingerprints ensure sovereign-grade evidentiary auditability for MoSPI.")
     ]
-
     for idx, (head, desc) in enumerate(sol_points):
         p = tf_sol.paragraphs[0] if idx == 0 else tf_sol.add_paragraph()
-        p.space_after = Pt(3.5)
+        p.space_after = Pt(5)
         p.line_spacing = 1.15
         r1 = p.add_run()
-        r1.text = "✓ " + head
+        r1.text = "• " + head
         r1.font.name = "Arial"
-        r1.font.size = Pt(10)
+        r1.font.size = Pt(10.2)
         r1.font.bold = True
         r1.font.color.rgb = RGBColor(21, 128, 61)
         r2 = p.add_run()
         r2.text = desc
         r2.font.name = "Arial"
-        r2.font.size = Pt(9.5)
+        r2.font.size = Pt(9.8)
         r2.font.color.rgb = C_TEXT_DARK
 
-    # --- CONNECTED 5-STEP HORIZONTAL PROCESS WORKFLOW ---
-    flow_y = Inches(4.25)
-    flow_h = Inches(1.95)
-    
-    total_w = Inches(12.23)
-    arrow_w = Inches(0.20)
-    gap_arrow = Inches(0.04)
-    total_arrows_w = 4 * (arrow_w + 2 * gap_arrow)
-    card_w = (total_w - total_arrows_w) / 5
+    # 4. Connected 5-Step Horizontal Process Workflow (High-Res Circular Strip)
+    if os.path.exists(workflow_strip_img):
+        s2.shapes.add_picture(workflow_strip_img, Inches(0.55), Inches(4.45), Inches(12.23), Inches(1.92))
 
-    steps = [
-        (
-            "STEP 1",
-            "Dynamic Yield Tracking",
-            "Captures intraday surges across T+1..T+45 advance booking windows.",
-            RGBColor(30, 64, 175), # Blue
-            RGBColor(239, 246, 255)
-        ),
-        (
-            "STEP 2",
-            "Dynamic IQR Scrubber",
-            "Isolates base fares and purges phantom prices and cache glitches.",
-            RGBColor(124, 58, 237), # Purple
-            RGBColor(245, 243, 255)
-        ),
-        (
-            "STEP 3",
-            "UN/ILO Jevons Index",
-            "Geometric mean calculation that eliminates upward substitution bias.",
-            RGBColor(2, 132, 199), # Sky
-            RGBColor(240, 249, 255)
-        ),
-        (
-            "STEP 4",
-            "Sovereign Audit Vault",
-            "SHA-256 batch Merkle tree proofs for judicial and policy scrutiny.",
-            RGBColor(16, 185, 129), # Emerald
-            RGBColor(236, 253, 245)
-        ),
-        (
-            "STEP 5",
-            "Real-Time API Delivery",
-            "Sub-10ms REST API and live eSankhyiki CSV feed for MoSPI and RBI.",
-            RGBColor(217, 119, 6), # Amber
-            RGBColor(254, 252, 232)
-        )
-    ]
-
-    for idx, (s_num, s_title, s_desc, border_c, bg_c) in enumerate(steps):
-        cx = Inches(0.55) + idx * (card_w + arrow_w + 2 * gap_arrow)
-        
-        # Step Card
-        card_shape = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, flow_y, card_w, flow_h)
-        card_shape.adjustments[0] = 0.08
-        card_shape.fill.solid()
-        card_shape.fill.fore_color.rgb = bg_c
-        card_shape.line.color.rgb = border_c
-        card_shape.line.width = Pt(1.4)
-
-        # Top Badge Pill
-        badge = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx + Inches(0.12), flow_y + Inches(0.10), Inches(0.85), Inches(0.26))
-        badge.adjustments[0] = 0.5
-        badge.fill.solid()
-        badge.fill.fore_color.rgb = border_c
-        badge.line.fill.background()
-        p_b = badge.text_frame.paragraphs[0]
-        p_b.text = s_num
-        p_b.font.name = "Arial"
-        p_b.font.size = Pt(8.5)
-        p_b.font.bold = True
-        p_b.font.color.rgb = C_WHITE
-        p_b.alignment = PP_ALIGN.CENTER
-
-        # Content Textbox
-        tb_c = s2.shapes.add_textbox(cx + Inches(0.12), flow_y + Inches(0.40), card_w - Inches(0.24), flow_h - Inches(0.46))
-        tf_c = tb_c.text_frame
-        tf_c.word_wrap = True
-        tf_c.margin_left = tf_c.margin_top = tf_c.margin_right = tf_c.margin_bottom = 0
-
-        p_ct = tf_c.paragraphs[0]
-        p_ct.text = s_title
-        p_ct.font.name = "Arial"
-        p_ct.font.size = Pt(10.5)
-        p_ct.font.bold = True
-        p_ct.font.color.rgb = border_c
-        p_ct.space_after = Pt(4)
-
-        p_cd = tf_c.add_paragraph()
-        p_cd.text = s_desc
-        p_cd.font.name = "Arial"
-        p_cd.font.size = Pt(8.8)
-        p_cd.font.color.rgb = C_TEXT_DARK
-        p_cd.line_spacing = 1.15
-
-        # Connecting Arrow between cards (for first 4 cards)
-        if idx < 4:
-            ax = cx + card_w + gap_arrow
-            ay = flow_y + flow_h / 2 - Inches(0.14)
-            arrow = s2.shapes.add_shape(MSO_SHAPE.RIGHT_ARROW, ax, ay, arrow_w, Inches(0.28))
-            arrow.fill.solid()
-            arrow.fill.fore_color.rgb = RGBColor(148, 163, 184) # slate-400
-            arrow.line.fill.background()
-
-    # --- BOTTOM ROW: PROCESS PIPELINE BANNER ---
-    bot_y = Inches(6.35)
-    bot_h = Inches(0.50)
+    # 5. Bottom Ribbon: Solid Dark Navy Blue Bar with White / Sky Text
+    bot_y = Inches(6.50)
+    bot_h = Inches(0.48)
     box_bottom = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), bot_y, Inches(12.23), bot_h)
     box_bottom.adjustments[0] = 0.2
     box_bottom.fill.solid()
-    box_bottom.fill.fore_color.rgb = RGBColor(255, 255, 255)
-    box_bottom.line.color.rgb = C_BLUE_TEMPLATE
-    box_bottom.line.width = Pt(1.5)
+    box_bottom.fill.fore_color.rgb = RGBColor(15, 23, 42)
+    box_bottom.line.color.rgb = RGBColor(30, 58, 138)
+    box_bottom.line.width = Pt(1.2)
 
-    tb_bb = s2.shapes.add_textbox(Inches(0.65), bot_y + Inches(0.06), Inches(12.03), Inches(0.38))
+    tb_bb = s2.shapes.add_textbox(Inches(0.65), bot_y + Inches(0.06), Inches(12.03), Inches(0.36))
     tf_bb = tb_bb.text_frame
     p_bb = tf_bb.paragraphs[0]
-    p_bb.text = "DATA HARVESTING  ➔  IQR OUTLIER TRUNCATION  ➔  JEVONS GEOMETRIC INDEX  ➔  SHA-256 PROVENANCE  ➔  MoSPI & RBI CPI INTEGRATION"
-    p_bb.font.name = "Arial"
-    p_bb.font.size = Pt(11)
-    p_bb.font.bold = True
-    p_bb.font.color.rgb = C_BLACK
     p_bb.alignment = PP_ALIGN.CENTER
+
+    ribbon_segments = [
+        ("DATA HARVESTING", False),
+        ("  ➔  ", True),
+        ("IQR OUTLIER TRUNCATION", False),
+        ("  ➔  ", True),
+        ("JEVONS GEOMETRIC INDEX", False),
+        ("  ➔  ", True),
+        ("SHA-256 PROVENANCE", False),
+        ("  ➔  ", True),
+        ("MoSPI & RBI CPI INTEGRATION", False)
+    ]
+    for seg_text, is_arrow in ribbon_segments:
+        r = p_bb.add_run()
+        r.text = seg_text
+        r.font.name = "Arial"
+        r.font.size = Pt(10.5)
+        r.font.bold = True
+        r.font.color.rgb = RGBColor(56, 189, 248) if is_arrow else C_WHITE
 
     add_template_footer(s2, 2)
 
