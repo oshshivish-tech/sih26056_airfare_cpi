@@ -317,67 +317,158 @@ def create_final_presentation(output_path):
 
     add_template_top_bar(s3, "TECHNICAL APPROACH", title_font_size=25, is_serif=True)
 
-    # Main Architecture Diagram Card: Spans width to maximize diagram size and text legibility
-    card_x = Inches(0.55)
-    card_w = Inches(12.23)
-    card_y = Inches(1.10)
-    card_h = Inches(4.90)
+    col_y = Inches(1.15)
+    col_h = Inches(5.95)
 
-    card = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, card_x, card_y, card_w, card_h)
-    card.fill.solid()
-    card.fill.fore_color.rgb = C_WHITE
-    card.line.color.rgb = RGBColor(203, 213, 225) # soft slate-300 border
-    card.line.width = Pt(1.2)
+    # 1. Left Column: Technologies Used (~28% of usable slide width: 3.45 inches)
+    col_w_l = Inches(3.45)
+    box_l = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.55), col_y, col_w_l, col_h)
+    box_l.fill.solid()
+    box_l.fill.fore_color.rgb = RGBColor(248, 250, 252) # soft slate-50
+    box_l.line.color.rgb = C_BLUE_TEMPLATE
+    box_l.line.width = Pt(1.5)
 
-    # Diagram centered inside card at maximum crisp aspect ratio
-    diag_w = Inches(11.35)
-    diag_h = Inches(11.35 / 2.3432) # ~4.84 inches
-    diag_x = card_x + (card_w - diag_w) / 2
-    diag_y = card_y + (card_h - diag_h) / 2
+    tb_l = s3.shapes.add_textbox(Inches(0.70), col_y + Inches(0.14), col_w_l - Inches(0.30), col_h - Inches(0.28))
+    tf_l = tb_l.text_frame
+    tf_l.word_wrap = True
+    tf_l.margin_left = tf_l.margin_top = tf_l.margin_right = tf_l.margin_bottom = 0
 
-    if os.path.exists(arch_img):
-        s3.shapes.add_picture(arch_img, diag_x, diag_y, diag_w, diag_h)
+    p_lh = tf_l.paragraphs[0]
+    p_lh.text = "Technologies Used:"
+    p_lh.font.name = "Arial"
+    p_lh.font.size = Pt(17)
+    p_lh.font.bold = True
+    p_lh.font.color.rgb = C_BLUE_TEMPLATE
+    p_lh.space_after = Pt(10)
 
-    # Bottom Ribbon: Clean 4-Pillar Technologies Architecture (matching card_x and card_w)
-    bar_y = Inches(6.12)
-    bar_h = Inches(1.08)
-
-    bar = s3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, card_x, bar_y, card_w, bar_h)
-    bar.adjustments[0] = 0.12
-    bar.fill.solid()
-    bar.fill.fore_color.rgb = RGBColor(248, 250, 252)
-    bar.line.color.rgb = C_BLUE_TEMPLATE
-    bar.line.width = Pt(1.5)
-
-    cols_data = [
-        ('Languages & Runtimes', RGBColor(220, 38, 38), ['Python 3.13 (Async Harvester & Engine)', 'TypeScript & React 19 (Dashboard UI)', 'SQL (PostgreSQL Time-Series & SQLite)']),
-        ('Extraction & Cleansing', RGBColor(30, 64, 175), ['Playwright Headless Stealth Crawlers', 'T+1..T+45 Advance Booking Horizons', 'SciPy & NumPy Dynamic IQR Filter']),
-        ('Index Engine & Crypto', RGBColor(124, 58, 237), ['UN/ILO Jevons Geometric Mean (GMI)', 'DGCA Official Corridor Volume Weights', 'SHA-256 Batch Merkle Audit Ledger']),
-        ('API, Cloud & Standards', RGBColor(16, 185, 129), ['FastAPI & Uvicorn Sub-10ms REST APIs', 'Vercel Edge & GitHub Actions Daily Cron', 'NDSAP Open Data & UN/ILO Ch. 10 Ready'])
+    tech_groups = [
+        ("Languages & Runtimes:", RGBColor(220, 38, 38), [
+            "Python 3.13 (Async Harvester & Engine)",
+            "TypeScript & React 19 (Dashboard UI)",
+            "SQL (PostgreSQL Time-Series & SQLite)"
+        ]),
+        ("Extraction & Cleansing:", RGBColor(30, 64, 175), [
+            "Playwright Headless Stealth Proxy Pool",
+            "T+1..T+45 Advance Horizons Dynamic Tracking",
+            "SciPy & NumPy Dynamic IQR Outlier Filter"
+        ]),
+        ("Index Engine & Crypto:", RGBColor(124, 58, 237), [
+            "UN/ILO Jevons Index Formula (GMI)",
+            "DGCA Official Route Volume Weighting",
+            "SHA-256 Batch Merkle Audit Ledger"
+        ]),
+        ("API, Cloud & Standards:", RGBColor(16, 185, 129), [
+            "FastAPI & Uvicorn Sub-10ms REST APIs",
+            "Vercel Edge & GitHub Actions Daily Cron",
+            "NDSAP Open Data & UN/ILO Ch. 10 Ready"
+        ])
     ]
 
-    col_w = (card_w - Inches(0.40)) / 4
-    for i, (c_title, c_color, c_items) in enumerate(cols_data):
-        cx = card_x + Inches(0.20) + i * col_w
-        tb = s3.shapes.add_textbox(cx, bar_y + Inches(0.06), col_w - Inches(0.10), bar_h - Inches(0.12))
-        tf = tb.text_frame
-        tf.word_wrap = True
-        tf.margin_left = tf.margin_top = tf.margin_right = tf.margin_bottom = 0
-        p0 = tf.paragraphs[0]
-        p0.text = c_title
-        p0.font.name = 'Arial'
-        p0.font.size = Pt(9.8)
-        p0.font.bold = True
-        p0.font.color.rgb = c_color
-        p0.space_after = Pt(2)
-        for it in c_items:
-            p = tf.add_paragraph()
-            p.space_after = Pt(1.5)
-            r = p.add_run()
-            r.text = '• ' + it
-            r.font.name = 'Arial'
-            r.font.size = Pt(8.2)
-            r.font.color.rgb = C_TEXT_DARK
+    for title, col, items in tech_groups:
+        p_t = tf_l.add_paragraph()
+        p_t.space_before = Pt(8)
+        p_t.space_after = Pt(3)
+        r_t = p_t.add_run()
+        r_t.text = title
+        r_t.font.name = "Arial"
+        r_t.font.size = Pt(11.5)
+        r_t.font.bold = True
+        r_t.font.color.rgb = col
+        
+        for it in items:
+            p_i = tf_l.add_paragraph()
+            p_i.space_after = Pt(2.5)
+            r_b = p_i.add_run()
+            r_b.text = "• "
+            r_b.font.name = "Arial"
+            r_b.font.size = Pt(10)
+            r_b.font.bold = True
+            r_b.font.color.rgb = C_TEXT_DARK
+            
+            r_txt = p_i.add_run()
+            r_txt.text = it
+            r_txt.font.name = "Arial"
+            r_txt.font.size = Pt(9.8)
+            r_txt.font.color.rgb = C_TEXT_DARK
+
+    # 2. Right Section: Architecture Diagram & Core Benchmarks (~72% of usable width: 8.58 inches)
+    right_x = Inches(4.20)
+    right_w = Inches(8.58)
+
+    card_r = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, right_x, col_y, right_w, col_h)
+    card_r.fill.solid()
+    card_r.fill.fore_color.rgb = C_WHITE
+    card_r.line.color.rgb = RGBColor(203, 213, 225)
+    card_r.line.width = Pt(1.2)
+
+    # Architecture Diagram: Scaled neatly to 8.30 inches width
+    flow_w = Inches(8.30)
+    flow_h = Inches(8.30 / 2.3432) # ~3.54 in
+    flow_x = right_x + (right_w - flow_w) / 2
+    flow_y = col_y + Inches(0.18)
+
+    if os.path.exists(arch_img):
+        s3.shapes.add_picture(arch_img, flow_x, flow_y, flow_w, flow_h)
+
+    # Underneath Diagram: Core Engineering Benchmarks & SLAs Card
+    badge_y = flow_y + flow_h + Inches(0.20)
+    badge_h = col_y + col_h - badge_y - Inches(0.15) # ~1.88 in
+    badge_box = s3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, right_x + Inches(0.15), badge_y, right_w - Inches(0.30), badge_h)
+    badge_box.adjustments[0] = 0.08
+    badge_box.fill.solid()
+    badge_box.fill.fore_color.rgb = RGBColor(248, 250, 252)
+    badge_box.line.color.rgb = C_BLUE_TEMPLATE
+    badge_box.line.width = Pt(1.2)
+
+    tb_bh = s3.shapes.add_textbox(right_x + Inches(0.25), badge_y + Inches(0.10), right_w - Inches(0.50), Inches(0.30))
+    tf_bh = tb_bh.text_frame
+    p_bh = tf_bh.paragraphs[0]
+    p_bh.text = "Core Engineering Benchmarks & Architectural Guarantees"
+    p_bh.font.name = "Arial"
+    p_bh.font.size = Pt(11.5)
+    p_bh.font.bold = True
+    p_bh.font.color.rgb = C_BLUE_TEMPLATE
+    p_bh.alignment = PP_ALIGN.CENTER
+
+    metrics = [
+        ("Harvester Run SLA", "< 18 Minutes", "10,000+ daily live fares"),
+        ("Dynamic IQR Filter", "SciPy Scrubber", "Purges phantom taxes & surge"),
+        ("Axiomatic Rigor", "0.00% Bias", "UN/ILO Jevons Geometric Mean"),
+        ("REST API Delivery", "< 10ms Latency", "MoSPI eSankhyiki CSV/JSON")
+    ]
+    col_bw = (right_w - Inches(0.50)) / 4
+    for idx, (m_head, m_val, m_sub) in enumerate(metrics):
+        mx = right_x + Inches(0.25) + idx * col_bw
+        my = badge_y + Inches(0.48)
+        tb_m = s3.shapes.add_textbox(mx, my, col_bw - Inches(0.08), Inches(1.15))
+        tf_m = tb_m.text_frame
+        tf_m.word_wrap = True
+        tf_m.margin_left = tf_m.margin_top = tf_m.margin_right = tf_m.margin_bottom = 0
+        
+        p1 = tf_m.paragraphs[0]
+        p1.text = m_head
+        p1.font.name = "Arial"
+        p1.font.size = Pt(9.2)
+        p1.font.bold = True
+        p1.font.color.rgb = C_NAVY
+        p1.alignment = PP_ALIGN.CENTER
+        p1.space_after = Pt(3)
+        
+        p2 = tf_m.add_paragraph()
+        p2.text = m_val
+        p2.font.name = "Arial"
+        p2.font.size = Pt(11.5)
+        p2.font.bold = True
+        p2.font.color.rgb = RGBColor(16, 185, 129) if ("0" in m_val or "<" in m_val) else C_RED_TEMPLATE
+        p2.alignment = PP_ALIGN.CENTER
+        p2.space_after = Pt(3)
+        
+        p3 = tf_m.add_paragraph()
+        p3.text = m_sub
+        p3.font.name = "Arial"
+        p3.font.size = Pt(8.2)
+        p3.font.color.rgb = C_TEXT_DARK
+        p3.alignment = PP_ALIGN.CENTER
 
     add_template_footer(s3, 3)
 
