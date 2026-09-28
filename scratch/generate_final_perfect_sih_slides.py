@@ -153,55 +153,55 @@ def create_final_presentation(output_path):
     add_template_top_bar(s2, "VayuSuchak: Real-Time Airfare Price Index", "Augmenting CPI Transport Inflation", title_font_size=21)
 
     # Subtitle with diamond bullet: ❖ Proposed Solution: Problem vs. Solution Architecture
-    tb_s2_sub = s2.shapes.add_textbox(Inches(0.55), Inches(1.10), Inches(12.2), Inches(0.40))
+    tb_s2_sub = s2.shapes.add_textbox(Inches(0.55), Inches(1.06), Inches(12.2), Inches(0.35))
     tf_s2_sub = tb_s2_sub.text_frame
     tf_s2_sub.margin_left = tf_s2_sub.margin_top = tf_s2_sub.margin_right = tf_s2_sub.margin_bottom = 0
     p_s2_sub = tf_s2_sub.paragraphs[0]
     p_s2_sub.text = "❖ Proposed Solution: Problem vs. Solution Architecture"
     p_s2_sub.font.name = "Arial"
-    p_s2_sub.font.size = Pt(15.5)
+    p_s2_sub.font.size = Pt(15)
     p_s2_sub.font.bold = True
     p_s2_sub.font.color.rgb = C_BLUE_TEMPLATE
 
-    # 3. Top Row: Problem & Solution Cards (Matching user mockup)
+    # 1. Problem & Solution Comparison Cards (Top Half)
     top_y = Inches(1.42)
-    top_h = Inches(2.95)
-    col_w = Inches(5.95)
+    top_h = Inches(2.72)
+    card_w = Inches(5.98)
 
     # --- Problem Card (Left) ---
-    box_prob = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), top_y, col_w, top_h)
-    box_prob.adjustments[0] = 0.04
-    box_prob.fill.solid()
-    box_prob.fill.fore_color.rgb = RGBColor(248, 250, 252) # sleek metallic slate-50
-    box_prob.line.color.rgb = RGBColor(220, 38, 38)
-    box_prob.line.width = Pt(1.5)
+    card_prob = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), top_y, card_w, top_h)
+    card_prob.adjustments[0] = 0.04
+    card_prob.fill.solid()
+    card_prob.fill.fore_color.rgb = RGBColor(254, 242, 242) # soft subtle rose tint
+    card_prob.line.color.rgb = RGBColor(220, 38, 38)
+    card_prob.line.width = Pt(1.5)
 
-    hdr_prob = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), top_y, col_w, Inches(0.42))
-    hdr_prob.adjustments[0] = 0.2
+    hdr_prob = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), top_y, card_w, Inches(0.42))
+    hdr_prob.adjustments[0] = 0.18
     hdr_prob.fill.solid()
-    hdr_prob.fill.fore_color.rgb = RGBColor(220, 38, 38)
+    hdr_prob.fill.fore_color.rgb = RGBColor(185, 28, 28) # deep crimson
     hdr_prob.line.fill.background()
-    p_ph = hdr_prob.text_frame.paragraphs[0]
-    p_ph.text = "▲ THE PROBLEM (Current MoSPI Manual Survey)"
-    p_ph.font.name = "Arial"
-    p_ph.font.size = Pt(11.5)
-    p_ph.font.bold = True
-    p_ph.font.color.rgb = C_WHITE
-    p_ph.alignment = PP_ALIGN.CENTER
+    p_hp = hdr_prob.text_frame.paragraphs[0]
+    p_hp.text = "CURRENT MoSPI FRAMEWORK: MANUAL FIELD SURVEY (THE PROBLEM)"
+    p_hp.font.name = "Arial"
+    p_hp.font.size = Pt(10.8)
+    p_hp.font.bold = True
+    p_hp.font.color.rgb = C_WHITE
+    p_hp.alignment = PP_ALIGN.CENTER
 
-    tb_prob = s2.shapes.add_textbox(Inches(0.75), top_y + Inches(0.48), col_w - Inches(0.40), top_h - Inches(0.52))
+    tb_prob = s2.shapes.add_textbox(Inches(0.72), top_y + Inches(0.46), card_w - Inches(0.35), top_h - Inches(0.50))
     tf_prob = tb_prob.text_frame
     tf_prob.word_wrap = True
 
-    prob_points = [
-        ("15-Day Information Lag: ", "Manual surveyor visits delay CPI reporting by 2 weeks, missing high-frequency price volatility."),
-        ("Static Single Snapshot: ", "Only 1 quote collected per route/month, failing to capture 10,000+ daily dynamic algorithmic fares."),
-        ("Dutot Upward Bias: ", "Arithmetic mean formula overstates airfare transport inflation by 20-30 bps."),
-        ("High Operational Cost: ", "Multi-crore physical surveyor logistics across airports with zero cryptographic audit trail.")
+    prob_items = [
+        ("15-Day Information Lag: ", "Manual surveyor visits delay CPI reporting by 2 weeks, missing rapid price volatility and holiday surges."),
+        ("Static Single Snapshot: ", "Only 1 physical quote collected per route/month, failing to capture 10,000+ daily dynamic pricing changes."),
+        ("Dutot Upward Bias: ", "Arithmetic mean price relatives structurally overstate airfare transport inflation by +20–30 bps (substitution bias)."),
+        ("High Operational Logistics: ", "Multi-crore physical airport field surveyor visits with zero cryptographic or verifiable audit trail.")
     ]
-    for idx, (head, desc) in enumerate(prob_points):
+    for idx, (head, desc) in enumerate(prob_items):
         p = tf_prob.paragraphs[0] if idx == 0 else tf_prob.add_paragraph()
-        p.space_after = Pt(5)
+        p.space_after = Pt(4)
         p.line_spacing = 1.15
         r1 = p.add_run()
         r1.text = "• " + head
@@ -213,43 +213,43 @@ def create_final_presentation(output_path):
         r2.text = desc
         r2.font.name = "Arial"
         r2.font.size = Pt(9.8)
-        r2.font.color.rgb = C_TEXT_DARK
+        r2.font.color.rgb = RGBColor(30, 41, 59)
 
     # --- Solution Card (Right) ---
-    r_x = Inches(6.83)
-    box_sol = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, r_x, top_y, col_w, top_h)
-    box_sol.adjustments[0] = 0.04
-    box_sol.fill.solid()
-    box_sol.fill.fore_color.rgb = RGBColor(240, 253, 244) # soft emerald
-    box_sol.line.color.rgb = RGBColor(22, 163, 74)
-    box_sol.line.width = Pt(1.5)
+    r_x = Inches(6.80)
+    card_sol = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, r_x, top_y, card_w, top_h)
+    card_sol.adjustments[0] = 0.04
+    card_sol.fill.solid()
+    card_sol.fill.fore_color.rgb = RGBColor(240, 253, 244) # soft subtle emerald tint
+    card_sol.line.color.rgb = RGBColor(22, 163, 74)
+    card_sol.line.width = Pt(1.5)
 
-    hdr_sol = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, r_x, top_y, col_w, Inches(0.42))
-    hdr_sol.adjustments[0] = 0.2
+    hdr_sol = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, r_x, top_y, card_w, Inches(0.42))
+    hdr_sol.adjustments[0] = 0.18
     hdr_sol.fill.solid()
-    hdr_sol.fill.fore_color.rgb = RGBColor(22, 163, 74)
+    hdr_sol.fill.fore_color.rgb = RGBColor(21, 128, 61) # deep forest emerald
     hdr_sol.line.fill.background()
-    p_sh = hdr_sol.text_frame.paragraphs[0]
-    p_sh.text = "▶ HOW OUR APP SOLVES IT (VayuSuchak Engine)"
-    p_sh.font.name = "Arial"
-    p_sh.font.size = Pt(11.5)
-    p_sh.font.bold = True
-    p_sh.font.color.rgb = C_WHITE
-    p_sh.alignment = PP_ALIGN.CENTER
+    p_hs = hdr_sol.text_frame.paragraphs[0]
+    p_hs.text = "VAYUSUCHAK AUTOMATED PIPELINE (HOW OUR SYSTEM SOLVES IT)"
+    p_hs.font.name = "Arial"
+    p_hs.font.size = Pt(10.8)
+    p_hs.font.bold = True
+    p_hs.font.color.rgb = C_WHITE
+    p_hs.alignment = PP_ALIGN.CENTER
 
-    tb_sol = s2.shapes.add_textbox(r_x + Inches(0.20), top_y + Inches(0.48), col_w - Inches(0.40), top_h - Inches(0.52))
+    tb_sol = s2.shapes.add_textbox(r_x + Inches(0.18), top_y + Inches(0.46), card_w - Inches(0.35), top_h - Inches(0.50))
     tf_sol = tb_sol.text_frame
     tf_sol.word_wrap = True
 
-    sol_points = [
-        ("Real-Time Extraction: ", "Playwright headless bots harvest 10,000+ live fares daily with sub-24h latency at 02:00 AM IST."),
-        ("T+1..T+45 Advance Horizons: ", "Captures urgent vs saver fares weighted dynamically by official DGCA passenger volumes."),
-        ("UN/ILO Jevons Index: ", "Geometric mean formulation mathematically eliminates Dutot upward substitution distortion."),
-        ("SHA-256 Audit Ledger: ", "Immutable cryptographic fingerprints ensure sovereign-grade evidentiary auditability for MoSPI.")
+    sol_items = [
+        ("Automated Live Extraction: ", "Distributed Playwright bots harvest 10,000+ live fares daily with sub-24h latency at 02:00 AM IST."),
+        ("T+1..T+45 Advance Horizons: ", "Captures urgent vs saver booking curves weighted dynamically by official DGCA passenger volume shares."),
+        ("UN/ILO Jevons Index: ", "Geometric mean formula eliminates Dutot substitution bias, delivering an axiomatic 0.0% distortion index."),
+        ("Sovereign Audit Ledger: ", "SHA-256 Merkle tree fingerprints guarantee tamper-proof legal evidentiary auditability for MoSPI & RBI.")
     ]
-    for idx, (head, desc) in enumerate(sol_points):
+    for idx, (head, desc) in enumerate(sol_items):
         p = tf_sol.paragraphs[0] if idx == 0 else tf_sol.add_paragraph()
-        p.space_after = Pt(5)
+        p.space_after = Pt(4)
         p.line_spacing = 1.15
         r1 = p.add_run()
         r1.text = "• " + head
@@ -261,45 +261,162 @@ def create_final_presentation(output_path):
         r2.text = desc
         r2.font.name = "Arial"
         r2.font.size = Pt(9.8)
-        r2.font.color.rgb = C_TEXT_DARK
+        r2.font.color.rgb = RGBColor(30, 41, 59)
 
-    # 4. Connected 5-Step Horizontal Process Workflow (High-Res Circular Strip)
-    if os.path.exists(workflow_strip_img):
-        s2.shapes.add_picture(workflow_strip_img, Inches(0.55), Inches(4.45), Inches(12.23), Inches(1.92))
+    # 2. Bottom Section: 5 Connected Horizontal Process Workflow Cards (Engineered & Full)
+    bot_y = Inches(4.32)
+    w_step = Inches(2.30)
+    gap = Inches(0.18)
+    h_step = Inches(2.95)
+    start_x = Inches(0.55)
 
-    # 5. Bottom Ribbon: Solid Dark Navy Blue Bar with White / Sky Text
-    bot_y = Inches(6.50)
-    bot_h = Inches(0.48)
-    box_bottom = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), bot_y, Inches(12.23), bot_h)
-    box_bottom.adjustments[0] = 0.2
-    box_bottom.fill.solid()
-    box_bottom.fill.fore_color.rgb = RGBColor(15, 23, 42)
-    box_bottom.line.color.rgb = RGBColor(30, 58, 138)
-    box_bottom.line.width = Pt(1.2)
-
-    tb_bb = s2.shapes.add_textbox(Inches(0.65), bot_y + Inches(0.06), Inches(12.03), Inches(0.36))
-    tf_bb = tb_bb.text_frame
-    p_bb = tf_bb.paragraphs[0]
-    p_bb.alignment = PP_ALIGN.CENTER
-
-    ribbon_segments = [
-        ("DATA HARVESTING", False),
-        ("  ➔  ", True),
-        ("IQR OUTLIER TRUNCATION", False),
-        ("  ➔  ", True),
-        ("JEVONS GEOMETRIC INDEX", False),
-        ("  ➔  ", True),
-        ("SHA-256 PROVENANCE", False),
-        ("  ➔  ", True),
-        ("MoSPI & RBI CPI INTEGRATION", False)
+    steps_data = [
+        {
+            "num": "01",
+            "title": "Dynamic Yield\nTracking",
+            "badge": "T+1..T+45 Windows",
+            "color": RGBColor(30, 64, 175), # Navy/Blue
+            "border": RGBColor(59, 130, 246),
+            "bg_badge": RGBColor(239, 246, 255),
+            "desc": "Captures intraday surges across T+1..T+45 advance booking windows.",
+            "tech": "Playwright Scraper",
+            "metric": "10,000+ Fares/Day"
+        },
+        {
+            "num": "02",
+            "title": "Dynamic IQR\nScrubber",
+            "badge": "Base Fare Isolation",
+            "color": RGBColor(2, 132, 199), # Sky
+            "border": RGBColor(14, 165, 233),
+            "bg_badge": RGBColor(240, 249, 255),
+            "desc": "Isolates base fares and purges phantom prices and cache glitches.",
+            "tech": "SciPy Truncation",
+            "metric": "Outlier Purged"
+        },
+        {
+            "num": "03",
+            "title": "UN/ILO Jevons\nIndex Engine",
+            "badge": "Geometric Mean",
+            "color": RGBColor(13, 148, 136), # Teal
+            "border": RGBColor(20, 184, 166),
+            "bg_badge": RGBColor(240, 253, 250),
+            "desc": "Geometric mean calculation that eliminates upward substitution bias.",
+            "tech": "UN/ILO Ch. 10 Math",
+            "metric": "0.0% Upward Bias"
+        },
+        {
+            "num": "04",
+            "title": "Sovereign Audit\nVault",
+            "badge": "Cryptographic Proofs",
+            "color": RGBColor(22, 163, 74), # Green
+            "border": RGBColor(34, 197, 94),
+            "bg_badge": RGBColor(240, 253, 244),
+            "desc": "SHA-256 batch Merkle tree proofs for judicial and policy scrutiny.",
+            "tech": "SHA-256 Ledger",
+            "metric": "Tamper-Proof"
+        },
+        {
+            "num": "05",
+            "title": "Real-Time API\nDelivery",
+            "badge": "Instant Feeds",
+            "color": RGBColor(15, 23, 42), # Slate Navy
+            "border": RGBColor(100, 116, 139),
+            "bg_badge": RGBColor(248, 250, 252),
+            "desc": "Sub-10ms REST API and live eSankhyiki CSV feed for MoSPI and RBI.",
+            "tech": "FastAPI & CSV Feed",
+            "metric": "< 10ms Latency"
+        }
     ]
-    for seg_text, is_arrow in ribbon_segments:
-        r = p_bb.add_run()
-        r.text = seg_text
-        r.font.name = "Arial"
-        r.font.size = Pt(10.5)
-        r.font.bold = True
-        r.font.color.rgb = RGBColor(56, 189, 248) if is_arrow else C_WHITE
+
+    for i, st in enumerate(steps_data):
+        cx = start_x + i * (w_step + gap)
+
+        # Card container
+        box = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, bot_y, w_step, h_step)
+        box.adjustments[0] = 0.05
+        box.fill.solid()
+        box.fill.fore_color.rgb = C_WHITE
+        box.line.color.rgb = st["border"]
+        box.line.width = Pt(1.5)
+
+        # Top Header Pill / Band
+        h_strip = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, bot_y, w_step, Inches(0.40))
+        h_strip.adjustments[0] = 0.18
+        h_strip.fill.solid()
+        h_strip.fill.fore_color.rgb = st["color"]
+        h_strip.line.fill.background()
+        p_sh = h_strip.text_frame.paragraphs[0]
+        p_sh.text = f"STEP {st['num']}"
+        p_sh.font.name = "Arial"
+        p_sh.font.size = Pt(11)
+        p_sh.font.bold = True
+        p_sh.font.color.rgb = C_WHITE
+        p_sh.alignment = PP_ALIGN.CENTER
+
+        # Content in Card
+        tb = s2.shapes.add_textbox(cx + Inches(0.10), bot_y + Inches(0.45), w_step - Inches(0.20), h_step - Inches(0.95))
+        tf = tb.text_frame
+        tf.word_wrap = True
+        tf.margin_top = tf.margin_bottom = tf.margin_left = tf.margin_right = 0
+
+        # Title
+        p_t = tf.paragraphs[0]
+        p_t.text = st["title"]
+        p_t.font.name = "Arial"
+        p_t.font.size = Pt(11.5)
+        p_t.font.bold = True
+        p_t.font.color.rgb = st["color"]
+        p_t.alignment = PP_ALIGN.CENTER
+        p_t.space_after = Pt(2)
+
+        # Subtitle / Horizon Badge
+        p_s = tf.add_paragraph()
+        p_s.text = f"• {st['badge']} •"
+        p_s.font.name = "Arial"
+        p_s.font.size = Pt(9.0)
+        p_s.font.bold = True
+        p_s.font.color.rgb = RGBColor(100, 116, 139)
+        p_s.alignment = PP_ALIGN.CENTER
+        p_s.space_after = Pt(6)
+
+        # Description
+        p_d = tf.add_paragraph()
+        p_d.text = st["desc"]
+        p_d.font.name = "Arial"
+        p_d.font.size = Pt(9.6)
+        p_d.font.color.rgb = RGBColor(30, 41, 59)
+        p_d.alignment = PP_ALIGN.LEFT
+        p_d.line_spacing = 1.18
+
+        # Bottom Metric Tag Box (Anchored at the bottom of the card)
+        tag_y = bot_y + h_step - Inches(0.42)
+        tag_box = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx + Inches(0.08), tag_y, w_step - Inches(0.16), Inches(0.34))
+        tag_box.adjustments[0] = 0.2
+        tag_box.fill.solid()
+        tag_box.fill.fore_color.rgb = st["bg_badge"]
+        tag_box.line.color.rgb = st["border"]
+        tag_box.line.width = Pt(1.0)
+        p_tb = tag_box.text_frame.paragraphs[0]
+        p_tb.text = f"{st['tech']} | {st['metric']}"
+        p_tb.font.name = "Arial"
+        p_tb.font.size = Pt(8.5)
+        p_tb.font.bold = True
+        p_tb.font.color.rgb = st["color"]
+        p_tb.alignment = PP_ALIGN.CENTER
+
+        # Connecting Arrow (between cards)
+        if i < 4:
+            arr_x = cx + w_step + Inches(0.01)
+            arr_tb = s2.shapes.add_textbox(arr_x, bot_y + Inches(1.15), gap - Inches(0.02), Inches(0.40))
+            tf_a = arr_tb.text_frame
+            tf_a.margin_left = tf_a.margin_top = tf_a.margin_right = tf_a.margin_bottom = 0
+            p_a = tf_a.paragraphs[0]
+            p_a.text = "➔"
+            p_a.font.name = "Arial"
+            p_a.font.size = Pt(15)
+            p_a.font.bold = True
+            p_a.font.color.rgb = RGBColor(148, 163, 184)
+            p_a.alignment = PP_ALIGN.CENTER
 
     add_template_footer(s2, 2)
 
