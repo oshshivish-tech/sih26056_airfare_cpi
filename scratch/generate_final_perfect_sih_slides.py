@@ -49,7 +49,7 @@ def create_final_presentation(output_path):
             tf_p = pill.text_frame
             tf_p.word_wrap = True
             p_p = tf_p.paragraphs[0]
-            p_p.text = "Team Rookie"
+            p_p.text = "Roorkies"
             p_p.font.name = "Arial"
             p_p.font.size = Pt(13)
             p_p.font.bold = True
@@ -113,8 +113,8 @@ def create_final_presentation(output_path):
         ("• Problem Statement Title-", "Real-Time Airfare Price Index for CPI Augmentation", True),
         ("• Theme-", "Smart Governance / Miscellaneous", False),
         ("• PS Category-", "Software", False),
-        ("• Team ID-", "Team Rookie", False),
-        ("• Team Name –", "Team Rookie", False)   # "registered on portal" REMOVED!
+        ("• Team ID-", "168405", False),
+        ("• Team Name –", "Roorkies", False)
     ]
 
     for idx, (label, val, is_red) in enumerate(s1_items):

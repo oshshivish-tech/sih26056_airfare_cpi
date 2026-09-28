@@ -101,6 +101,12 @@ npm run dev
 
 ---
 
-## 🏛️ Project Maintainers
-* **SIH Team**: SIH 26056 Finalist Team
+## 🏛️ Project Maintainers & SIH 2026 Details
+* **Team Name**: Roorkies
+* **Team ID**: 168405
+* **Problem Statement**: SIH 26056 (Real-Time Airfare Price Index for CPI Augmentation)
+* **College / Institution**: D Y Patil University Pune Ambi
+* **Team Leader**: Nikhil
+* **Team Members**: Nikhil (Leader), Shivish, Pranav, Harsh, Tejas, Blessy
 * **Live Deployment**: [https://sih26056-airfare-cpi.vercel.app](https://sih26056-airfare-cpi.vercel.app)
+* **Presentation Viewer**: [https://sih26056-airfare-cpi.vercel.app/slides.html](https://sih26056-airfare-cpi.vercel.app/slides.html)

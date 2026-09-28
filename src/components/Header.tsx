@@ -76,6 +76,9 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="px-2 py-0.5 text-[10px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-full font-mono">
                   SIH 26056
                 </span>
+                <span className="hidden sm:inline-flex items-center px-2 py-0.5 text-[10px] font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/30 rounded-full font-mono">
+                  Team Roorkies (168405)
+                </span>
               </div>
               <p className="text-[11px] text-slate-400">
                 Real-Time Airfare Price Index (APIx) for India • MoSPI NSO & RBI Monetary Policy Augmentation
