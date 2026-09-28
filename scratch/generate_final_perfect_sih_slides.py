@@ -110,8 +110,8 @@ def create_final_presentation(output_path):
     tf_s1.margin_left = tf_s1.margin_top = tf_s1.margin_right = tf_s1.margin_bottom = 0
 
     s1_items = [
-        ("• Problem Statement ID –", "26056", False),
-        ("• Problem Statement Title-", "Real-Time Airfare Price Index for CPI Augmentation", True),
+        ("• Problem Statement ID –", "SIH26056", False),
+        ("• Problem Statement Title-", "Development of a Real-time Airfare Price Index for India through Automated Web Scraping", True),
         ("• Theme-", "Smart Governance / Miscellaneous", False),
         ("• PS Category-", "Software", False),
         ("• Team ID-", "168405", False),
@@ -120,20 +120,20 @@ def create_final_presentation(output_path):
 
     for idx, (label, val, is_red) in enumerate(s1_items):
         p = tf_s1.add_paragraph() if idx > 0 else tf_s1.paragraphs[0]
-        p.space_before = Pt(12)
-        p.space_after = Pt(12)
+        p.space_before = Pt(10)
+        p.space_after = Pt(10)
 
         r_lbl = p.add_run()
         r_lbl.text = label + " "
         r_lbl.font.name = "Arial"
-        r_lbl.font.size = Pt(17)
+        r_lbl.font.size = Pt(16.5)
         r_lbl.font.bold = True
         r_lbl.font.color.rgb = C_BLACK
 
         r_val = p.add_run()
         r_val.text = val
         r_val.font.name = "Arial"
-        r_val.font.size = Pt(17)
+        r_val.font.size = Pt(16.5)
         r_val.font.bold = True
         r_val.font.color.rgb = C_RED_TEMPLATE if is_red else C_BLACK
 
