@@ -26,6 +26,8 @@ export interface FlightFare {
   cabinClass: 'ECONOMY' | 'PREMIUM_ECONOMY' | 'BUSINESS';
   isRefundable: boolean;
   seatAvailability: number;
+  isOutlier?: boolean;
+  outlierReason?: string;
 }
 
 export interface RouteWeight {

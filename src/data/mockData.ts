@@ -215,7 +215,7 @@ export const MOCK_CPI_HISTORICAL: CPIIndexPoint[] = [
   { date: '2026-06', periodLabel: 'Jun 2026', jevonsIndex: 112.6, dutotIndex: 113.9, weightedLaspeyresIndex: 112.1, officialMoSPICPIBaseline: 110.8, sampleCount: 20500, leadTimeFilter: 'ALL', yoyInflationRate: 7.2, momInflationRate: -4.7 },
   { date: '2026-07', periodLabel: 'Jul 2026', jevonsIndex: 107.4, dutotIndex: 108.1, weightedLaspeyresIndex: 107.0, officialMoSPICPIBaseline: 106.5, sampleCount: 18900, leadTimeFilter: 'ALL', yoyInflationRate: 5.4, momInflationRate: -4.6 },
   { date: '2026-08', periodLabel: 'Aug 2026', jevonsIndex: 109.8, dutotIndex: 110.6, weightedLaspeyresIndex: 109.4, officialMoSPICPIBaseline: 108.2, sampleCount: 21400, leadTimeFilter: 'ALL', yoyInflationRate: 6.1, momInflationRate: 2.2 },
-  { date: '2026-09', periodLabel: 'Sep 2026 (Live - 28 Sep)', jevonsIndex: 111.4, dutotIndex: 112.5, weightedLaspeyresIndex: 111.0, officialMoSPICPIBaseline: 109.5, sampleCount: 25400, leadTimeFilter: 'ALL', yoyInflationRate: 6.9, momInflationRate: 1.5 },
+  { date: '2026-09', periodLabel: 'Sep 2026 (Live - 28 Sep)', jevonsIndex: 111.4, dutotIndex: 112.5, weightedLaspeyresIndex: 111.0, officialMoSPICPIBaseline: 109.5, sampleCount: 26150, leadTimeFilter: 'ALL', yoyInflationRate: 6.9, momInflationRate: 1.5 },
   { date: '2026-10', periodLabel: 'Oct 2026 (Fcst)', jevonsIndex: 115.8, dutotIndex: 117.1, weightedLaspeyresIndex: 115.4, officialMoSPICPIBaseline: 113.8, sampleCount: 26000, leadTimeFilter: 'ALL', yoyInflationRate: 8.2, momInflationRate: 3.9 },
   { date: '2026-11', periodLabel: 'Nov 2026 (Fcst)', jevonsIndex: 119.4, dutotIndex: 121.0, weightedLaspeyresIndex: 118.9, officialMoSPICPIBaseline: 117.2, sampleCount: 27500, leadTimeFilter: 'ALL', yoyInflationRate: 9.5, momInflationRate: 3.1 },
   { date: '2026-12', periodLabel: 'Dec 2026 (Fcst)', jevonsIndex: 122.5, dutotIndex: 124.2, weightedLaspeyresIndex: 122.0, officialMoSPICPIBaseline: 120.1, sampleCount: 29000, leadTimeFilter: 'ALL', yoyInflationRate: 11.2, momInflationRate: 2.6 },
@@ -260,24 +260,89 @@ export const MOCK_DAILY_CPI: DailyFarePoint[] = [
   { date: '2026-09-12', dayLabel: '12 Sep (Sat)', dailyJevonsIndex: 115.9, dailyAvgFare: 5910, movingAverage7d: 5470, scrapedQuotesCount: 2980, isWeekend: true },
   { date: '2026-09-13', dayLabel: '13 Sep (Sun)', dailyJevonsIndex: 115.2, dailyAvgFare: 5840, movingAverage7d: 5460, scrapedQuotesCount: 2910, isWeekend: true },
   { date: '2026-09-14', dayLabel: '14 Sep (Mon)', dailyJevonsIndex: 110.1, dailyAvgFare: 5360, movingAverage7d: 5440, scrapedQuotesCount: 2700, isWeekend: false },
-  { date: '2026-09-15', dayLabel: '15 Sep (Tue)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5420, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-09-16', dayLabel: '16 Sep (Wed)', dailyJevonsIndex: 109.2, dailyAvgFare: 5290, movingAverage7d: 5400, scrapedQuotesCount: 3680, isWeekend: false },
-  { date: '2026-09-17', dayLabel: '17 Sep (Thu)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5380, scrapedQuotesCount: 3720, isWeekend: false },
-  { date: '2026-09-18', dayLabel: '18 Sep (Fri)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5364, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-09-19', dayLabel: '19 Sep (Sat)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5364, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-09-20', dayLabel: '20 Sep (Sun)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5364, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-09-21', dayLabel: '21 Sep (Mon)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5364, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-09-22', dayLabel: '22 Sep (Tue)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5364, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-09-23', dayLabel: '23 Sep (Wed)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5364, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-09-24', dayLabel: '24 Sep (Thu)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5364, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-09-25', dayLabel: '25 Sep (Fri)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5364, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-09-26', dayLabel: '26 Sep (Sat)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5364, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-09-27', dayLabel: '27 Sep (Sun)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5364, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-09-28', dayLabel: '28 Sep (Mon - Today)', dailyJevonsIndex: 109.6, dailyAvgFare: 5314, movingAverage7d: 5364, scrapedQuotesCount: 3650, isWeekend: false }
+  { date: '2026-09-15', dayLabel: '15 Sep (Tue)', dailyJevonsIndex: 107.4, dailyAvgFare: 5210, movingAverage7d: 5410, scrapedQuotesCount: 3650, isWeekend: false },
+  { date: '2026-09-16', dayLabel: '16 Sep (Wed)', dailyJevonsIndex: 108.5, dailyAvgFare: 5260, movingAverage7d: 5390, scrapedQuotesCount: 3680, isWeekend: false },
+  { date: '2026-09-17', dayLabel: '17 Sep (Thu)', dailyJevonsIndex: 110.9, dailyAvgFare: 5380, movingAverage7d: 5400, scrapedQuotesCount: 3720, isWeekend: false },
+  { date: '2026-09-18', dayLabel: '18 Sep (Fri)', dailyJevonsIndex: 114.6, dailyAvgFare: 5740, movingAverage7d: 5440, scrapedQuotesCount: 3850, isWeekend: true },
+  { date: '2026-09-19', dayLabel: '19 Sep (Sat)', dailyJevonsIndex: 116.1, dailyAvgFare: 5920, movingAverage7d: 5480, scrapedQuotesCount: 3950, isWeekend: true },
+  { date: '2026-09-20', dayLabel: '20 Sep (Sun)', dailyJevonsIndex: 115.3, dailyAvgFare: 5830, movingAverage7d: 5500, scrapedQuotesCount: 3910, isWeekend: true },
+  { date: '2026-09-21', dayLabel: '21 Sep (Mon)', dailyJevonsIndex: 111.1, dailyAvgFare: 5389, movingAverage7d: 5551, scrapedQuotesCount: 3650, isWeekend: false },
+  { date: '2026-09-22', dayLabel: '22 Sep (Tue)', dailyJevonsIndex: 108.4, dailyAvgFare: 5250, movingAverage7d: 5538, scrapedQuotesCount: 3720, isWeekend: false },
+  { date: '2026-09-23', dayLabel: '23 Sep (Wed)', dailyJevonsIndex: 108.9, dailyAvgFare: 5280, movingAverage7d: 5520, scrapedQuotesCount: 3680, isWeekend: false },
+  { date: '2026-09-24', dayLabel: '24 Sep (Thu)', dailyJevonsIndex: 110.2, dailyAvgFare: 5350, movingAverage7d: 5510, scrapedQuotesCount: 3710, isWeekend: false },
+  { date: '2026-09-25', dayLabel: '25 Sep (Fri)', dailyJevonsIndex: 114.2, dailyAvgFare: 5720, movingAverage7d: 5505, scrapedQuotesCount: 3840, isWeekend: true },
+  { date: '2026-09-26', dayLabel: '26 Sep (Sat)', dailyJevonsIndex: 115.8, dailyAvgFare: 5890, movingAverage7d: 5515, scrapedQuotesCount: 3920, isWeekend: true },
+  { date: '2026-09-27', dayLabel: '27 Sep (Sun)', dailyJevonsIndex: 115.0, dailyAvgFare: 5810, movingAverage7d: 5522, scrapedQuotesCount: 3880, isWeekend: true },
+  { date: '2026-09-28', dayLabel: '28 Sep (Mon - Today)', dailyJevonsIndex: 111.4, dailyAvgFare: 5395, movingAverage7d: 5528, scrapedQuotesCount: 3750, isWeekend: false }
 ];
 
 // Sample Outliers Detected & Excluded by Algorithm
 export const MOCK_OUTLIERS: OutlierRecord[] = [
+  {
+    id: 'out-110',
+    flightNumber: '6E-5091',
+    corridor: 'DEL ↔ BLR',
+    airline: 'IndiGo',
+    observedFare: 26800,
+    expectedRouteMedianFare: 5250,
+    zScore: 5.18,
+    iqrBounds: [3300, 7900],
+    action: 'EXCLUDED_FROM_INDEX',
+    reason: 'LAST_MINUTE_SCALPING',
+    timestamp: '2026-09-22 02:00:25'
+  },
+  {
+    id: 'out-109',
+    flightNumber: '6E-6182',
+    corridor: 'DEL ↔ BOM',
+    airline: 'IndiGo',
+    observedFare: 27400,
+    expectedRouteMedianFare: 5389,
+    zScore: 5.24,
+    iqrBounds: [3400, 8100],
+    action: 'EXCLUDED_FROM_INDEX',
+    reason: 'LAST_MINUTE_SCALPING',
+    timestamp: '2026-09-21 02:00:18'
+  },
+  {
+    id: 'out-108',
+    flightNumber: 'AI-684',
+    corridor: 'BLR ↔ DEL',
+    airline: 'Air India',
+    observedFare: 39500,
+    expectedRouteMedianFare: 5830,
+    zScore: 6.32,
+    iqrBounds: [3600, 8800],
+    action: 'EXCLUDED_FROM_INDEX',
+    reason: 'FIRST_CLASS_ANOMALY',
+    timestamp: '2026-09-20 02:00:14'
+  },
+  {
+    id: 'out-107',
+    flightNumber: 'SG-8192',
+    corridor: 'DEL ↔ BOM',
+    airline: 'SpiceJet',
+    observedFare: 28900,
+    expectedRouteMedianFare: 5920,
+    zScore: 5.45,
+    iqrBounds: [3700, 9100],
+    action: 'EXCLUDED_FROM_INDEX',
+    reason: 'FLEXI_SURGE_PRICING',
+    timestamp: '2026-09-19 02:00:22'
+  },
+  {
+    id: 'out-106',
+    flightNumber: 'QP-1405',
+    corridor: 'BOM ↔ BLR',
+    airline: 'Akasa Air',
+    observedFare: 1250,
+    expectedRouteMedianFare: 5740,
+    zScore: -3.42,
+    iqrBounds: [3500, 8500],
+    action: 'ADJUSTED',
+    reason: 'PROMOTIONAL_DISCOUNT',
+    timestamp: '2026-09-18 02:00:11'
+  },
   {
     id: 'out-105',
     flightNumber: '6E-5012',
@@ -359,6 +424,27 @@ export const generateLiveScrapedFares = (): FlightFare[] => {
 
   const results: FlightFare[] = [];
 
+  const now = new Date();
+  const dayOfWeek = now.getDay(); // 0: Sun, 1: Mon, 2: Tue, 3: Wed, 4: Thu, 5: Fri, 6: Sat
+
+  // Real-world dynamic Day-of-Week elasticity multiplier:
+  // Tuesday/Wednesday: lower business/leisure demand (-2.5% to -1.5% discount)
+  // Friday/Saturday/Sunday: peak weekend surge (+4% to +6.5%)
+  const dayElasticityMap: Record<number, number> = {
+    0: 1.055, // Sunday peak returns
+    1: 1.015, // Monday morning business rush
+    2: 0.985, // Tuesday midweek discount trough
+    3: 0.990, // Wednesday midweek discount
+    4: 1.010, // Thursday weekend prep
+    5: 1.050, // Friday weekend outbound spike
+    6: 1.065  // Saturday prime leisure surge
+  };
+  const dowMult = dayElasticityMap[dayOfWeek] ?? 1.0;
+
+  // Intraday high-frequency jitter (±1.5%) so every scrape run produces unique, live data
+  const intradayJitter = 1.0 + (Math.sin(now.getTime() / 60000) * 0.012) + ((Math.random() - 0.5) * 0.018);
+  const liveBaseMultiplier = 1.088 * dowMult * intradayJitter;
+
   MOCK_ROUTE_WEIGHTS.forEach((route, rIdx) => {
     horizons.forEach(horizon => {
       // Realistic advance-purchase lead time multipliers (1d last-minute to 45d advance)
@@ -372,10 +458,10 @@ export const generateLiveScrapedFares = (): FlightFare[] => {
         // Intentional surge pricing outlier on 1d horizon for first route to demonstrate IQR algorithm
         const isSurgeOutlier = (horizon === '1d' && rIdx === 0 && aIdx === 0);
 
-        // Current market price incorporates ~10.5% inflation over 2025 base price (Index ~110.5)
+        // Dynamic market price incorporating base inflation, day elasticity, lead time, and route variance
         const targetTotal = isSurgeOutlier
           ? Math.round(route.baseYearPrice * 4.2)
-          : Math.round(route.baseYearPrice * 1.085 * horizonMultiplier * (0.97 + Math.random() * 0.06));
+          : Math.round(route.baseYearPrice * liveBaseMultiplier * horizonMultiplier * (0.97 + Math.random() * 0.06));
 
         // Deconstruct total price into realistic components backwards (Base ~78%, Fuel ~14%, UDF/PSF ~4%, GST ~4%)
         const base = Math.round(targetTotal * 0.78);
@@ -387,7 +473,7 @@ export const generateLiveScrapedFares = (): FlightFare[] => {
         const nowTs = new Date().toISOString().replace('T', ' ').substring(0, 19);
 
         results.push({
-          id: `fare-${rIdx}-${horizon}-${aIdx}-${Date.now()}`,
+          id: `fare-${rIdx}-${horizon}-${aIdx}-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
           flightNumber: `${air.code === 'INDIGO' ? '6E' : air.code === 'AIR_INDIA' ? 'AI' : air.code === 'AKASA' ? 'QP' : 'SG'}-${1000 + Math.floor(Math.random() * 8999)}`,
           airline: air.code,
           airlineName: air.name,

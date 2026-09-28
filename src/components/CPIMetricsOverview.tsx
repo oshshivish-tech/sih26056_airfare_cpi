@@ -1,9 +1,10 @@
 import React from 'react';
 import { TrendingUp, ShieldCheck, Database, Filter, ArrowUpRight, CheckCircle2 } from 'lucide-react';
-import { CPIIndexPoint } from '../types';
+import { CPIIndexPoint, DailyFarePoint } from '../types';
 
 interface CPIMetricsOverviewProps {
   currentPoint: CPIIndexPoint;
+  latestDailyPoint?: DailyFarePoint;
   totalDataPoints: number;
   outlierCount: number;
   onOpenOutlierModal: () => void;
@@ -11,6 +12,7 @@ interface CPIMetricsOverviewProps {
 
 export const CPIMetricsOverview: React.FC<CPIMetricsOverviewProps> = ({
   currentPoint,
+  latestDailyPoint,
   totalDataPoints,
   outlierCount,
   onOpenOutlierModal
@@ -24,7 +26,7 @@ export const CPIMetricsOverview: React.FC<CPIMetricsOverviewProps> = ({
         </div>
         <div className="flex items-center space-x-2 text-xs font-semibold text-sky-400 mb-1">
           <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
-          <span>AIRFARE CPI SUB-INDEX</span>
+          <span>AIRFARE CPI (SEP MTD)</span>
         </div>
         <div className="flex items-baseline space-x-2 my-1">
           <span className="text-3xl font-extrabold tracking-tight text-white font-mono">
@@ -32,10 +34,17 @@ export const CPIMetricsOverview: React.FC<CPIMetricsOverviewProps> = ({
           </span>
           <span className="text-xs text-slate-400 font-medium">(Base = 100)</span>
         </div>
-        <div className="flex items-center text-xs mt-3 space-x-1 text-emerald-400 font-medium">
-          <ArrowUpRight className="w-4 h-4" />
-          <span>+{currentPoint.momInflationRate}% MoM Inflation</span>
-          <span className="text-slate-500 font-normal">({currentPoint.periodLabel})</span>
+        <div className="flex items-center justify-between text-xs mt-3 text-slate-300 font-medium border-t border-slate-800/80 pt-2">
+          <span className="flex items-center text-emerald-400">
+            <ArrowUpRight className="w-3.5 h-3.5 mr-0.5" />
+            +{currentPoint.momInflationRate}% MoM
+          </span>
+          {latestDailyPoint && (
+            <span className="text-[11px] font-mono bg-sky-950/80 text-sky-300 border border-sky-800/50 px-2 py-0.5 rounded-full flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+              Today ({latestDailyPoint.dayLabel.split('(')[0].trim()}): <strong className="text-white">{latestDailyPoint.dailyJevonsIndex.toFixed(1)}</strong>
+            </span>
+          )}
         </div>
       </div>
 

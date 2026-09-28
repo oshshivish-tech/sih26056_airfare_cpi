@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity, Plane, Download, RefreshCw, Layers, ShieldCheck, BarChart3, Database, Lock, Presentation } from 'lucide-react';
+import { Activity, Plane, Download, RefreshCw, Layers, ShieldCheck, BarChart3, Database, Lock, Presentation, Key, Server } from 'lucide-react';
 
 interface HeaderProps {
   activeTab: 'overview' | 'corridors' | 'scraper' | 'methodology';
@@ -7,6 +7,9 @@ interface HeaderProps {
   onRunScrape: () => void;
   onOpenExport: () => void;
   onOpenProvenance: () => void;
+  onOpenLiveAPI: () => void;
+  onOpenRestApi: () => void;
+  isLiveAPIConnected: boolean;
   isScraping: boolean;
   latestIndex: number;
   yoyInflation: number;
@@ -18,6 +21,9 @@ export const Header: React.FC<HeaderProps> = ({
   onRunScrape,
   onOpenExport,
   onOpenProvenance,
+  onOpenLiveAPI,
+  onOpenRestApi,
+  isLiveAPIConnected,
   isScraping,
   latestIndex,
   yoyInflation,
@@ -32,7 +38,7 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
             </span>
-            LIVE MOSPI AIRFARE CPI: <strong className="ml-1 text-white">{latestIndex.toFixed(1)}</strong> (Base = 100)
+            LIVE MOSPI AIRFARE CPI: <strong className="ml-1 text-white">{latestIndex.toFixed(1)}</strong> (Sep MTD Composite)
           </span>
           <span className="text-slate-400">|</span>
           <span className="text-slate-300">
@@ -62,14 +68,17 @@ export const Header: React.FC<HeaderProps> = ({
             <div>
               <div className="flex items-center space-x-2">
                 <h1 className="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-1.5">
-                  VayuSuchak <span className="text-xs font-normal text-sky-400 font-sans hidden sm:inline">(वायु सूचक)</span>
+                  <span className="text-sky-400 font-mono font-black">APIx</span>
+                  <span>•</span>
+                  <span>VayuSuchak</span>
+                  <span className="text-xs font-normal text-slate-400 font-sans hidden sm:inline">(वायु सूचक)</span>
                 </h1>
                 <span className="px-2 py-0.5 text-[10px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-full font-mono">
-                  eSankhyiki Augmented
+                  SIH 26056
                 </span>
               </div>
               <p className="text-[11px] text-slate-400">
-                MoSPI Airfare CPI Intelligence & Ingestion Platform • National Statistical Office
+                Real-Time Airfare Price Index (APIx) for India • MoSPI NSO & RBI Monetary Policy Augmentation
               </p>
             </div>
           </div>
@@ -139,12 +148,34 @@ export const Header: React.FC<HeaderProps> = ({
             </a>
 
             <button
+              onClick={onOpenRestApi}
+              className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-purple-300 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 transition-all shadow-sm"
+              title="Inspect MoSPI NSO & RBI Open REST API Endpoints"
+            >
+              <Server className="w-3.5 h-3.5 text-purple-400" />
+              <span>NSO & RBI API</span>
+            </button>
+
+            <button
               onClick={onOpenProvenance}
               className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-teal-300 bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 transition-all"
               title="View SHA-256 Cryptographic Audit Trail"
             >
               <Lock className="w-3.5 h-3.5 text-teal-400" />
               <span className="hidden sm:inline">Provenance Vault</span>
+            </button>
+
+            <button
+              onClick={onOpenLiveAPI}
+              className={`flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                isLiveAPIConnected
+                  ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/40 shadow-sm shadow-emerald-500/20'
+                  : 'bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 border-indigo-500/30'
+              }`}
+              title="Connect Amadeus Live GDS API for Real Live Flight Fares"
+            >
+              <Key className="w-3.5 h-3.5 text-indigo-400" />
+              <span className="hidden sm:inline">{isLiveAPIConnected ? 'Live GDS Active' : 'Live Flight API'}</span>
             </button>
 
             <button

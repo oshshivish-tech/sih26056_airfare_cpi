@@ -8,16 +8,21 @@ import { MethodologyDoc } from './components/MethodologyDoc';
 import { OutlierAnalysisModal } from './components/OutlierAnalysisModal';
 import { ExportModal } from './components/ExportModal';
 import { ProvenanceVaultModal } from './components/ProvenanceVaultModal';
+import { LiveAPIModal } from './components/LiveAPIModal';
 
 import { IndiaFlightMap } from './components/IndiaFlightMap';
 import { TransmissionChain } from './components/TransmissionChain';
 import { FuelPriceSimulator } from './components/FuelPriceSimulator';
 import { DailyCPIChart } from './components/DailyCPIChart';
 import { CorridorAvgTable } from './components/CorridorAvgTable';
+import { LeadTimeElasticityCard } from './components/LeadTimeElasticityCard';
+import { DgcaBacktestComparison } from './components/DgcaBacktestComparison';
+import { RestApiExplorerModal } from './components/RestApiExplorerModal';
 
 import { MOCK_CPI_HISTORICAL, MOCK_DAILY_CPI, MOCK_OUTLIERS, MOCK_ROUTE_WEIGHTS, generateLiveScrapedFares } from './data/mockData';
 import { MoSPICPIEngine } from './services/cpiEngine';
 import { scraperOrchestrator, ScrapingLogEntry } from './services/scraperEngine';
+import { AmadeusFlightService } from './services/amadeusFlightService';
 import { FlightFare, CPIIndexPoint, LeadTimeHorizon, OutlierRecord, DailyFarePoint } from './types';
 
 export const App: React.FC = () => {
@@ -35,6 +40,9 @@ export const App: React.FC = () => {
   const [isOutlierModalOpen, setIsOutlierModalOpen] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const [isProvenanceModalOpen, setIsProvenanceModalOpen] = useState(false);
+  const [isLiveAPIModalOpen, setIsLiveAPIModalOpen] = useState(false);
+  const [isRestApiModalOpen, setIsRestApiModalOpen] = useState(false);
+  const [isLiveAPIConnected, setIsLiveAPIConnected] = useState(() => Boolean(AmadeusFlightService.getStoredCredentials()));
 
   const baseLatestPoint = historicalData.find(p => p.periodLabel.includes('Live')) || historicalData[11] || historicalData[historicalData.length - 1];
 
@@ -137,6 +145,60 @@ export const App: React.FC = () => {
     return () => unsubscribe();
   }, [selectedLeadTime]);
 
+  const handleIngestLiveFares = (newRealFares: FlightFare[]) => {
+    const result = MoSPICPIEngine.calculateIndex(newRealFares, MOCK_ROUTE_WEIGHTS, selectedLeadTime);
+    const { outliers: newOutliers } = MoSPICPIEngine.filterOutliers(newRealFares);
+
+    setLiveFares(newRealFares);
+    setOutliers(prev => [...newOutliers, ...prev]);
+    setHasLiveScraped(true);
+    setIsLiveAPIConnected(true);
+
+    const batchAvgFare = Math.round(newRealFares.reduce((sum, f) => sum + f.totalFare, 0) / newRealFares.length);
+    const batchJevons = Number(result.jevonsIndex.toFixed(1));
+
+    setScrapeNotification(
+      `100% Real Live Flight Data Ingested: +${newRealFares.length} verified quotes from Amadeus GDS. Live Jevons Index updated to ${batchJevons} (Avg Fare ₹${batchAvgFare.toLocaleString()})`
+    );
+
+    // Update Day-Wise Series
+    setDailyData(prev => {
+      const updated = [...prev];
+      const targetIdx = updated.length - 1;
+      const oldPoint = updated[targetIdx];
+      const last6 = updated.slice(Math.max(0, targetIdx - 6), targetIdx);
+      const moving7d = Math.round((last6.reduce((acc, p) => acc + p.dailyAvgFare, 0) + batchAvgFare) / (last6.length + 1));
+
+      updated[targetIdx] = {
+        ...oldPoint,
+        dayLabel: `${oldPoint.dayLabel.replace(' - Live)', '').replace(' - Live GDS)', '').replace(')', '')} - Live GDS)`,
+        dailyAvgFare: batchAvgFare,
+        dailyJevonsIndex: batchJevons,
+        movingAverage7d: moving7d,
+        scrapedQuotesCount: (oldPoint?.scrapedQuotesCount || 3720) + newRealFares.length
+      };
+      return updated;
+    });
+
+    // Update Monthly Index Series
+    setHistoricalData(prev => {
+      const updated = [...prev];
+      const liveIdx = updated.findIndex(p => p.periodLabel.includes('Live'));
+      const targetIdx = liveIdx !== -1 ? liveIdx : updated.length - 1;
+      const currentP = updated[targetIdx];
+
+      updated[targetIdx] = {
+        ...currentP,
+        periodLabel: `Sep 2026 (Live GDS - 22 Sep)`,
+        jevonsIndex: batchJevons,
+        dutotIndex: Number(result.dutotIndex.toFixed(1)),
+        weightedLaspeyresIndex: Number(result.weightedLaspeyresIndex.toFixed(1)),
+        sampleCount: currentP.sampleCount + newRealFares.length
+      };
+      return updated;
+    });
+  };
+
   const handleRunScrape = async () => {
     try {
       setIsScraping(true);
@@ -157,6 +219,9 @@ export const App: React.FC = () => {
         onRunScrape={handleRunScrape}
         onOpenExport={() => setIsExportModalOpen(true)}
         onOpenProvenance={() => setIsProvenanceModalOpen(true)}
+        onOpenLiveAPI={() => setIsLiveAPIModalOpen(true)}
+        onOpenRestApi={() => setIsRestApiModalOpen(true)}
+        isLiveAPIConnected={isLiveAPIConnected}
         isScraping={isScraping}
         latestIndex={latestPoint.jevonsIndex}
         yoyInflation={latestPoint.yoyInflationRate}
@@ -167,6 +232,7 @@ export const App: React.FC = () => {
         {/* Top Key Metrics Overview */}
         <CPIMetricsOverview
           currentPoint={latestPoint}
+          latestDailyPoint={dailyData[dailyData.length - 1]}
           totalDataPoints={latestPoint.sampleCount}
           outlierCount={outliers.length}
           onOpenOutlierModal={() => setIsOutlierModalOpen(true)}
@@ -194,11 +260,24 @@ export const App: React.FC = () => {
 
             <TransmissionChain currentAirfareSurgePct={latestPoint.momInflationRate || 11.4} />
 
+            {/* Advance Purchase Horizon Elasticity Curve (T+1 to T+45) */}
+            <LeadTimeElasticityCard
+              fares={liveFares}
+              selectedHorizon={selectedLeadTime}
+              onSelectHorizon={setSelectedLeadTime}
+            />
+
             <IndexChart
               data={historicalData}
               selectedLeadTime={selectedLeadTime}
               onSelectLeadTime={setSelectedLeadTime}
               isLiveScraped={hasLiveScraped}
+            />
+
+            {/* 30-Day Backtest Validation vs DGCA Monthly Benchmarks */}
+            <DgcaBacktestComparison
+              dailyData={dailyData}
+              onOpenApiModal={() => setIsRestApiModalOpen(true)}
             />
 
             <DailyCPIChart data={dailyData} isLiveScraped={hasLiveScraped} />
@@ -262,6 +341,17 @@ export const App: React.FC = () => {
         isOpen={isProvenanceModalOpen}
         onClose={() => setIsProvenanceModalOpen(false)}
         currentPoint={latestPoint}
+      />
+
+      <LiveAPIModal
+        isOpen={isLiveAPIModalOpen}
+        onClose={() => setIsLiveAPIModalOpen(false)}
+        onIngestLiveFares={handleIngestLiveFares}
+      />
+
+      <RestApiExplorerModal
+        isOpen={isRestApiModalOpen}
+        onClose={() => setIsRestApiModalOpen(false)}
       />
     </div>
   );
