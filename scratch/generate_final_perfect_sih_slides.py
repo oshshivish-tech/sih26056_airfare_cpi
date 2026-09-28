@@ -286,9 +286,11 @@ def create_final_presentation(output_path):
     add_template_footer(s2, 2)
 
     # =========================================================================
-    # SLIDE 3: Technical Approach (System Workflow Overview + Consolidated Notes)
-    # Top Half: SYSTEM WORKFLOW OVERVIEW (4 connected tiers)
-    # Bottom Half: CONSOLIDATED PROJECT DETAILS & IMPLEMENTATION NOTES (4 columns)
+    # SLIDE 3: Technical Approach
+    # Left Column (~28%): Technologies Used (Languages, Extraction, Engine, API)
+    # Right Section (~72%):
+    #   Top: SYSTEM WORKFLOW OVERVIEW (4 connected tiers)
+    #   Bottom: CONSOLIDATED PROJECT DETAILS & IMPLEMENTATION NOTES (4 columns)
     # =========================================================================
     s3 = prs.slides.add_slide(blank_layout)
     bg3 = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, prs.slide_width, prs.slide_height)
@@ -298,34 +300,115 @@ def create_final_presentation(output_path):
 
     add_template_top_bar(s3, "TECHNICAL APPROACH", "System Workflow Overview & Implementation Notes", title_font_size=23, is_serif=True)
 
-    # 1. Top Section: System Workflow Overview Image (~2.45 inches height)
+    # Assets for Slide 3
     wf_top_img = os.path.join(base_dir, "scratch", "workflow_top_hd.png")
-    top_y = Inches(1.15)
-    top_w = Inches(12.23)
-    top_h = Inches(2.45)
+    eq1_path = os.path.join(base_dir, "scratch", "eq_jevons_hd.png")
+    eq2_path = os.path.join(base_dir, "scratch", "eq_composite_hd.png")
+
+    # 1. LEFT COLUMN: Technologies Used (Width: 3.38 in, Height: 6.00 in)
+    col_y = Inches(1.15)
+    col_h = Inches(6.00)
+    col_w_l = Inches(3.38)
     start_x = Inches(0.55)
 
+    box_l = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, start_x, col_y, col_w_l, col_h)
+    box_l.fill.solid()
+    box_l.fill.fore_color.rgb = RGBColor(248, 250, 252)
+    box_l.line.color.rgb = C_BLUE_TEMPLATE
+    box_l.line.width = Pt(1.5)
+
+    tb_l = s3.shapes.add_textbox(start_x + Inches(0.14), col_y + Inches(0.12), col_w_l - Inches(0.28), col_h - Inches(0.24))
+    tf_l = tb_l.text_frame
+    tf_l.word_wrap = True
+    tf_l.margin_left = tf_l.margin_top = tf_l.margin_right = tf_l.margin_bottom = 0
+
+    p_lh = tf_l.paragraphs[0]
+    p_lh.text = "Technologies Used:"
+    p_lh.font.name = "Arial"
+    p_lh.font.size = Pt(18)
+    p_lh.font.bold = True
+    p_lh.font.color.rgb = C_BLUE_TEMPLATE
+    p_lh.space_after = Pt(10)
+
+    tech_groups = [
+        ("Languages & Runtimes:", RGBColor(220, 38, 38), [
+            "Python 3.13 (Async Harvester & Engine)",
+            "TypeScript & React 19 (Dashboard UI)",
+            "SQL (PostgreSQL Time-Series & SQLite)"
+        ]),
+        ("Extraction & Cleansing:", RGBColor(30, 64, 175), [
+            "Playwright Headless Stealth Proxy Pool",
+            "T+1..T+45 Advance Horizons Dynamic Tracking",
+            "SciPy & NumPy Dynamic IQR Outlier Filter"
+        ]),
+        ("Index Engine & Crypto:", RGBColor(124, 58, 237), [
+            "UN/ILO Jevons Index Formula (GMI)",
+            "DGCA Official Route Volume Weighting",
+            "SHA-256 Batch Merkle Audit Ledger"
+        ]),
+        ("API, Cloud & Standards:", RGBColor(16, 185, 129), [
+            "FastAPI & Uvicorn Sub-10ms REST APIs",
+            "Vercel Edge & GitHub Actions Daily Cron",
+            "NDSAP Open Data & UN/ILO Ch. 10 Ready"
+        ])
+    ]
+
+    for title, col, items in tech_groups:
+        p_t = tf_l.add_paragraph()
+        p_t.space_before = Pt(8)
+        p_t.space_after = Pt(3)
+        r_t = p_t.add_run()
+        r_t.text = title
+        r_t.font.name = "Arial"
+        r_t.font.size = Pt(11.5)
+        r_t.font.bold = True
+        r_t.font.color.rgb = col
+        
+        for it in items:
+            p_i = tf_l.add_paragraph()
+            p_i.space_after = Pt(2.5)
+            p_i.line_spacing = 1.15
+            r_b = p_i.add_run()
+            r_b.text = "• "
+            r_b.font.name = "Arial"
+            r_b.font.size = Pt(9.5)
+            r_b.font.bold = True
+            r_b.font.color.rgb = C_TEXT_DARK
+            
+            r_txt = p_i.add_run()
+            r_txt.text = it
+            r_txt.font.name = "Arial"
+            r_txt.font.size = Pt(9.2)
+            r_txt.font.color.rgb = C_TEXT_DARK
+
+    # 2. RIGHT SECTION: Workflow Diagram (Top) + Consolidated Notes (Bottom)
+    right_x = start_x + col_w_l + Inches(0.18) # Inches(4.11)
+    right_w = Inches(12.23) - col_w_l - Inches(0.18) # Inches(8.67)
+
+    # Top Half: System Workflow Overview Image
+    top_w = right_w
+    top_h = Inches(2.05)
+    top_y = Inches(1.15)
+
     if os.path.exists(wf_top_img):
-        s3.shapes.add_picture(wf_top_img, start_x, top_y, top_w, top_h)
+        s3.shapes.add_picture(wf_top_img, right_x, top_y, top_w, top_h)
 
-    # 2. Bottom Section: Consolidated Project Details & Implementation Notes
-    bot_y = Inches(3.68)
-    bot_h = Inches(3.55)
+    # Bottom Half: Consolidated Project Details & Implementation Notes
+    bot_y = Inches(3.30)
+    bot_h = Inches(3.85)
 
-    # Outer Container Box
-    outer_box = s3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, start_x, bot_y, top_w, bot_h)
+    outer_box = s3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, right_x, bot_y, right_w, bot_h)
     outer_box.adjustments[0] = 0.03
     outer_box.fill.solid()
     outer_box.fill.fore_color.rgb = RGBColor(248, 250, 252)
     outer_box.line.color.rgb = RGBColor(148, 163, 184)
-    outer_box.line.width = Pt(1.5)
+    outer_box.line.width = Pt(1.2)
 
-    # Top Banner Header for Consolidated Notes
-    banner_h = Inches(0.36)
-    banner = s3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, start_x, bot_y, top_w, banner_h)
+    banner_h = Inches(0.32)
+    banner = s3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, right_x, bot_y, right_w, banner_h)
     banner.adjustments[0] = 0.18
     banner.fill.solid()
-    banner.fill.fore_color.rgb = RGBColor(203, 213, 225) # slate-300
+    banner.fill.fore_color.rgb = RGBColor(203, 213, 225)
     banner.line.color.rgb = RGBColor(148, 163, 184)
     banner.line.width = Pt(1.0)
 
@@ -333,34 +416,34 @@ def create_final_presentation(output_path):
     p_b = tb_b.paragraphs[0]
     p_b.text = "CONSOLIDATED PROJECT DETAILS & IMPLEMENTATION NOTES"
     p_b.font.name = "Arial"
-    p_b.font.size = Pt(11.5)
+    p_b.font.size = Pt(10.5)
     p_b.font.bold = True
     p_b.font.color.rgb = RGBColor(15, 23, 42)
     p_b.alignment = PP_ALIGN.CENTER
 
     # 4 Columns inside bottom container
-    col_y = bot_y + banner_h + Inches(0.04)
-    col_h = bot_h - banner_h - Inches(0.08) # ~3.11 in
+    col_sub_y = bot_y + banner_h + Inches(0.04)
+    col_sub_h = bot_h - banner_h - Inches(0.08) # ~3.45 in
 
-    w1 = Inches(2.78)
-    w2 = Inches(2.78)
-    w3 = Inches(3.78) # wider for math formulas
-    w4 = Inches(2.56)
-    gap = Inches(0.08)
+    w1 = Inches(1.90)
+    w2 = Inches(1.92)
+    w3 = Inches(3.08) # wider for math formulas & full text
+    w4 = Inches(1.72)
+    gap_col = Inches(0.05)
 
-    x1 = start_x + Inches(0.04)
-    x2 = x1 + w1 + gap
-    x3 = x2 + w2 + gap
-    x4 = x3 + w3 + gap
+    x1 = right_x + Inches(0.02)
+    x2 = x1 + w1 + gap_col
+    x3 = x2 + w2 + gap_col
+    x4 = x3 + w3 + gap_col
 
     # --- Column 1: Tier 1 Details ---
-    c1 = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, x1, col_y, w1, col_h)
+    c1 = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, x1, col_sub_y, w1, col_sub_h)
     c1.fill.solid()
-    c1.fill.fore_color.rgb = RGBColor(240, 249, 255) # sky-50
+    c1.fill.fore_color.rgb = RGBColor(240, 249, 255)
     c1.line.color.rgb = RGBColor(186, 230, 253)
     c1.line.width = Pt(1.0)
 
-    tb_c1 = s3.shapes.add_textbox(x1 + Inches(0.08), col_y + Inches(0.06), w1 - Inches(0.16), col_h - Inches(0.12))
+    tb_c1 = s3.shapes.add_textbox(x1 + Inches(0.06), col_sub_y + Inches(0.06), w1 - Inches(0.12), col_sub_h - Inches(0.12))
     tf_1 = tb_c1.text_frame
     tf_1.word_wrap = True
     tf_1.margin_top = tf_1.margin_bottom = tf_1.margin_left = tf_1.margin_right = 0
@@ -368,11 +451,11 @@ def create_final_presentation(output_path):
     p_1h = tf_1.paragraphs[0]
     p_1h.text = "TIER 1 DETAILS"
     p_1h.font.name = "Arial"
-    p_1h.font.size = Pt(10.5)
+    p_1h.font.size = Pt(9.5)
     p_1h.font.bold = True
     p_1h.font.color.rgb = RGBColor(3, 105, 161)
     p_1h.alignment = PP_ALIGN.CENTER
-    p_1h.space_after = Pt(8)
+    p_1h.space_after = Pt(6)
 
     t1_bullets = [
         "02:00 AM IST Cron Trigger",
@@ -382,22 +465,22 @@ def create_final_presentation(output_path):
     ]
     for b in t1_bullets:
         p = tf_1.add_paragraph()
-        p.space_after = Pt(6)
+        p.space_after = Pt(4)
         p.line_spacing = 1.15
         r = p.add_run()
         r.text = f"• {b}"
         r.font.name = "Arial"
-        r.font.size = Pt(9.2)
+        r.font.size = Pt(8.0)
         r.font.color.rgb = RGBColor(15, 23, 42)
 
     # --- Column 2: Tier 2 Details ---
-    c2 = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, x2, col_y, w2, col_h)
+    c2 = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, x2, col_sub_y, w2, col_sub_h)
     c2.fill.solid()
-    c2.fill.fore_color.rgb = RGBColor(240, 253, 244) # emerald-50
+    c2.fill.fore_color.rgb = RGBColor(240, 253, 244)
     c2.line.color.rgb = RGBColor(187, 247, 208)
     c2.line.width = Pt(1.0)
 
-    tb_c2 = s3.shapes.add_textbox(x2 + Inches(0.08), col_y + Inches(0.06), w2 - Inches(0.16), col_h - Inches(0.12))
+    tb_c2 = s3.shapes.add_textbox(x2 + Inches(0.06), col_sub_y + Inches(0.06), w2 - Inches(0.12), col_sub_h - Inches(0.12))
     tf_2 = tb_c2.text_frame
     tf_2.word_wrap = True
     tf_2.margin_top = tf_2.margin_bottom = tf_2.margin_left = tf_2.margin_right = 0
@@ -405,117 +488,115 @@ def create_final_presentation(output_path):
     p_2h = tf_2.paragraphs[0]
     p_2h.text = "TIER 2: DETAILS"
     p_2h.font.name = "Arial"
-    p_2h.font.size = Pt(10.5)
+    p_2h.font.size = Pt(9.5)
     p_2h.font.bold = True
     p_2h.font.color.rgb = RGBColor(21, 128, 61)
     p_2h.alignment = PP_ALIGN.CENTER
-    p_2h.space_after = Pt(8)
+    p_2h.space_after = Pt(6)
 
     t2_bullets = [
-        "Data isolation and base fare extraction (Fare Unbundling)",
+        "Data isolation & base fare extraction (Fare Unbundling)",
         "Normalization to unified JSON schema",
         "Dynamic IQR Outlier Filter (SciPy / NumPy)",
         "Glitch & stale cache removal"
     ]
     for b in t2_bullets:
         p = tf_2.add_paragraph()
-        p.space_after = Pt(6)
+        p.space_after = Pt(4)
         p.line_spacing = 1.15
         r = p.add_run()
         r.text = f"• {b}"
         r.font.name = "Arial"
-        r.font.size = Pt(9.2)
+        r.font.size = Pt(8.0)
         r.font.color.rgb = RGBColor(15, 23, 42)
 
     # --- Column 3: Core Indexing Methodology (Emphasized Amber Card) ---
-    c3 = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, x3, col_y, w3, col_h)
+    c3 = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, x3, col_sub_y, w3, col_sub_h)
     c3.fill.solid()
-    c3.fill.fore_color.rgb = RGBColor(254, 252, 232) # amber-50
-    c3.line.color.rgb = RGBColor(245, 158, 11)        # bright amber border
+    c3.fill.fore_color.rgb = RGBColor(254, 252, 232)
+    c3.line.color.rgb = RGBColor(245, 158, 11)
     c3.line.width = Pt(1.5)
 
-    tb_c3_hdr = s3.shapes.add_textbox(x3 + Inches(0.08), col_y + Inches(0.04), w3 - Inches(0.16), Inches(0.26))
+    tb_c3_hdr = s3.shapes.add_textbox(x3 + Inches(0.06), col_sub_y + Inches(0.04), w3 - Inches(0.12), Inches(0.24))
     tf_3h = tb_c3_hdr.text_frame
     p_3h = tf_3h.paragraphs[0]
     p_3h.text = "CORE INDEXING METHODOLOGY"
     p_3h.font.name = "Arial"
-    p_3h.font.size = Pt(10.5)
+    p_3h.font.size = Pt(9.5)
     p_3h.font.bold = True
     p_3h.font.color.rgb = RGBColor(180, 83, 9)
     p_3h.alignment = PP_ALIGN.CENTER
 
     # Math Section 1: Jevons Mean
-    y_jev = col_y + Inches(0.30)
-    tb_jev_t = s3.shapes.add_textbox(x3 + Inches(0.08), y_jev, w3 - Inches(0.16), Inches(0.22))
+    y_jev = col_sub_y + Inches(0.28)
+    tb_jev_t = s3.shapes.add_textbox(x3 + Inches(0.04), y_jev, w3 - Inches(0.08), Inches(0.20))
     tf_jt = tb_jev_t.text_frame
+    tf_jt.word_wrap = True
     p_jt = tf_jt.paragraphs[0]
     p_jt.text = "1. Jevons Geometric Mean (Elementary Index)"
     p_jt.font.name = "Arial"
-    p_jt.font.size = Pt(9.0)
+    p_jt.font.size = Pt(8.0)
     p_jt.font.bold = True
     p_jt.font.color.rgb = RGBColor(146, 64, 14)
 
-    # Insert Jevons equation image
-    eq1_path = os.path.join(base_dir, "scratch", "eq_jevons_hd.png")
     if os.path.exists(eq1_path):
-        s3.shapes.add_picture(eq1_path, x3 + Inches(0.06), y_jev + Inches(0.22), w3 - Inches(0.12), Inches(0.50))
+        s3.shapes.add_picture(eq1_path, x3 + Inches(0.06), y_jev + Inches(0.20), w3 - Inches(0.12), Inches(0.46))
 
-    tb_jev_b = s3.shapes.add_textbox(x3 + Inches(0.08), y_jev + Inches(0.74), w3 - Inches(0.16), Inches(0.50))
+    tb_jev_b = s3.shapes.add_textbox(x3 + Inches(0.06), y_jev + Inches(0.68), w3 - Inches(0.12), Inches(0.50))
     tf_jb = tb_jev_b.text_frame
     tf_jb.word_wrap = True
     tf_jb.margin_top = tf_jb.margin_bottom = tf_jb.margin_left = tf_jb.margin_right = 0
     p1 = tf_jb.paragraphs[0]
     p1.text = "• Adheres to UN/ILO standards (ch. 10)"
     p1.font.name = "Arial"
-    p1.font.size = Pt(8.5)
+    p1.font.size = Pt(7.8)
     p1.font.color.rgb = RGBColor(30, 41, 59)
-    p1.space_after = Pt(2)
+    p1.space_after = Pt(1.5)
     p2 = tf_jb.add_paragraph()
     p2.text = "• Satisfies Time Reversal & Circular Transitivity tests"
     p2.font.name = "Arial"
-    p2.font.size = Pt(8.5)
+    p2.font.size = Pt(7.8)
     p2.font.color.rgb = RGBColor(30, 41, 59)
 
     # Math Section 2: Composite Aggregation
-    y_comp = y_jev + Inches(1.30)
-    tb_comp_t = s3.shapes.add_textbox(x3 + Inches(0.08), y_comp, w3 - Inches(0.16), Inches(0.22))
+    y_comp = y_jev + Inches(1.35)
+    tb_comp_t = s3.shapes.add_textbox(x3 + Inches(0.04), y_comp, w3 - Inches(0.08), Inches(0.20))
     tf_ct = tb_comp_t.text_frame
+    tf_ct.word_wrap = True
     p_ct = tf_ct.paragraphs[0]
     p_ct.text = "2. DGCA Volume Weighted Aggregation (National Rollup)"
     p_ct.font.name = "Arial"
-    p_ct.font.size = Pt(9.0)
+    p_ct.font.size = Pt(8.0)
     p_ct.font.bold = True
     p_ct.font.color.rgb = RGBColor(146, 64, 14)
 
-    # Insert Composite equation image
-    eq2_path = os.path.join(base_dir, "scratch", "eq_composite_hd.png")
     if os.path.exists(eq2_path):
-        s3.shapes.add_picture(eq2_path, x3 + Inches(0.12), y_comp + Inches(0.22), w3 - Inches(0.24), Inches(0.46))
+        s3.shapes.add_picture(eq2_path, x3 + Inches(0.10), y_comp + Inches(0.20), w3 - Inches(0.20), Inches(0.42))
 
-    tb_comp_b = s3.shapes.add_textbox(x3 + Inches(0.08), y_comp + Inches(0.70), w3 - Inches(0.16), Inches(0.50))
+    tb_comp_b = s3.shapes.add_textbox(x3 + Inches(0.06), y_comp + Inches(0.64), w3 - Inches(0.12), Inches(0.50))
     tf_cb = tb_comp_b.text_frame
     tf_cb.word_wrap = True
     tf_cb.margin_top = tf_cb.margin_bottom = tf_cb.margin_left = tf_cb.margin_right = 0
     p3 = tf_cb.paragraphs[0]
     p3.text = "• Routes weighted by official DGCA traffic"
     p3.font.name = "Arial"
-    p3.font.size = Pt(8.5)
+    p3.font.size = Pt(7.8)
     p3.font.color.rgb = RGBColor(30, 41, 59)
-    p3.space_after = Pt(2)
+    p3.space_after = Pt(1.5)
     p4 = tf_cb.add_paragraph()
     p4.text = "• Delhi-Mumbai (e.g., 14.8%) | Bengaluru-Delhi (e.g., 9.2%)"
     p4.font.name = "Arial"
-    p4.font.size = Pt(8.5)
+    p4.font.size = Pt(7.8)
     p4.font.color.rgb = RGBColor(30, 41, 59)
 
     # --- Column 4: Tier 4 Details ---
-    c4 = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, x4, col_y, w4, col_h)
+    c4 = s3.shapes.add_shape(MSO_SHAPE.RECTANGLE, x4, col_sub_y, w4, col_sub_h)
     c4.fill.solid()
-    c4.fill.fore_color.rgb = RGBColor(241, 245, 249) # slate-100
+    c4.fill.fore_color.rgb = RGBColor(241, 245, 249)
     c4.line.color.rgb = RGBColor(203, 213, 225)
     c4.line.width = Pt(1.0)
 
-    tb_c4 = s3.shapes.add_textbox(x4 + Inches(0.08), col_y + Inches(0.06), w4 - Inches(0.16), col_h - Inches(0.12))
+    tb_c4 = s3.shapes.add_textbox(x4 + Inches(0.06), col_sub_y + Inches(0.06), w4 - Inches(0.12), col_sub_h - Inches(0.12))
     tf_4 = tb_c4.text_frame
     tf_4.word_wrap = True
     tf_4.margin_top = tf_4.margin_bottom = tf_4.margin_left = tf_4.margin_right = 0
@@ -523,11 +604,11 @@ def create_final_presentation(output_path):
     p_4h = tf_4.paragraphs[0]
     p_4h.text = "TIER 4 DETAILS"
     p_4h.font.name = "Arial"
-    p_4h.font.size = Pt(10.5)
+    p_4h.font.size = Pt(9.5)
     p_4h.font.bold = True
     p_4h.font.color.rgb = RGBColor(30, 41, 59)
     p_4h.alignment = PP_ALIGN.CENTER
-    p_4h.space_after = Pt(8)
+    p_4h.space_after = Pt(6)
 
     t4_bullets = [
         "Cryptographic Audit & Immutability",
@@ -537,12 +618,12 @@ def create_final_presentation(output_path):
     ]
     for b in t4_bullets:
         p = tf_4.add_paragraph()
-        p.space_after = Pt(6)
+        p.space_after = Pt(4)
         p.line_spacing = 1.15
         r = p.add_run()
         r.text = f"• {b}"
         r.font.name = "Arial"
-        r.font.size = Pt(9.2)
+        r.font.size = Pt(8.0)
         r.font.color.rgb = RGBColor(15, 23, 42)
 
     add_template_footer(s3, 3)
