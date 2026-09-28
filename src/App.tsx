@@ -18,6 +18,7 @@ import { CorridorAvgTable } from './components/CorridorAvgTable';
 import { LeadTimeElasticityCard } from './components/LeadTimeElasticityCard';
 import { DgcaBacktestComparison } from './components/DgcaBacktestComparison';
 import { RestApiExplorerModal } from './components/RestApiExplorerModal';
+import { VideoDemoGuideModal } from './components/VideoDemoGuideModal';
 
 import { MOCK_CPI_HISTORICAL, MOCK_DAILY_CPI, MOCK_OUTLIERS, MOCK_ROUTE_WEIGHTS, generateLiveScrapedFares } from './data/mockData';
 import { MoSPICPIEngine } from './services/cpiEngine';
@@ -42,6 +43,7 @@ export const App: React.FC = () => {
   const [isProvenanceModalOpen, setIsProvenanceModalOpen] = useState(false);
   const [isLiveAPIModalOpen, setIsLiveAPIModalOpen] = useState(false);
   const [isRestApiModalOpen, setIsRestApiModalOpen] = useState(false);
+  const [isVideoGuideOpen, setIsVideoGuideOpen] = useState(false);
   const [isLiveAPIConnected, setIsLiveAPIConnected] = useState(() => Boolean(AmadeusFlightService.getStoredCredentials()));
 
   const baseLatestPoint = historicalData.find(p => p.periodLabel.includes('Live')) || historicalData[11] || historicalData[historicalData.length - 1];
@@ -221,6 +223,7 @@ export const App: React.FC = () => {
         onOpenProvenance={() => setIsProvenanceModalOpen(true)}
         onOpenLiveAPI={() => setIsLiveAPIModalOpen(true)}
         onOpenRestApi={() => setIsRestApiModalOpen(true)}
+        onOpenVideoGuide={() => setIsVideoGuideOpen(true)}
         isLiveAPIConnected={isLiveAPIConnected}
         isScraping={isScraping}
         latestIndex={latestPoint.jevonsIndex}
@@ -230,13 +233,15 @@ export const App: React.FC = () => {
       {/* Main Page Body */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Top Key Metrics Overview */}
-        <CPIMetricsOverview
-          currentPoint={latestPoint}
-          latestDailyPoint={dailyData[dailyData.length - 1]}
-          totalDataPoints={latestPoint.sampleCount}
-          outlierCount={outliers.length}
-          onOpenOutlierModal={() => setIsOutlierModalOpen(true)}
-        />
+        <div id="cpi-metrics-overview">
+          <CPIMetricsOverview
+            currentPoint={latestPoint}
+            latestDailyPoint={dailyData[dailyData.length - 1]}
+            totalDataPoints={latestPoint.sampleCount}
+            outlierCount={outliers.length}
+            onOpenOutlierModal={() => setIsOutlierModalOpen(true)}
+          />
+        </div>
 
         {/* Tab 1: Overview */}
         {activeTab === 'overview' && (
@@ -261,11 +266,13 @@ export const App: React.FC = () => {
             <TransmissionChain currentAirfareSurgePct={latestPoint.momInflationRate || 11.4} />
 
             {/* Advance Purchase Horizon Elasticity Curve (T+1 to T+45) */}
-            <LeadTimeElasticityCard
-              fares={liveFares}
-              selectedHorizon={selectedLeadTime}
-              onSelectHorizon={setSelectedLeadTime}
-            />
+            <div id="lead-time-elasticity-card">
+              <LeadTimeElasticityCard
+                fares={liveFares}
+                selectedHorizon={selectedLeadTime}
+                onSelectHorizon={setSelectedLeadTime}
+              />
+            </div>
 
             <IndexChart
               data={historicalData}
@@ -282,7 +289,9 @@ export const App: React.FC = () => {
 
             <DailyCPIChart data={dailyData} isLiveScraped={hasLiveScraped} />
 
-            <FuelPriceSimulator baseJevonsIndex={latestPoint.jevonsIndex} />
+            <div id="fuel-price-simulator">
+              <FuelPriceSimulator baseJevonsIndex={latestPoint.jevonsIndex} />
+            </div>
 
             <IndiaFlightMap corridorBreakdown={currentEngineResult.corridorBreakdown} />
 
@@ -352,6 +361,16 @@ export const App: React.FC = () => {
       <RestApiExplorerModal
         isOpen={isRestApiModalOpen}
         onClose={() => setIsRestApiModalOpen(false)}
+      />
+
+      <VideoDemoGuideModal
+        isOpen={isVideoGuideOpen}
+        onClose={() => setIsVideoGuideOpen(false)}
+        onOpenProvenance={() => setIsProvenanceModalOpen(true)}
+        onOpenRestApi={() => setIsRestApiModalOpen(true)}
+        onOpenExport={() => setIsExportModalOpen(true)}
+        onOpenOutlierModal={() => setIsOutlierModalOpen(true)}
+        setActiveTab={setActiveTab}
       />
     </div>
   );

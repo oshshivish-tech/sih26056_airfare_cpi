@@ -1,5 +1,4 @@
-import React from 'react';
-import { Activity, Plane, Download, RefreshCw, Layers, ShieldCheck, BarChart3, Database, Lock, Presentation, Key, Server } from 'lucide-react';
+import { Activity, Plane, Download, RefreshCw, Layers, ShieldCheck, BarChart3, Database, Lock, Presentation, Key, Server, Video } from 'lucide-react';
 
 interface HeaderProps {
   activeTab: 'overview' | 'corridors' | 'scraper' | 'methodology';
@@ -9,6 +8,7 @@ interface HeaderProps {
   onOpenProvenance: () => void;
   onOpenLiveAPI: () => void;
   onOpenRestApi: () => void;
+  onOpenVideoGuide: () => void;
   isLiveAPIConnected: boolean;
   isScraping: boolean;
   latestIndex: number;
@@ -23,6 +23,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenProvenance,
   onOpenLiveAPI,
   onOpenRestApi,
+  onOpenVideoGuide,
   isLiveAPIConnected,
   isScraping,
   latestIndex,
@@ -139,6 +140,15 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Action Buttons */}
           <div className="flex items-center flex-wrap gap-2 shrink-0">
+            <button
+              onClick={onOpenVideoGuide}
+              className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 transition-all shadow-sm ring-1 ring-rose-500/20"
+              title="Open Scene-by-Scene Video Recording Script & Teleprompter"
+            >
+              <Video className="w-3.5 h-3.5 text-rose-400" />
+              <span>Video Script</span>
+            </button>
+
             <a
               href="/slides.html"
               target="_blank"
