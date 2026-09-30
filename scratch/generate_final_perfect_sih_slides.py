@@ -145,7 +145,7 @@ def create_final_presentation(output_path):
         ("• Theme-", "Smart Automation"),
         ("• PS Category-", "Software"),
         ("• Team ID-", "168405"),
-        ("• Team Name (Registered on portal)-", "Roorkies")
+        ("• Team Name-", "Roorkies")
     ]
 
     for idx, (label, val) in enumerate(s1_items):
