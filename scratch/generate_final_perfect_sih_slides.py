@@ -83,7 +83,10 @@ def create_final_presentation(output_path):
             p_p.alignment = PP_ALIGN.CENTER
             
         # 2. Main Title in the middle
-        tb_t = slide.shapes.add_textbox(Inches(2.55), Inches(0.10), Inches(8.35), Inches(0.96))
+        tb_w = Inches(10.0) if is_title_page else Inches(8.35)
+        tb_x = Inches(1.0) if is_title_page else Inches(2.55)
+        tb_h = Inches(1.35) if is_title_page else Inches(0.96)
+        tb_t = slide.shapes.add_textbox(tb_x, Inches(0.10), tb_w, tb_h)
         tf_t = tb_t.text_frame
         tf_t.word_wrap = True
         tf_t.margin_left = tf_t.margin_right = tf_t.margin_top = tf_t.margin_bottom = 0
@@ -98,11 +101,13 @@ def create_final_presentation(output_path):
         if bold_headline:
             p_t2 = tf_t.add_paragraph()
             p_t2.text = bold_headline
-            p_t2.font.name = "Arial"
-            p_t2.font.size = Pt(12)
+            p_t2.font.name = "Times New Roman" if is_title_page else "Arial"
+            p_t2.font.size = Pt(24) if is_title_page else Pt(12)
             p_t2.font.bold = True
-            p_t2.font.color.rgb = RGBColor(30, 64, 175) # #1E40AF vibrant headline message
+            p_t2.font.color.rgb = C_BLACK if is_title_page else RGBColor(30, 64, 175)
             p_t2.alignment = PP_ALIGN.CENTER
+            if is_title_page:
+                p_t2.space_before = Pt(4)
 
         # 3. Official SIH Logo on top-right
         if os.path.exists(sih_top_logo):
@@ -117,42 +122,49 @@ def create_final_presentation(output_path):
     bg1.fill.fore_color.rgb = C_WHITE
     bg1.line.fill.background()
 
-    add_template_top_bar(s1, "SMART INDIA HACKATHON 2026", "VayuSuchak: Real-Time Airfare Price Index for India", is_title_page=True, title_font_size=32, title_color=C_NAVY)
+    add_template_top_bar(
+        s1,
+        "SMART INDIA HACKATHON 2026",
+        "TITLE PAGE",
+        is_title_page=True,
+        title_font_size=28,
+        title_color=C_NAVY
+    )
 
     if os.path.exists(sih_bulb_graphic):
         s1.shapes.add_picture(sih_bulb_graphic, Inches(8.35), Inches(1.40), Inches(4.40), Inches(5.40))
 
-    tb_s1_bullets = s1.shapes.add_textbox(Inches(0.65), Inches(1.45), Inches(7.45), Inches(5.6))
+    tb_s1_bullets = s1.shapes.add_textbox(Inches(0.65), Inches(2.40), Inches(7.55), Inches(4.80))
     tf_s1 = tb_s1_bullets.text_frame
     tf_s1.word_wrap = True
     tf_s1.margin_left = tf_s1.margin_top = tf_s1.margin_right = tf_s1.margin_bottom = 0
 
     s1_items = [
-        ("• Problem Statement ID –", "SIH26056"),
-        ("• Problem Statement Title –", "Development of a Real-time Airfare Price Index for India through Automated Web Scraping"),
-        ("• Department –", "Data Informatics & Innovation Division (DIID)"),
-        ("• Category –", "Software"),
-        ("• Theme –", "Smart Automation"),
-        ("• Team ID –", "168405"),
-        ("• Team Name –", "Roorkies")
+        ("• Problem Statement ID –", "26056"),
+        ("• Problem Statement Title-", "Development of a Real-time Airfare Price Index for India through Automated Web Scraping of Airline and Online Travel Aggregator Portals for Augmentation of the Consumer Price Index (CPI)."),
+        ("• Theme-", "Smart Automation"),
+        ("• PS Category-", "Software"),
+        ("• Team ID-", "168405"),
+        ("• Team Name (Registered on portal)-", "Roorkies")
     ]
 
     for idx, (label, val) in enumerate(s1_items):
         p = tf_s1.add_paragraph() if idx > 0 else tf_s1.paragraphs[0]
-        p.space_before = Pt(8)
-        p.space_after = Pt(8)
+        p.space_before = Pt(9)
+        p.space_after = Pt(9)
+        p.line_spacing = 1.15
 
         r_lbl = p.add_run()
         r_lbl.text = label + " "
         r_lbl.font.name = "Arial"
-        r_lbl.font.size = Pt(15)
+        r_lbl.font.size = Pt(14.5)
         r_lbl.font.bold = True
         r_lbl.font.color.rgb = C_BLACK
 
         r_val = p.add_run()
         r_val.text = val
         r_val.font.name = "Arial"
-        r_val.font.size = Pt(15)
+        r_val.font.size = Pt(14.5)
         r_val.font.bold = True
         r_val.font.color.rgb = C_BLACK
 
