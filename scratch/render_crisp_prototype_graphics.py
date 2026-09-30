@@ -9,7 +9,7 @@ pres_dir = os.path.join(base_dir, "public", "presentation")
 os.makedirs(pres_dir, exist_ok=True)
 
 def render_prototype_chart():
-    fig, ax = plt.subplots(figsize=(10.5, 4.4), dpi=200)
+    fig, ax = plt.subplots(figsize=(10.5, 6.6), dpi=220)
     fig.patch.set_facecolor('#0B132B') # Dark navy theme matching prototype dashboard
     ax.set_facecolor('#0F172A')
 
@@ -18,54 +18,52 @@ def render_prototype_chart():
 
     jevons = [100.0, 102.3, 114.5, 106.8, 103.4, 105.1, 108.9, 118.2, 112.6, 107.4, 109.8, 111.4]
     dutot =  [100.0, 102.8, 116.2, 107.5, 104.1, 105.8, 109.8, 120.4, 113.9, 108.1, 110.6, 112.5]
-    weighted = [100.0, 102.1, 115.2, 106.2, 103.1, 104.9, 108.5, 117.8, 112.1, 107.0, 109.4, 111.0]
     mospi =  [100.0, 101.8, 112.5, 105.4, 102.9, 104.2, 107.6, 115.0, 110.8, 106.5, 108.2, 109.5]
 
     # Grid
     ax.grid(True, linestyle='--', color='#334155', alpha=0.5, zorder=0)
 
     # Base line
-    ax.axhline(100.0, color='#64748B', linestyle=':', linewidth=1.2, label='Base Period = 100.0', zorder=1)
+    ax.axhline(100.0, color='#64748B', linestyle=':', linewidth=1.4, label='Base Period = 100.0', zorder=1)
 
-    # Lines
-    ax.plot(x, jevons, color='#38BDF8', linewidth=2.8, marker='o', markersize=4.5, label='Jevons Index (Geometric) — 111.4', zorder=5)
-    ax.plot(x, weighted, color='#34D399', linewidth=2.2, linestyle='--', marker='s', markersize=4, label='DGCA Weighted Laspeyres — 111.0', zorder=4)
-    ax.plot(x, mospi, color='#C084FC', linewidth=2.0, linestyle='-.', marker='^', markersize=4, label='Official MoSPI CPI Baseline — 109.5', zorder=3)
-    ax.plot(x, dutot, color='#FBBF24', linewidth=1.8, linestyle=':', marker='d', markersize=3.5, label='Arithmetic-mean (Dutot) benchmark* — 112.5', zorder=2)
+    # Lines: Jevons (geometric), Official MoSPI (illustrative), Arithmetic-mean (Dutot) benchmark
+    ax.plot(x, jevons, color='#38BDF8', linewidth=3.2, marker='o', markersize=6.0, label='Jevons Index (Geometric) — 111.4', zorder=5)
+    ax.plot(x, mospi, color='#C084FC', linewidth=2.4, linestyle='-.', marker='^', markersize=5.0, label='Official MoSPI CPI Baseline (illustrative) — 109.5', zorder=3)
+    ax.plot(x, dutot, color='#FBBF24', linewidth=2.2, linestyle=':', marker='d', markersize=5.0, label='Arithmetic-mean (Dutot) benchmark* — 112.5', zorder=2)
 
     # Highlight latest live point
-    ax.scatter([x[-1]], [jevons[-1]], color='#38BDF8', s=90, edgecolors='#FFFFFF', linewidth=1.5, zorder=6)
-    ax.annotate('Live: 111.4', xy=(x[-1], jevons[-1]), xytext=(x[-1]-1.2, jevons[-1]+3.2),
-                fontsize=9.5, fontweight='bold', color='#38BDF8',
-                arrowprops=dict(arrowstyle='->', color='#38BDF8', lw=1.2))
+    ax.scatter([x[-1]], [jevons[-1]], color='#38BDF8', s=110, edgecolors='#FFFFFF', linewidth=1.8, zorder=6)
+    ax.annotate('Live: 111.4', xy=(x[-1], jevons[-1]), xytext=(x[-1]-1.35, jevons[-1]+3.0),
+                fontsize=10.5, fontweight='bold', color='#38BDF8',
+                arrowprops=dict(arrowstyle='->', color='#38BDF8', lw=1.4))
 
     # Ticks & labels
     ax.set_xticks(x)
-    ax.set_xticklabels(months, fontsize=8.5, color='#94A3B8', rotation=15)
+    ax.set_xticklabels(months, fontsize=9.5, color='#94A3B8', rotation=15)
     ax.set_yticks(np.arange(90, 131, 5))
-    ax.set_yticklabels([str(y) for y in np.arange(90, 131, 5)], fontsize=9, color='#94A3B8')
+    ax.set_yticklabels([str(y) for y in np.arange(90, 131, 5)], fontsize=10, color='#94A3B8')
     ax.set_ylim(92, 126)
-    ax.set_ylabel('Index Value (Oct 2025 = 100.0)', fontsize=9.5, color='#E2E8F0', fontweight='bold')
+    ax.set_ylabel('Index Value (Oct 2025 = 100.0)', fontsize=11, color='#E2E8F0', fontweight='bold', labelpad=10)
 
     # Spines
     for spine in ax.spines.values():
         spine.set_color('#334155')
 
     # Legend
-    leg = ax.legend(loc='upper left', fontsize=8, facecolor='#0F172A', edgecolor='#334155', labelcolor='#E2E8F0', framealpha=0.95)
+    leg = ax.legend(loc='upper left', fontsize=9.5, facecolor='#0F172A', edgecolor='#334155', labelcolor='#E2E8F0', framealpha=0.95, borderpad=0.8)
 
     # Prototype Data: Sample Badge
-    bbox_props = dict(boxstyle="round,pad=0.3", fc="#FEF3C7", ec="#F59E0B", lw=1.2)
-    ax.text(0.985, 0.94, "Prototype data: sample", transform=ax.transAxes, fontsize=8.5,
+    bbox_props = dict(boxstyle="round,pad=0.35", fc="#FEF3C7", ec="#F59E0B", lw=1.2)
+    ax.text(0.985, 0.94, "Prototype data: sample", transform=ax.transAxes, fontsize=9.5,
             fontweight='bold', color='#92400E', ha='right', va='top', bbox=bbox_props)
 
     # Footnote
-    fig.text(0.12, 0.02, "* Footnote: Arithmetic-mean (Dutot) benchmark is an unweighted arithmetic series demonstrating upward substitution bias; NOT an official MoSPI series.",
-             fontsize=7.2, color='#94A3B8', style='italic')
+    fig.text(0.08, 0.02, "* Footnote: Arithmetic-mean (Dutot) benchmark is an unweighted arithmetic series (own comparison series, NOT an official MoSPI figure) demonstrating upward substitution bias.",
+             fontsize=8.0, color='#94A3B8', style='italic')
 
-    plt.tight_layout(rect=[0, 0.05, 1, 0.98])
+    plt.tight_layout(rect=[0, 0.045, 1, 0.98])
     chart_path = os.path.join(pres_dir, "vayusuchak_prototype_chart.png")
-    fig.savefig(chart_path, dpi=200, bbox_inches='tight')
+    fig.savefig(chart_path, dpi=220, bbox_inches='tight')
     plt.close(fig)
     print(f"Generated {chart_path}")
 
