@@ -1,139 +1,31 @@
 import { RouteWeight, ScraperSourceStatus, CPIIndexPoint, FlightFare, OutlierRecord, AirlineCode, ScrapingSource, LeadTimeHorizon, DailyFarePoint } from '../types';
+import { REPRESENTATIVE_CORRIDORS, BOOKING_HORIZONS, DATA_METADATA } from '../config/constants';
 
 // Booking Lead-Time Window Weighting Matrix (Based on DGCA Domestic Passenger Booking Trends)
 export const LEAD_TIME_WEIGHTS: Record<LeadTimeHorizon, { weightPercentage: number; description: string }> = {
   '1d':  { weightPercentage: 15.0, description: 'Urgent / Emergency Booking (1 Day Out)' },
   '7d':  { weightPercentage: 30.0, description: 'Short-Term / Business Booking (7 Days Out)' },
-  '15d': { weightPercentage: 35.0, description: 'Standard Advance Purchase (15 Days Out)' },
+  '14d': { weightPercentage: 35.0, description: 'Standard Advance Purchase (14 Days Out)' },
+  '15d': { weightPercentage: 35.0, description: 'Standard Advance Purchase (14 Days Out)' },
   '30d': { weightPercentage: 15.0, description: 'Leisure Travel Booking (30 Days Out)' },
   '45d': { weightPercentage: 5.0,  description: 'Far-Advance / Holiday Booking (45 Days Out)' },
 };
 
 // Top Indian Air Corridors based on DGCA Passenger Traffic Data & MoSPI Weighting Matrix
-export const MOCK_ROUTE_WEIGHTS: RouteWeight[] = [
-  {
-    corridorId: 'DEL-BOM',
-    origin: 'DEL',
-    destination: 'BOM',
-    corridorName: 'Delhi (DEL) ↔ Mumbai (BOM)',
-    annualPassengersMillions: 7.25,
-    weightPercentage: 14.8,
-    tierCategory: 'METRO_METRO',
-    baseYearPrice: 4850
-  },
-  {
-    corridorId: 'BLR-DEL',
-    origin: 'BLR',
-    destination: 'DEL',
-    corridorName: 'Bengaluru (BLR) ↔ Delhi (DEL)',
-    annualPassengersMillions: 5.40,
-    weightPercentage: 11.0,
-    tierCategory: 'METRO_METRO',
-    baseYearPrice: 5120
-  },
-  {
-    corridorId: 'BOM-BLR',
-    origin: 'BOM',
-    destination: 'BLR',
-    corridorName: 'Mumbai (BOM) ↔ Bengaluru (BLR)',
-    annualPassengersMillions: 4.80,
-    weightPercentage: 9.8,
-    tierCategory: 'METRO_METRO',
-    baseYearPrice: 3950
-  },
-  {
-    corridorId: 'CCU-DEL',
-    origin: 'CCU',
-    destination: 'DEL',
-    corridorName: 'Kolkata (CCU) ↔ Delhi (DEL)',
-    annualPassengersMillions: 3.90,
-    weightPercentage: 7.9,
-    tierCategory: 'METRO_METRO',
-    baseYearPrice: 5400
-  },
-  {
-    corridorId: 'HYD-DEL',
-    origin: 'HYD',
-    destination: 'DEL',
-    corridorName: 'Hyderabad (HYD) ↔ Delhi (DEL)',
-    annualPassengersMillions: 3.65,
-    weightPercentage: 7.4,
-    tierCategory: 'METRO_METRO',
-    baseYearPrice: 4680
-  },
-  {
-    corridorId: 'MAA-DEL',
-    origin: 'MAA',
-    destination: 'DEL',
-    corridorName: 'Chennai (MAA) ↔ Delhi (DEL)',
-    annualPassengersMillions: 3.20,
-    weightPercentage: 6.5,
-    tierCategory: 'METRO_METRO',
-    baseYearPrice: 5290
-  },
-  {
-    corridorId: 'DEL-PNQ',
-    origin: 'DEL',
-    destination: 'PNQ',
-    corridorName: 'Delhi (DEL) ↔ Pune (PNQ)',
-    annualPassengersMillions: 2.80,
-    weightPercentage: 5.7,
-    tierCategory: 'METRO_TIER2',
-    baseYearPrice: 4410
-  },
-  {
-    corridorId: 'DEL-AMD',
-    origin: 'DEL',
-    destination: 'AMD',
-    corridorName: 'Delhi (DEL) ↔ Ahmedabad (AMD)',
-    annualPassengersMillions: 2.50,
-    weightPercentage: 5.1,
-    tierCategory: 'METRO_TIER2',
-    baseYearPrice: 3820
-  },
-  {
-    corridorId: 'DEL-GAU',
-    origin: 'DEL',
-    destination: 'GAU',
-    corridorName: 'Delhi (DEL) ↔ Guwahati (GAU)',
-    annualPassengersMillions: 1.95,
-    weightPercentage: 4.0,
-    tierCategory: 'METRO_TIER2',
-    baseYearPrice: 6150
-  },
-  {
-    corridorId: 'BOM-GOI',
-    origin: 'BOM',
-    destination: 'GOI',
-    corridorName: 'Mumbai (BOM) ↔ Goa (GOI)',
-    annualPassengersMillions: 2.20,
-    weightPercentage: 4.5,
-    tierCategory: 'METRO_TIER2',
-    baseYearPrice: 3450
-  },
-  {
-    corridorId: 'DEL-IXR',
-    origin: 'DEL',
-    destination: 'IXR',
-    corridorName: 'Delhi (DEL) ↔ Ranchi (IXR) [UDAN]',
-    annualPassengersMillions: 1.10,
-    weightPercentage: 2.2,
-    tierCategory: 'UDAN_REGIONAL',
-    baseYearPrice: 4200
-  },
-  {
-    corridorId: 'BOM-PAT',
-    origin: 'BOM',
-    destination: 'PAT',
-    corridorName: 'Mumbai (BOM) ↔ Patna (PAT) [UDAN]',
-    annualPassengersMillions: 1.25,
-    weightPercentage: 2.5,
-    tierCategory: 'UDAN_REGIONAL',
-    baseYearPrice: 5800
-  }
-];
+// Single source of truth derived from REPRESENTATIVE_CORRIDORS in src/config/constants.ts
+export const MOCK_ROUTE_WEIGHTS: RouteWeight[] = REPRESENTATIVE_CORRIDORS.map(c => ({
+  corridorId: c.corridorId,
+  origin: c.origin,
+  destination: c.destination,
+  corridorName: c.corridorName,
+  annualPassengersMillions: c.annualPassengersMillions,
+  weightPercentage: c.normalizedPercentage, // Normalized basket weight w_c (sums to 100.0%)
+  rawDgcaSharePercentage: c.rawDgcaSharePercentage, // Raw DGCA national passenger traffic share
+  tierCategory: c.tierCategory,
+  baseYearPrice: c.baseYearPrice
+}));
 
-// Scraping Engine Source Health Statuses
+// Scraping Engine Source Health Statuses (Rate-Limited Compliant Collection Policy)
 export const MOCK_SCRAPER_SOURCES: ScraperSourceStatus[] = [
   {
     id: 'src-1',
@@ -145,8 +37,8 @@ export const MOCK_SCRAPER_SOURCES: ScraperSourceStatus[] = [
     successRate: 99.6,
     recordsExtracted24h: 14280,
     lastSyncTime: 'Just now (10s ago)',
-    bypassStrategy: 'STEALTH_PLAYWRIGHT',
-    activeProxies: 32
+    bypassStrategy: 'RATE_LIMITED_COMPLIANT',
+    activeProxies: 4
   },
   {
     id: 'src-2',
@@ -159,7 +51,7 @@ export const MOCK_SCRAPER_SOURCES: ScraperSourceStatus[] = [
     recordsExtracted24h: 11450,
     lastSyncTime: 'Just now (15s ago)',
     bypassStrategy: 'API_INTERCEPT',
-    activeProxies: 28
+    activeProxies: 4
   },
   {
     id: 'src-3',
@@ -172,7 +64,7 @@ export const MOCK_SCRAPER_SOURCES: ScraperSourceStatus[] = [
     recordsExtracted24h: 28400,
     lastSyncTime: 'Just now (5s ago)',
     bypassStrategy: 'API_INTERCEPT',
-    activeProxies: 45
+    activeProxies: 6
   },
   {
     id: 'src-4',
@@ -185,7 +77,7 @@ export const MOCK_SCRAPER_SOURCES: ScraperSourceStatus[] = [
     recordsExtracted24h: 19800,
     lastSyncTime: 'Just now (8s ago)',
     bypassStrategy: 'RESILIENT_DOM_PARSER',
-    activeProxies: 20
+    activeProxies: 4
   },
   {
     id: 'src-5',
@@ -197,8 +89,8 @@ export const MOCK_SCRAPER_SOURCES: ScraperSourceStatus[] = [
     successRate: 94.2,
     recordsExtracted24h: 8200,
     lastSyncTime: '2 mins ago',
-    bypassStrategy: 'STEALTH_PLAYWRIGHT',
-    activeProxies: 15
+    bypassStrategy: 'RATE_LIMITED_COMPLIANT',
+    activeProxies: 2
   }
 ];
 
@@ -420,7 +312,7 @@ export const generateLiveScrapedFares = (): FlightFare[] => {
   ];
 
   const sources: ScrapingSource[] = ['INDIGO_DIRECT', 'AIR_INDIA_DIRECT', 'MAKEMYTRIP', 'EASEMYTRIP', 'YATRA'];
-  const horizons: LeadTimeHorizon[] = ['1d', '7d', '15d', '30d', '45d'];
+  const horizons: LeadTimeHorizon[] = ['1d', '7d', '14d', '30d', '45d'];
 
   const results: FlightFare[] = [];
 
@@ -451,7 +343,7 @@ export const generateLiveScrapedFares = (): FlightFare[] => {
       const horizonMultiplier = 
         horizon === '1d' ? 1.18 :
         horizon === '7d' ? 1.08 :
-        horizon === '15d' ? 1.01 :
+        (horizon === '14d' || horizon === '15d') ? 1.01 :
         horizon === '30d' ? 0.94 : 0.89;
 
       airlines.forEach((air, aIdx) => {
@@ -482,7 +374,7 @@ export const generateLiveScrapedFares = (): FlightFare[] => {
           destination: route.destination,
           destinationName: route.corridorName.split('↔')[1].trim(),
           corridor: route.corridorId,
-          departureDate: new Date(Date.now() + (horizon === '1d' ? 86400000 : horizon === '7d' ? 7*86400000 : horizon === '15d' ? 15*86400000 : horizon === '30d' ? 30*86400000 : 45*86400000)).toISOString().split('T')[0],
+          departureDate: new Date(Date.now() + (horizon === '1d' ? 86400000 : horizon === '7d' ? 7*86400000 : (horizon === '14d' || horizon === '15d') ? 14*86400000 : horizon === '30d' ? 30*86400000 : 45*86400000)).toISOString().split('T')[0],
           scrapingTimestamp: nowTs,
           leadTimeHorizon: horizon,
           baseFare: base,

@@ -64,7 +64,7 @@ export class ScraperOrchestrator {
       timestamp: now(),
       source: 'goindigo.in',
       level: 'SUCCESS',
-      message: 'Bypassed Cloudflare TLS fingerprint. Extracted 4,200 fares via Stealth Playwright headless cluster.',
+      message: 'Rate-limited compliant collection session executed. Extracted 4,200 fares via Playwright headless browser.',
       recordsCount: 4200,
       latencyMs: 310
     };

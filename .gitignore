@@ -11,3 +11,10 @@ venv/
 .env*
 
 *.db
+
+scratch/test_*
+scratch/var*
+scratch/slide3_*
+scratch/tier4_*
+scratch/workflow_*
+scratch/update_*

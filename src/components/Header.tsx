@@ -79,6 +79,12 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="hidden sm:inline-flex items-center px-2 py-0.5 text-[10px] font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/30 rounded-full font-mono">
                   Team Roorkies (168405)
                 </span>
+                <span
+                  className="inline-flex items-center px-2 py-0.5 text-[10px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40 rounded-full font-mono cursor-help"
+                  title="Calibrated sample flight fare dataset for prototype demonstration; live collection operates under compliant rate-limited policies."
+                >
+                  Prototype data: Sample
+                </span>
               </div>
               <p className="text-[11px] text-slate-400">
                 Real-Time Airfare Price Index (APIx) for India • MoSPI NSO & RBI Monetary Policy Augmentation

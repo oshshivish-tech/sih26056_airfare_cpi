@@ -18,6 +18,7 @@ import { CorridorAvgTable } from './components/CorridorAvgTable';
 import { LeadTimeElasticityCard } from './components/LeadTimeElasticityCard';
 import { DgcaBacktestComparison } from './components/DgcaBacktestComparison';
 import { RestApiExplorerModal } from './components/RestApiExplorerModal';
+import { DataHealthPanel } from './components/DataHealthPanel';
 
 import { MOCK_CPI_HISTORICAL, MOCK_DAILY_CPI, MOCK_OUTLIERS, MOCK_ROUTE_WEIGHTS, generateLiveScrapedFares } from './data/mockData';
 import { MoSPICPIEngine } from './services/cpiEngine';
@@ -50,6 +51,7 @@ export const App: React.FC = () => {
     'ALL': 1.0,
     '1d': 1.14,
     '7d': 1.07,
+    '14d': 1.01,
     '15d': 1.01,
     '30d': 0.94,
     '45d': 0.90
@@ -243,6 +245,12 @@ export const App: React.FC = () => {
         {/* Tab 1: Overview */}
         {activeTab === 'overview' && (
           <div className="space-y-6">
+            <DataHealthPanel
+              onOpenScraperTab={() => setActiveTab('scraper')}
+              onRunScrape={handleRunScrape}
+              isScraping={isScraping}
+            />
+
             {scrapeNotification && (
               <div className="bg-emerald-500/15 border border-emerald-500/40 rounded-xl p-4 flex items-center justify-between shadow-lg shadow-emerald-950/40 animate-pulse">
                 <div className="flex items-center space-x-3">

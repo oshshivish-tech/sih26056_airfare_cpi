@@ -17,106 +17,24 @@ import numpy as np
 from datetime import datetime, timedelta
 from typing import List, Dict, Tuple, Optional
 
+from backend.config import REPRESENTATIVE_CORRIDORS, BOOKING_HORIZONS
+
 # DGCA Official Passenger Traffic Weights (12 Representative Indian Corridors)
 # Calibrated against DGCA Annual Domestic City-Pair Traffic Statistics
+# Normalized basket weights w_c sum to exactly 1.0 (100.0%)
 DGCA_REPRESENTATIVE_CORRIDORS = {
-    "DEL-BOM": {
-        "name": "Delhi ↔ Mumbai",
-        "origin": "DEL",
-        "destination": "BOM",
-        "weight": 0.148, # 14.8% of national traffic
-        "base_year_price": 4850, # INR (2024-25 baseline yield)
-        "tier": "METRO_METRO"
-    },
-    "BLR-DEL": {
-        "name": "Bengaluru ↔ Delhi",
-        "origin": "BLR",
-        "destination": "DEL",
-        "weight": 0.110,
-        "base_year_price": 5120,
-        "tier": "METRO_METRO"
-    },
-    "BOM-BLR": {
-        "name": "Mumbai ↔ Bengaluru",
-        "origin": "BOM",
-        "destination": "BLR",
-        "weight": 0.098,
-        "base_year_price": 3950,
-        "tier": "METRO_METRO"
-    },
-    "CCU-DEL": {
-        "name": "Kolkata ↔ Delhi",
-        "origin": "CCU",
-        "destination": "DEL",
-        "weight": 0.079,
-        "base_year_price": 5400,
-        "tier": "METRO_METRO"
-    },
-    "HYD-DEL": {
-        "name": "Hyderabad ↔ Delhi",
-        "origin": "HYD",
-        "destination": "DEL",
-        "weight": 0.074,
-        "base_year_price": 4680,
-        "tier": "METRO_METRO"
-    },
-    "MAA-DEL": {
-        "name": "Chennai ↔ Delhi",
-        "origin": "MAA",
-        "destination": "DEL",
-        "weight": 0.065,
-        "base_year_price": 5290,
-        "tier": "METRO_METRO"
-    },
-    "DEL-PNQ": {
-        "name": "Delhi ↔ Pune",
-        "origin": "DEL",
-        "destination": "PNQ",
-        "weight": 0.057,
-        "base_year_price": 4410,
-        "tier": "METRO_TIER2"
-    },
-    "DEL-AMD": {
-        "name": "Delhi ↔ Ahmedabad",
-        "origin": "DEL",
-        "destination": "AMD",
-        "weight": 0.051,
-        "base_year_price": 3820,
-        "tier": "METRO_TIER2"
-    },
-    "DEL-GAU": {
-        "name": "Delhi ↔ Guwahati",
-        "origin": "DEL",
-        "destination": "GAU",
-        "weight": 0.040,
-        "base_year_price": 6150,
-        "tier": "METRO_TIER2"
-    },
-    "BOM-GOI": {
-        "name": "Mumbai ↔ Goa",
-        "origin": "BOM",
-        "destination": "GOI",
-        "weight": 0.045,
-        "base_year_price": 3450,
-        "tier": "METRO_TIER2"
-    },
-    "DEL-IXR": {
-        "name": "Delhi ↔ Ranchi",
-        "origin": "DEL",
-        "destination": "IXR",
-        "weight": 0.022,
-        "base_year_price": 4200,
-        "tier": "UDAN_REGIONAL"
-    },
-    "BOM-PAT": {
-        "name": "Mumbai ↔ Patna",
-        "origin": "BOM",
-        "destination": "PAT",
-        "weight": 0.025,
-        "base_year_price": 5800,
-        "tier": "UDAN_REGIONAL"
-    },
+    cid: {
+        "name": data["name"],
+        "origin": data["origin"],
+        "destination": data["destination"],
+        "weight": data["normalized_weight"],
+        "raw_dgca_share": data["raw_dgca_share_pct"] / 100.0,
+        "base_year_price": data["base_year_price"],
+        "tier": data["tier"]
+    }
+    for cid, data in REPRESENTATIVE_CORRIDORS.items()
 }
+
 
 class APIxEngine:
     """Core mathematical engine for computing the Real-time Airfare Price Index."""

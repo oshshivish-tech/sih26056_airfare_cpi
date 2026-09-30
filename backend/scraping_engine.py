@@ -1,14 +1,14 @@
 """
-Ethical Multi-Source Airfare Scraping Engine
-SIH Problem Statement 26056 - MoSPI Real-time Airfare Price Index (APIx)
+Rate-Limited, Compliant Airfare Collection Engine
+SIH Problem Statement 26056 - MoSPI Real-time Airfare Price Index (VayuSuchak)
 
 Pillar (a) Implementation:
-- Multi-source Python scraping engine covering IndiGo, Air India, Akasa Air, SpiceJet, MakeMyTrip, and EaseMyTrip
-- Robots.txt compliance checker via urllib.robotparser
-- Anti-bot stealth mechanisms: User-Agent rotation, TLS header emulation, jittered polite rate limiting
+- Multi-source Python collection engine covering IndiGo, Air India, Akasa Air, SpiceJet, MakeMyTrip, and EaseMyTrip
+- Strict Robots.txt compliance checker via urllib.robotparser
+- Rate-limited, polite request pacing with jittered backoff delays
 - Disaggregated extraction: Base Fare, Fuel Surcharge, Airport Development Fee (UDF/PSF), GST/Taxes, and Total Fare
-- Advance Purchase Horizon sampling: T+1, T+7, T+15, T+30, T+45
-- Automated ingestion into SQLite Database with cryptographic provenance
+- Advance Purchase Horizon sampling: T+1, T+7, T+14, T+30, T+45 days
+- Automated ingestion into SQLite Database with SHA-256 cryptographic provenance
 """
 
 import asyncio
@@ -25,17 +25,16 @@ from typing import Dict, List, Optional, Tuple
 
 from backend.database import FlightDatabaseManager, DB_PATH
 from backend.apix_engine import DGCA_REPRESENTATIVE_CORRIDORS
+from backend.config import DATA_METADATA, BOOKING_HORIZONS
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("ScrapingEngine")
 
-# Pool of modern desktop browser User-Agents
-USER_AGENT_POOL = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
-]
+# Descriptive Research User-Agent identifying academic/hackathon purpose and contact info
+DEFAULT_USER_AGENT = DATA_METADATA.get(
+    "user_agent",
+    "VayuSuchak-Research-Bot/1.0 (+https://sih26056-airfare-cpi.vercel.app; research-contact@roorkies.edu)"
+)
 
 # Official Portals and their Robots.txt URLs
 TARGET_PORTALS = {

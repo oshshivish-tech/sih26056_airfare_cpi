@@ -42,7 +42,8 @@ export const IndexChart: React.FC<IndexChartProps> = ({
     'ALL': 1.0,
     '1d': 1.14,  // Urgent 1-day bookings (+14% over composite market)
     '7d': 1.07,  // Near-term 7-day bookings (+7% over composite market)
-    '15d': 1.01, // Standard 15-day advance (+1% near composite market)
+    '14d': 1.01, // Standard 14-day advance (+1% near composite market)
+    '15d': 1.01, // Alias for backward compatibility
     '30d': 0.94, // Advance 30-day leisure booking (-6% discount)
     '45d': 0.90  // Early-bird 45-day discount booking (-10% discount)
   };
@@ -76,14 +77,14 @@ export const IndexChart: React.FC<IndexChartProps> = ({
             )}
           </div>
           <p className="text-xs text-slate-400 mt-0.5">
-            Comparison of Automated Real-Time Index (Jevons/Laspeyres) vs. Official MoSPI eSankhyiki Benchmark (esankhyiki.mospi.gov.in)
+            Comparison of Automated Real-Time Index (Jevons/Laspeyres) vs. Official MoSPI eSankhyiki Benchmark & Arithmetic-mean (Dutot) benchmark
           </p>
         </div>
 
         {/* Lead Time Horizon Filters */}
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs text-slate-400 font-medium mr-1">Booking Window:</span>
-          {(['ALL', '1d', '7d', '15d', '30d', '45d'] as const).map(horizon => (
+          {(['ALL', '1d', '7d', '14d', '30d', '45d'] as const).map(horizon => (
             <button
               key={horizon}
               onClick={() => onSelectLeadTime(horizon)}
@@ -93,7 +94,7 @@ export const IndexChart: React.FC<IndexChartProps> = ({
                   : 'bg-slate-900/60 text-slate-400 border-slate-800 hover:bg-slate-800 hover:text-slate-200'
               }`}
             >
-              {horizon === 'ALL' ? 'All Lead Times' : horizon === '1d' ? '1-Day (Urgent)' : horizon === '7d' ? '7-Day' : horizon === '15d' ? '15-Day' : horizon === '30d' ? '30-Day' : '45-Day (Leisure)'}
+              {horizon === 'ALL' ? 'All Lead Times' : horizon === '1d' ? 'T+1 (Urgent)' : horizon === '7d' ? 'T+7' : horizon === '14d' ? 'T+14' : horizon === '30d' ? 'T+30' : 'T+45 (Leisure)'}
             </button>
           ))}
         </div>
@@ -145,9 +146,10 @@ export const IndexChart: React.FC<IndexChartProps> = ({
               ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
               : 'bg-slate-900 text-slate-500 border border-slate-800'
           }`}
+          title="Our comparison series calculating the arithmetic mean ratio (Dutot index) to demonstrate upward substitution bias; NOT an official MoSPI figure."
         >
           <span className="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
-          <span>Dutot Index (Arithmetic)</span>
+          <span>Arithmetic-mean (Dutot) benchmark</span>
         </button>
       </div>
 
@@ -185,7 +187,7 @@ export const IndexChart: React.FC<IndexChartProps> = ({
                   key === 'jevonsIndex' || name.includes('Jevons') ? 'Jevons Index (Geometric)' :
                   key === 'weightedLaspeyresIndex' || name.includes('DGCA') ? 'DGCA Weighted Index' :
                   key === 'officialMoSPICPIBaseline' || name.includes('MoSPI') || name.includes('eSankhyiki') ? 'MoSPI eSankhyiki Baseline' :
-                  'Dutot Index (Arithmetic)';
+                  'Arithmetic-mean (Dutot) benchmark*';
                 return [`${Number(value).toFixed(2)} (Base = 100)`, displayName];
               }}
             />
@@ -232,7 +234,7 @@ export const IndexChart: React.FC<IndexChartProps> = ({
               <Line
                 type="monotone"
                 dataKey="dutotIndex"
-                name="Dutot Index (Arithmetic)"
+                name="Arithmetic-mean (Dutot) benchmark*"
                 stroke="#fbbf24"
                 strokeWidth={2}
                 dot={{ r: 3, fill: '#fbbf24' }}
@@ -242,12 +244,17 @@ export const IndexChart: React.FC<IndexChartProps> = ({
         </ResponsiveContainer>
       </div>
 
-      {/* Statistical Insight Footer */}
-      <div className="mt-4 p-3.5 bg-slate-900/90 rounded-xl border border-slate-800 text-xs flex items-start space-x-3 text-slate-300">
-        <Info className="w-4 h-4 text-sky-400 flex-shrink-0 mt-0.5" />
-        <div>
-          <strong className="text-white">UN/ILO CPI Guideline Note: </strong>
-          The <strong>Jevons Geometric Index</strong> is the international statistical gold standard for unweighted airfare item groups because it satisfies the <em>Time Reversal Test</em> and protects the index from upward substitution bias caused by dynamic airline surge pricing algorithms.
+      {/* Statistical Insight & Footnote Footer */}
+      <div className="mt-4 space-y-2">
+        <div className="p-3.5 bg-slate-900/90 rounded-xl border border-slate-800 text-xs flex items-start space-x-3 text-slate-300">
+          <Info className="w-4 h-4 text-sky-400 flex-shrink-0 mt-0.5" />
+          <div>
+            <strong className="text-white">UN/ILO CPI Guideline Note: </strong>
+            The <strong>Jevons Geometric Index</strong> is the international statistical gold standard for unweighted airfare item groups because it satisfies the <em>Time Reversal Test</em> and protects the index from upward substitution bias caused by dynamic airline surge pricing algorithms (Diewert, 2004).
+          </div>
+        </div>
+        <div className="px-3.5 py-2 bg-slate-950/60 rounded-lg border border-slate-800/60 text-[11px] text-slate-400">
+          * <strong className="text-slate-300">Footnote on Arithmetic-mean (Dutot) benchmark:</strong> This is our own comparison series calculating the unweighted arithmetic mean ratio (Dutot index) to empirically demonstrate upward substitution bias vs. the Jevons geometric mean; it is NOT an official MoSPI published series.
         </div>
       </div>
     </div>

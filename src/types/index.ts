@@ -1,4 +1,4 @@
-export type LeadTimeHorizon = '1d' | '7d' | '15d' | '30d' | '45d';
+export type LeadTimeHorizon = '1d' | '7d' | '14d' | '15d' | '30d' | '45d';
 
 export type AirlineCode = 'INDIGO' | 'AIR_INDIA' | 'SPICEJET' | 'AKASA' | 'VISTARA';
 
@@ -36,7 +36,8 @@ export interface RouteWeight {
   destination: string;
   corridorName: string;
   annualPassengersMillions: number;
-  weightPercentage: number; // e.g. 14.5% for DEL-BOM
+  weightPercentage: number; // e.g. 18.2% for DEL-BOM (normalized basket weight)
+  rawDgcaSharePercentage?: number; // e.g. 14.8% raw DGCA national passenger traffic share
   tierCategory: 'METRO_METRO' | 'METRO_TIER2' | 'UDAN_REGIONAL';
   baseYearPrice: number; // 2024-25 baseline average fare in INR
 }
@@ -64,7 +65,7 @@ export interface ScraperSourceStatus {
   successRate: number; // Percentage e.g. 99.4
   recordsExtracted24h: number;
   lastSyncTime: string;
-  bypassStrategy: 'STEALTH_PLAYWRIGHT' | 'API_INTERCEPT' | 'RESILIENT_DOM_PARSER';
+  bypassStrategy: 'RATE_LIMITED_COMPLIANT' | 'API_INTERCEPT' | 'RESILIENT_DOM_PARSER';
   activeProxies: number;
 }
 

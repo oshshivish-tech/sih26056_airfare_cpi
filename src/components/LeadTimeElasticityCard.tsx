@@ -37,10 +37,10 @@ export const LeadTimeElasticityCard: React.FC<LeadTimeElasticityCardProps> = ({
       desc: 'Short-lead business corridor travel demand peak'
     },
     {
-      key: '15d',
-      label: 'T+15 Window',
-      leadDays: 15,
-      urgency: 'Standard Planned',
+      key: '14d',
+      label: 'T+14 Window',
+      leadDays: 14,
+      urgency: 'Standard Advance',
       desc: 'Baseline travel horizon closely mirroring DGCA monthly yield'
     },
     {
@@ -62,7 +62,9 @@ export const LeadTimeElasticityCard: React.FC<LeadTimeElasticityCardProps> = ({
   // Dynamically compute average fare, sample count, and index for every horizon from live quotes
   const calculatedHorizons = useMemo(() => {
     return horizonConfigs.map(cfg => {
-      const matching = fares.filter(f => f.leadTimeHorizon === cfg.key && !f.isOutlier);
+      const matching = fares.filter(f => 
+        (f.leadTimeHorizon === cfg.key || (cfg.key === '14d' && (f.leadTimeHorizon as any) === '15d')) && !f.isOutlier
+      );
       const quotesCount = matching.length;
 
       let avgFare = 0;
