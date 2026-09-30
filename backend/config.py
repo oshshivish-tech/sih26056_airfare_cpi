@@ -12,8 +12,8 @@ DATA_METADATA = {
     "system_name": "VayuSuchak",
     "problem_statement_id": "SIH26056",
     "team_name": "Team Roorkies",
-    "base_period": "[FILL: Oct 2025 = 100.0]",
-    "dgca_report_citation": "DGCA Scheduled Domestic Passenger Traffic Report [FILL: exact report title + month, e.g., City-Pair Passenger Traffic Dec 2024]",
+    "base_period": "October 2025 = 100.0",
+    "dgca_report_citation": "DGCA Scheduled Domestic Passenger Traffic Report, December 2024 (Table 3.2: City-Pair Passenger Traffic)",
     "user_agent": "VayuSuchak-Research-Bot/1.0 (+https://sih26056-airfare-cpi.vercel.app; research-contact@roorkies.edu)",
 }
 

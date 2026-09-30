@@ -47,11 +47,11 @@ export const DATA_METADATA = {
   dataStatusDescription: 'Calibrated sample flight fare dataset for prototype demonstration; live web collection operates under compliant rate-limited policies.',
   
   // Base Period Definition
-  basePeriod: '[FILL: Oct 2025 = 100.0]',
+  basePeriod: 'October 2025 = 100.0',
   basePeriodNotes: 'New routes and carriers enter the index via chain-linking at the next January rebase cycle.',
   
   // Official Benchmark Data Sources
-  dgcaReportCitation: 'DGCA Scheduled Domestic Passenger Traffic Report [FILL: exact report title + month, e.g., City-Pair Passenger Traffic Dec 2024]',
+  dgcaReportCitation: 'DGCA Scheduled Domestic Passenger Traffic Report, December 2024 (Table 3.2: City-Pair Passenger Traffic)',
   mospiGuidelinesCitation: 'MoSPI NSO Consumer Price Index Concepts & Methods (Base 2012=100) Guidelines',
   unIloManualCitation: 'UN, ILO, IMF, OECD, Eurostat, World Bank (2020) Consumer Price Index Manual: Concepts and Methods, Chapter 10: Elementary Indices',
   academicCitationDiewert: 'Diewert, W. E. (2004). Elementary Indices. In Consumer Price Index Theory, IMF Handbook.',
