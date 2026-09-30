@@ -207,8 +207,8 @@ def create_final_presentation(output_path):
             "header_border": RGBColor(34, 197, 94),
             "card_bg": RGBColor(240, 253, 244),
             "card_border": RGBColor(34, 197, 94),
-            "title": "HOW WE SOLVE IT:",
-            "subtitle": "VayuSuchak Engine",
+            "title": "HOW IT ADDRESSES THE PROBLEM",
+            "subtitle": "VayuSuchak Automated Engine",
             "title_color": RGBColor(20, 83, 45),
             "sub_color": RGBColor(21, 128, 61),
             "accent_color": RGBColor(21, 128, 61),
@@ -224,7 +224,7 @@ def create_final_presentation(output_path):
             "header_border": RGBColor(59, 130, 246),
             "card_bg": RGBColor(239, 246, 255),
             "card_border": RGBColor(59, 130, 246),
-            "title": "WHY IT IS DIFFERENT",
+            "title": "INNOVATION & UNIQUENESS",
             "subtitle": "Unique VayuSuchak Advantages",
             "title_color": RGBColor(30, 58, 138),
             "sub_color": RGBColor(29, 78, 216),
@@ -266,7 +266,7 @@ def create_final_presentation(output_path):
         p_ht = tf_h.paragraphs[0]
         p_ht.text = col["title"]
         p_ht.font.name = "Arial"
-        p_ht.font.size = Pt(16)
+        p_ht.font.size = Pt(13) if len(col["title"]) > 18 else Pt(15)
         p_ht.font.bold = True
         p_ht.font.color.rgb = col["title_color"]
         p_ht.alignment = PP_ALIGN.CENTER
@@ -624,33 +624,33 @@ def create_final_presentation(output_path):
 
     col_data_s4 = [
         (
-            Inches(0.55), "⚙️ FEASIBILITY ANALYSIS", "PRACTICAL & SCALABLE",
+            Inches(0.55), "⚙️ ANALYSIS OF FEASIBILITY", "TECHNICAL, OPERATIONAL & ECONOMIC",
             RGBColor(37, 99, 235), RGBColor(239, 246, 255),
             [
-                ("Infrastructure Reusability", "Leverages standard cloud and public web portals; zero airport hardware installation required."),
-                ("Scalable Deployment", "Deployed across 12 core metro routes initially; scalable nationwide to 250+ UDAN regional corridors."),
-                ("Operating Cost", "Estimated operating cost: ₹4,500/month (hosting ₹1,200 + storage ₹1,800 + collection ₹1,500). (Breakdown in speaker notes)."),
+                ("Infrastructure Feasibility", "Leverages standard cloud and public web portals; zero airport hardware installation required."),
+                ("Operational Scalability", "Deployed across 12 core metro routes initially; scalable nationwide to 250+ UDAN regional corridors."),
+                ("Financial Feasibility", "Estimated operating cost: ₹4,500/month (hosting ₹1,200 + storage ₹1,800 + collection ₹1,500)."),
                 ("Authority Integration", "Native REST API and JSON feeds integrate directly into MoSPI eSankhyiki, RBI MPC, and DGCA portals.")
             ]
         ),
         (
-            Inches(4.68), "✔️ VIABILITY & TRUST", "RELIABLE & DEFENSIBLE",
-            RGBColor(22, 163, 74), RGBColor(240, 253, 244),
+            Inches(4.68), "⚠️ POTENTIAL CHALLENGES & RISKS", "SYSTEMIC & EXTRACTION VULNERABILITIES",
+            RGBColor(220, 38, 38), RGBColor(254, 242, 242),
             [
-                ("Proven Concept", "Prototype tested on 14,280 fare quotes over 21 days; scraper success rate 98.4%."),
-                ("Public Trust", "Transparent UN/ILO Chapter 10 formulas eliminate black-box skepticism and subjective sampling bias."),
-                ("Tamper-Evident Ledger", "SHA-256 hashing + Merkle batch roots make tampering detectable for sovereign audit."),
-                ("RISKS & MITIGATION", "• Layout changes → modular parsers + automated breakage alerts\n• Blocking / ToS → rate limits, compliance policy, move to official API/MoU\n• Outliers / missing quotes → dynamic IQR filter, stale purge, fallback\n• Scale 12 → 250+ routes → phased rollout ordered by DGCA share")
+                ("Portal Layout Drift", "Airlines periodically alter front-end markup and CSS classes, risking scraper parser failure."),
+                ("Rate-Limits & Throttling", "High-frequency automated queries risk triggering HTTP 429/503 rate-limits or IP restrictions."),
+                ("Dynamic Pricing Outliers", "Algorithmic yield surges and last-minute booking scalping introduce extreme statistical noise."),
+                ("Schedule Sparsity", "Infrequent or seasonal UDAN regional flight schedules risk creating missing daily quote gaps.")
             ]
         ),
         (
-            Inches(8.81), "📊 BUSINESS & POLICY IMPACT", "SUSTAINABLE POLICY VALUE",
-            RGBColor(217, 119, 6), RGBColor(254, 252, 232),
+            Inches(8.81), "🛡️ STRATEGIES FOR OVERCOMING CHALLENGES", "RISKS & MITIGATION ENGINE",
+            RGBColor(22, 163, 74), RGBColor(240, 253, 244),
             [
-                ("Government Savings", "Reduces manual airfare field collection; savings estimate under validation with MoSPI cost data."),
-                ("Monetary Policy", "Delivers high-frequency leading transport inflation signals for proactive interest rate setting."),
-                ("Regulatory Oversight", "Flagging abnormal fare surges for regulatory review and corridor pricing transparency."),
-                ("Open Ecosystem", "Open API for ministries, regulators and researchers (no commercial licensing friction).")
+                ("Modular Resilient Parsers", "Decoupled JSON network request interceptors with automated DOM selector breakage alerts."),
+                ("Compliant Pacing & MoUs", "Polite delays (1.5–3.0s), off-peak harvesting (2–4 AM), and roadmap to airline NDC feeds."),
+                ("Dynamic IQR Anomaly Scrubber", "Statistical bounds [Q1 - 1.5·IQR, Q3 + 2.0·IQR] dynamically prune extreme scalping spikes."),
+                ("Phased Rollout & Fallback", "Phased expansion ordered by DGCA passenger volume share with forward-carry imputation.")
             ]
         )
     ]
@@ -664,8 +664,8 @@ def create_final_presentation(output_path):
         c_col.line.color.rgb = theme_col
         c_col.line.width = Pt(1.5)
 
-        h_box = s4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, Inches(1.15), col_w_s4, Inches(0.50))
-        h_box.adjustments[0] = 0.2
+        h_box = s4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, Inches(1.15), col_w_s4, Inches(0.56))
+        h_box.adjustments[0] = 0.18
         h_box.fill.solid()
         h_box.fill.fore_color.rgb = theme_col
         h_box.line.fill.background()
@@ -674,7 +674,7 @@ def create_final_presentation(output_path):
         p_h = tf_h.paragraphs[0]
         p_h.text = title
         p_h.font.name = "Arial"
-        p_h.font.size = Pt(12)
+        p_h.font.size = Pt(11) if len(title) > 28 else Pt(11.5)
         p_h.font.bold = True
         p_h.font.color.rgb = C_WHITE
         p_h.alignment = PP_ALIGN.CENTER
@@ -682,27 +682,19 @@ def create_final_presentation(output_path):
         p_sub = tf_h.add_paragraph()
         p_sub.text = subtitle
         p_sub.font.name = "Arial"
-        p_sub.font.size = Pt(9.5)
+        p_sub.font.size = Pt(9)
         p_sub.font.color.rgb = RGBColor(241, 245, 249)
         p_sub.alignment = PP_ALIGN.CENTER
 
-        # Calibrate card heights per column
-        card_start_y = Inches(1.70)
+        # Perfectly symmetric cards across all 3 columns
+        card_start_y = Inches(1.78)
+        step_y = Inches(1.11)
+        card_h = Inches(1.02)
         for c_idx, (c_head, c_desc) in enumerate(cards):
-            is_risk_card = (col_i == 1 and c_idx == 3)
-            if col_i == 1:
-                if c_idx < 3:
-                    card_h = Inches(0.78)
-                    card_y = card_start_y + c_idx * Inches(0.84)
-                else:
-                    card_y = Inches(4.22)
-                    card_h = Inches(2.04)
-            else:
-                card_h = Inches(0.98)
-                card_y = card_start_y + c_idx * Inches(1.05)
+            card_y = card_start_y + c_idx * step_y
             
             card_shape = s4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx + Inches(0.10), card_y, col_w_s4 - Inches(0.20), card_h)
-            card_shape.adjustments[0] = 0.06 if is_risk_card else 0.10
+            card_shape.adjustments[0] = 0.10
             card_shape.fill.solid()
             card_shape.fill.fore_color.rgb = bg_col
             card_shape.line.color.rgb = theme_col
@@ -716,18 +708,18 @@ def create_final_presentation(output_path):
             p_ch = tf_cd.paragraphs[0]
             p_ch.text = c_head
             p_ch.font.name = "Arial"
-            p_ch.font.size = Pt(11.5) if is_risk_card else Pt(12)
+            p_ch.font.size = Pt(11.5)
             p_ch.font.bold = True
             p_ch.font.color.rgb = theme_col
 
             p_cb = tf_cd.add_paragraph()
             p_cb.text = c_desc
             p_cb.font.name = "Arial"
-            p_cb.font.size = Pt(10) if is_risk_card else Pt(11.5)
+            p_cb.font.size = Pt(11)
             p_cb.font.color.rgb = C_TEXT_DARK
             p_cb.line_spacing = 1.05
 
-    # Bottom Compact ROADMAP Strip
+    # Bottom Compact ROADMAP Strip (part of Strategies for Overcoming Challenges)
     road_y = Inches(6.45)
     road_h = Inches(0.80)
     road_box = s4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), road_y, Inches(12.23), road_h)
@@ -743,7 +735,7 @@ def create_final_presentation(output_path):
     p_rd1 = tb_rd.paragraphs[0]
     p_rd1.alignment = PP_ALIGN.CENTER
     r_rd_h = p_rd1.add_run()
-    r_rd_h.text = "📍 VAYUSUCHAK IMPLEMENTATION ROADMAP: "
+    r_rd_h.text = "📍 STRATEGIES FOR OVERCOMING CHALLENGES — IMPLEMENTATION ROADMAP: "
     r_rd_h.font.name = "Arial"
     r_rd_h.font.size = Pt(12)
     r_rd_h.font.bold = True
@@ -780,107 +772,94 @@ def create_final_presentation(output_path):
         is_serif=True
     )
 
-    # Left Column (width = 5.30 inches)
+    # Left Column (width = 5.30 inches) - Labeled Benefits: Social / Economic / Environmental / Policy
     l_w = Inches(5.30)
     col_l_x = Inches(0.55)
 
-    # Box 1: Potential Impact (top half, height = 2.60 inches)
-    box_s5_imp = s5.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, col_l_x, Inches(1.15), l_w, Inches(2.60))
-    box_s5_imp.adjustments[0] = 0.04
-    box_s5_imp.fill.solid()
-    box_s5_imp.fill.fore_color.rgb = C_WHITE
-    box_s5_imp.line.color.rgb = C_BLUE_TEMPLATE
-    box_s5_imp.line.width = Pt(1.5)
-
-    tb_imp = s5.shapes.add_textbox(col_l_x + Inches(0.16), Inches(1.22), l_w - Inches(0.32), Inches(2.45))
-    tf_imp = tb_imp.text_frame
-    tf_imp.word_wrap = True
-    tf_imp.margin_left = tf_imp.margin_top = tf_imp.margin_right = tf_imp.margin_bottom = 0
-
-    p_ih = tf_imp.paragraphs[0]
-    p_ih.text = "Potential Impact"
-    p_ih.font.name = "Arial"
-    p_ih.font.size = Pt(15)
-    p_ih.font.bold = True
-    p_ih.font.color.rgb = C_BLUE_TEMPLATE
-    p_ih.space_after = Pt(4)
-
-    impacts_list = [
-        ("• Zero Policy Lag: ", "Slashes price collection latency from 15 days to under 24 hours, eliminating critical macroeconomic blindspots."),
-        ("• High-Frequency Coverage: ", "3,650+ quotes/day across 12 routes × 4 airlines × 5 horizons (vs. 1 monthly static manual quote)."),
-        ("• Substitution Bias Immunity: ", "Geometric-mean aggregation avoids the upward bias of arithmetic (Dutot-type) averaging (Diewert, 2004)."),
-        ("• Validation Benchmark: ", "Back-tested against official CPI airfare component (Pearson r = 0.89); eliminates +1.8% Dutot arithmetic substitution bias.")
+    benefit_categories = [
+        (
+            "👥 SOCIAL BENEFITS",
+            RGBColor(37, 99, 235), RGBColor(239, 246, 255),
+            [
+                ("• Public Measurement: ", "Transparent, public airfare-inflation measurement; eliminates informational asymmetry and hidden surge fares."),
+                ("• Regional Relevance: ", "UDAN regional traveller relevance; continuous price tracking across tier-2/tier-3 underserved corridors.")
+            ]
+        ),
+        (
+            "📈 ECONOMIC BENEFITS",
+            RGBColor(22, 163, 74), RGBColor(240, 253, 244),
+            [
+                ("• Monetary Policy Signals: ", "Leading transport inflation indicator for RBI Monetary Policy Committee (MPC) rate deliberations."),
+                ("• Eliminates Dutot Bias: ", "UN/ILO Jevons geometric aggregation eliminates +1.8% upward substitution bias of arithmetic averaging.")
+            ]
+        ),
+        (
+            "🌱 ENVIRONMENTAL BENEFITS",
+            RGBColor(13, 148, 136), RGBColor(240, 253, 250),
+            [
+                ("• Reduced Field Commutes: ", "Less physical surveyor travel; eliminates airport field audit trips (qualitative only, zero travel emissions)."),
+                ("• Eco Cloud Footprint: ", "Lightweight headless batch collection scheduled during off-peak power grid hours (2–4 AM).")
+            ]
+        ),
+        (
+            "🏛️ POLICY & INSTITUTIONAL BENEFITS",
+            RGBColor(180, 83, 9), RGBColor(254, 252, 232),
+            [
+                ("• Sovereign NSO Feed: ", "Direct automated API ingestion into MoSPI eSankhyiki & National Data and Analytics Platform (NDAP)."),
+                ("• Regulatory Oversight: ", "Equips DGCA and MoCA with automated anomaly flags for abnormal surge spikes and predatory fares.")
+            ]
+        )
     ]
 
-    for itit, idesc in impacts_list:
-        p_i = tf_imp.add_paragraph()
-        p_i.space_after = Pt(2)
-        p_i.line_spacing = 1.05
-        
-        r_it = p_i.add_run()
-        r_it.text = itit
-        r_it.font.name = "Arial"
-        r_it.font.size = Pt(11)
-        r_it.font.bold = True
-        r_it.font.color.rgb = C_BLACK
+    card_s5_start_y = Inches(1.15)
+    card_s5_h = Inches(1.23)
+    card_s5_step = Inches(1.30)
 
-        r_id = p_i.add_run()
-        r_id.text = idesc
-        r_id.font.name = "Arial"
-        r_id.font.size = Pt(11)
-        r_id.font.color.rgb = C_TEXT_DARK
+    for b_idx, (b_cat_title, b_theme, b_bg, b_bullets) in enumerate(benefit_categories):
+        by = card_s5_start_y + b_idx * card_s5_step
+        b_card = s5.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, col_l_x, by, l_w, card_s5_h)
+        b_card.adjustments[0] = 0.08
+        b_card.fill.solid()
+        b_card.fill.fore_color.rgb = b_bg
+        b_card.line.color.rgb = b_theme
+        b_card.line.width = Pt(1.5)
 
-    # Left Column Box 2: Benefits (bottom half, height = 2.65 inches)
-    box_s5_ben = s5.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, col_l_x, Inches(3.82), l_w, Inches(2.65))
-    box_s5_ben.adjustments[0] = 0.04
-    box_s5_ben.fill.solid()
-    box_s5_ben.fill.fore_color.rgb = C_WHITE
-    box_s5_ben.line.color.rgb = C_BLUE_TEMPLATE
-    box_s5_ben.line.width = Pt(1.5)
+        tb_bc = s5.shapes.add_textbox(col_l_x + Inches(0.14), by + Inches(0.06), l_w - Inches(0.28), card_s5_h - Inches(0.12))
+        tf_bc = tb_bc.text_frame
+        tf_bc.word_wrap = True
+        tf_bc.margin_left = tf_bc.margin_top = tf_bc.margin_right = tf_bc.margin_bottom = 0
 
-    tb_ben = s5.shapes.add_textbox(col_l_x + Inches(0.16), Inches(3.86), l_w - Inches(0.32), Inches(2.55))
-    tf_ben = tb_ben.text_frame
-    tf_ben.word_wrap = True
-    tf_ben.margin_left = tf_ben.margin_top = tf_ben.margin_right = tf_ben.margin_bottom = 0
+        p_bch = tf_bc.paragraphs[0]
+        p_bch.text = b_cat_title
+        p_bch.font.name = "Arial"
+        p_bch.font.size = Pt(12)
+        p_bch.font.bold = True
+        p_bch.font.color.rgb = b_theme
+        p_bch.space_after = Pt(2)
 
-    p_bh = tf_ben.paragraphs[0]
-    p_bh.text = "Benefits & Institutional Value:"
-    p_bh.font.name = "Arial"
-    p_bh.font.size = Pt(15)
-    p_bh.font.bold = True
-    p_bh.font.color.rgb = C_BLUE_TEMPLATE
-    p_bh.space_after = Pt(2)
+        for blbl, bdesc in b_bullets:
+            p_bl = tf_bc.add_paragraph()
+            p_bl.space_after = Pt(1.5)
+            p_bl.line_spacing = 1.05
 
-    benefits_list = [
-        ("• Sovereign (MoSPI NSO): ", "Direct automated API feed into eSankhyiki & NDAP; transparent, reproducible inflation indices."),
-        ("• Monetary Policy (RBI MPC): ", "Provides high-frequency leading transport inflation signals for proactive interest rate setting."),
-        ("• Fiscal Efficiency: ", "Reduces manual surveyor logistics; prototype cloud operations cost ₹4,500/month."),
-        ("• Open API Access: ", "Open API for ministries, regulators and researchers with SHA-256 cryptographic auditability.")
-    ]
+            r_bl1 = p_bl.add_run()
+            r_bl1.text = blbl
+            r_bl1.font.name = "Arial"
+            r_bl1.font.size = Pt(11)
+            r_bl1.font.bold = True
+            r_bl1.font.color.rgb = C_BLACK
 
-    for btit, bdesc in benefits_list:
-        p_b = tf_ben.add_paragraph()
-        p_b.space_after = Pt(2)
-        p_b.line_spacing = 1.05
-        
-        r_bt = p_b.add_run()
-        r_bt.text = btit
-        r_bt.font.name = "Arial"
-        r_bt.font.size = Pt(11)
-        r_bt.font.bold = True
-        r_bt.font.color.rgb = C_RED_TEMPLATE
-
-        r_bd = p_b.add_run()
-        r_bd.text = bdesc
-        r_bd.font.name = "Arial"
-        r_bd.font.size = Pt(11)
-        r_bd.font.color.rgb = C_TEXT_DARK
+            r_bl2 = p_bl.add_run()
+            r_bl2.text = bdesc
+            r_bl2.font.name = "Arial"
+            r_bl2.font.size = Pt(11)
+            r_bl2.font.color.rgb = C_TEXT_DARK
 
     # Right Column: Two Prototype Image Boxes
     r_x = Inches(6.05)
     r_w = Inches(6.73)
 
-    # Top Prototype Box: PROTOTYPE IMAGE 1 (height = 2.60 inches)
+    # Top Prototype Box: PROTOTYPE IMAGE 1 (height = 2.55 inches)
     box_p1 = s5.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, r_x, Inches(1.15), r_w, Inches(2.60))
     box_p1.adjustments[0] = 0.04
     box_p1.fill.solid()
@@ -980,7 +959,7 @@ def create_final_presentation(output_path):
     add_template_top_bar(
         s6,
         "RESEARCH AND REFERENCES",
-        bold_headline="Academic Foundations, Official Data Sources & Team Roles",
+        bold_headline="Academic Foundations, Official Data Sources & Open Governance",
         title_font_size=23,
         title_color=C_NAVY,
         is_serif=True
@@ -1052,26 +1031,24 @@ def create_final_presentation(output_path):
         ),
         (
             Inches(6.83), Inches(4.25), Inches(5.95), Inches(2.95),
-            "TEAM ROORKIES (SIH 26056)",
+            "DATA GOVERNANCE & OPEN REPRODUCIBILITY",
             RGBColor(37, 99, 235), RGBColor(239, 246, 255),
             [
                 [
-                    ("Team Lead & Full-Stack Architect — End-to-End System Architecture & MoSPI API", False, None)
+                    ("Open-Source Repository: Fully public reproducible code repository with automated CI/CD. ", False, None),
+                    ("[GitHub Repository ↗]", True, "https://github.com/oshshivish-tech/sih26056_airfare_cpi")
                 ],
                 [
-                    ("Statistical Modeling Lead — UN/ILO Jevons Index & DGCA Passenger Weighting", False, None)
+                    ("NDSAP Open Data Compliance: Adheres to National Data Sharing and Accessibility Policy. ", False, None),
+                    ("[data.gov.in/ndsap ↗]", True, "https://data.gov.in")
                 ],
                 [
-                    ("Data Engineering Lead — Resilient Harvesters & Rate-Limited Ethics Pipeline", False, None)
+                    ("OpenAPI 3.0 Documentation: Interactive REST specifications and Swagger UI for ministry integration. ", False, None),
+                    ("[API Documentation (/docs) ↗]", True, "https://sih26056-airfare-cpi.vercel.app/docs")
                 ],
                 [
-                    ("Frontend UI/UX Architect — MoSPI Executive Analytics & Yield Heatmaps", False, None)
-                ],
-                [
-                    ("Backend Systems Engineer — FastAPI Microservice & TimescaleDB Archival", False, None)
-                ],
-                [
-                    ("DevOps & Compliance Lead — SHA-256 Provenance Vault & Cloud Production", False, None)
+                    ("Automated Pipeline Verification: Nightly unit tests validate Jevons index math and dynamic IQR bounds. ", False, None),
+                    ("[CI/CD Pipeline ↗]", True, "https://github.com/oshshivish-tech/sih26056_airfare_cpi/actions")
                 ]
             ]
         )
@@ -1099,16 +1076,15 @@ def create_final_presentation(output_path):
         h.alignment = PP_ALIGN.CENTER
         h.space_after = Pt(4)
 
-        is_team_quad = ("TEAM ROORKIES" in q_title)
         for item_segments in q_items:
             p = tf.add_paragraph()
-            p.space_after = Pt(2.0) if is_team_quad else Pt(3.5)
-            p.line_spacing = 1.05 if is_team_quad else 1.15
+            p.space_after = Pt(3.5)
+            p.line_spacing = 1.15
 
             r_bullet = p.add_run()
             r_bullet.text = "• "
             r_bullet.font.name = "Arial"
-            r_bullet.font.size = Pt(11) if is_team_quad else Pt(12)
+            r_bullet.font.size = Pt(12)
             r_bullet.font.bold = True
             r_bullet.font.color.rgb = C_TEXT_DARK
 
@@ -1116,7 +1092,7 @@ def create_final_presentation(output_path):
                 r_seg = p.add_run()
                 r_seg.text = seg_text
                 r_seg.font.name = "Arial"
-                r_seg.font.size = Pt(11) if is_team_quad else Pt(12)
+                r_seg.font.size = Pt(12)
                 if is_link:
                     r_seg.font.bold = True
                     r_seg.font.underline = True
