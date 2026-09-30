@@ -9,7 +9,7 @@ files = {
     "opt1": os.path.join(SOURCE_DIR, "slide5_option1.png"),
     "opt2": os.path.join(SOURCE_DIR, "slide5_option2.png"),
     "opt3": os.path.join(SOURCE_DIR, "slide5_option3.png"),
-    "opt4": os.path.join(SOURCE_DIR, "slide5_option4.png"),
+    "opt4": os.path.join(SOURCE_DIR, "slide5_option4_filled.png"),
 }
 
 b64_data = {}
