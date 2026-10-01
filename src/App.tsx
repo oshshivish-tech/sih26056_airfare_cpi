@@ -314,7 +314,11 @@ export const App: React.FC = () => {
 
         {/* Tab 2: Flight Corridors */}
         {activeTab === 'corridors' && (
-          <RouteHeatmap corridorBreakdown={currentEngineResult.corridorBreakdown} />
+          <div className="space-y-6">
+            <IndiaFlightMap corridorBreakdown={currentEngineResult.corridorBreakdown} />
+            <RouteHeatmap corridorBreakdown={currentEngineResult.corridorBreakdown} />
+            <CorridorAvgTable corridorBreakdown={currentEngineResult.corridorBreakdown} />
+          </div>
         )}
 
         {/* Tab 3: Scraper Monitor */}
