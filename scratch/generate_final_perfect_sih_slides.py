@@ -392,7 +392,7 @@ def create_final_presentation(output_path):
     box_l.line.color.rgb = C_BLUE_TEMPLATE
     box_l.line.width = Pt(1.5)
 
-    tb_l = s3.shapes.add_textbox(start_x + Inches(0.14), col_y + Inches(0.10), col_w_l - Inches(0.28), col_h - Inches(0.20))
+    tb_l = s3.shapes.add_textbox(start_x + Inches(0.14), col_y + Inches(0.08), col_w_l - Inches(0.28), Inches(2.95))
     tf_l = tb_l.text_frame
     tf_l.word_wrap = True
     tf_l.margin_left = tf_l.margin_top = tf_l.margin_right = tf_l.margin_bottom = 0
@@ -400,68 +400,99 @@ def create_final_presentation(output_path):
     p_lh = tf_l.paragraphs[0]
     p_lh.text = "Technologies Used:"
     p_lh.font.name = "Arial"
-    p_lh.font.size = Pt(15)
+    p_lh.font.size = Pt(14)
     p_lh.font.bold = True
     p_lh.font.color.rgb = C_BLUE_TEMPLATE
-    p_lh.space_after = Pt(4)
+    p_lh.space_after = Pt(2)
 
     tech_bullets = [
-        ("• Python 3.13 & FastAPI: ", "Engine & low-latency REST API"),
-        ("• Playwright Headless: ", "Rate-limited compliant collection"),
-        ("• TypeScript & React: ", "MoSPI executive analytics dashboard"),
+        ("• Python 3.13 & FastAPI: ", "High-speed engine & REST API"),
+        ("• Playwright Headless: ", "Compliant, rate-limited collection"),
+        ("• TypeScript & React: ", "MoSPI executive analytics portal"),
         ("• SciPy & NumPy: ", "Dynamic IQR anomaly filtering"),
-        ("• PostgreSQL Timescale: ", "Time-series storage & historical archive"),
-        ("• Cryptography (SHA-256): ", "Merkle batch verification ledger")
+        ("• TimescaleDB: ", "Sovereign time-series data archive"),
+        ("• Cryptography (SHA-256): ", "Merkle audit ledger")
     ]
     for b_lbl, b_txt in tech_bullets:
         p_b = tf_l.add_paragraph()
-        p_b.space_after = Pt(3)
-        p_b.line_spacing = 1.15
+        p_b.space_after = Pt(1.5)
+        p_b.line_spacing = 1.04
         r_bl = p_b.add_run()
         r_bl.text = b_lbl
         r_bl.font.name = "Arial"
-        r_bl.font.size = Pt(12) # Strict 12pt minimum
+        r_bl.font.size = Pt(11)
         r_bl.font.bold = True
         r_bl.font.color.rgb = C_TEXT_DARK
 
         r_bt = p_b.add_run()
         r_bt.text = b_txt
         r_bt.font.name = "Arial"
-        r_bt.font.size = Pt(12) # Strict 12pt minimum
+        r_bt.font.size = Pt(11)
         r_bt.font.color.rgb = C_TEXT_MUTED
 
-    # Prominent Box: DATA ACCESS & COMPLIANCE
-    p_ch_hdr = tf_l.add_paragraph()
-    p_ch_hdr.space_before = Pt(10)
-    p_ch_hdr.space_after = Pt(4)
-    r_ch_t = p_ch_hdr.add_run()
-    r_ch_t.text = "DATA ACCESS & COMPLIANCE"
-    r_ch_t.font.name = "Arial"
-    r_ch_t.font.size = Pt(13)
-    r_ch_t.font.bold = True
-    r_ch_t.font.color.rgb = RGBColor(180, 83, 9) # Amber
+    # Dedicated PROTOTYPE LINK AND QR Box (Replaces DATA ACCESS & COMPLIANCE)
+    qr_card_x = start_x + Inches(0.14)
+    qr_card_y = Inches(4.22)
+    qr_card_w = col_w_l - Inches(0.28)
+    qr_card_h = Inches(2.88)
 
-    compliance_items = [
-        ("• Robots.txt & Terms: ", "Respects robots.txt and site terms; conservative request rates."),
-        ("• Transition Roadmap: ", "Scraping is the prototype path; long-term path is official airline API / NDC feeds or data-sharing MoUs via MoCA/DGCA."),
-        ("• Verifiable Audit: ", "Raw quotes are hashed (SHA-256) and archived for sovereign audit.")
-    ]
-    for c_lbl, c_txt in compliance_items:
-        p_c = tf_l.add_paragraph()
-        p_c.space_after = Pt(3)
-        p_c.line_spacing = 1.15
-        r_cl = p_c.add_run()
-        r_cl.text = c_lbl
-        r_cl.font.name = "Arial"
-        r_cl.font.size = Pt(12) # Strict 12pt minimum
-        r_cl.font.bold = True
-        r_cl.font.color.rgb = C_TEXT_DARK
+    qr_card = s3.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, qr_card_x, qr_card_y, qr_card_w, qr_card_h)
+    qr_card.adjustments[0] = 0.04
+    qr_card.fill.solid()
+    qr_card.fill.fore_color.rgb = C_BLUE_LIGHT_BG
+    qr_card.line.color.rgb = RGBColor(147, 197, 253)
+    qr_card.line.width = Pt(1.2)
 
-        r_ct = p_c.add_run()
-        r_ct.text = c_txt
-        r_ct.font.name = "Arial"
-        r_ct.font.size = Pt(12) # Strict 12pt minimum
-        r_ct.font.color.rgb = C_TEXT_MUTED
+    tb_qr = s3.shapes.add_textbox(qr_card_x + Inches(0.08), qr_card_y + Inches(0.08), qr_card_w - Inches(0.16), Inches(0.42))
+    tf_qr = tb_qr.text_frame
+    tf_qr.word_wrap = True
+    tf_qr.margin_left = tf_qr.margin_top = tf_qr.margin_right = tf_qr.margin_bottom = 0
+
+    p_qrh = tf_qr.paragraphs[0]
+    p_qrh.text = "LIVE INTERACTIVE PROTOTYPE"
+    p_qrh.font.name = "Arial"
+    p_qrh.font.size = Pt(11.5)
+    p_qrh.font.bold = True
+    p_qrh.font.color.rgb = RGBColor(29, 78, 216)
+    p_qrh.alignment = PP_ALIGN.CENTER
+
+    p_qrs = tf_qr.add_paragraph()
+    p_qrs.text = "Scan QR or click below to launch live engine"
+    p_qrs.font.name = "Arial"
+    p_qrs.font.size = Pt(9)
+    p_qrs.font.color.rgb = RGBColor(71, 85, 105)
+    p_qrs.alignment = PP_ALIGN.CENTER
+
+    # QR Code Image (Sharp and Centered)
+    qr_size = Inches(1.26)
+    qr_x = qr_card_x + (qr_card_w - qr_size) / 2
+    qr_y = qr_card_y + Inches(0.52)
+    if os.path.exists(qr_code_img):
+        s3.shapes.add_picture(qr_code_img, qr_x, qr_y, qr_size, qr_size)
+
+    # Clickable Prototype Link
+    tb_link = s3.shapes.add_textbox(qr_card_x + Inches(0.08), qr_card_y + Inches(1.86), qr_card_w - Inches(0.16), Inches(0.85))
+    tf_link = tb_link.text_frame
+    tf_link.word_wrap = True
+    tf_link.margin_left = tf_link.margin_top = tf_link.margin_right = tf_link.margin_bottom = 0
+
+    p_lnk = tf_link.paragraphs[0]
+    r_lnk = p_lnk.add_run()
+    r_lnk.text = "sih26056-airfare-cpi.vercel.app ↗"
+    r_lnk.font.name = "Arial"
+    r_lnk.font.size = Pt(11)
+    r_lnk.font.bold = True
+    r_lnk.font.color.rgb = RGBColor(29, 78, 216)
+    r_lnk.font.underline = True
+    r_lnk.hyperlink.address = "https://sih26056-airfare-cpi.vercel.app"
+    p_lnk.alignment = PP_ALIGN.CENTER
+
+    p_sub = tf_link.add_paragraph()
+    p_sub.text = "Edge Serverless • Real-Time MoSPI Ingestion"
+    p_sub.font.name = "Arial"
+    p_sub.font.size = Pt(8.5)
+    p_sub.font.color.rgb = RGBColor(100, 116, 139)
+    p_sub.alignment = PP_ALIGN.CENTER
 
     # 2. RIGHT SECTION: Workflow Diagram (Top) + Clean 4 Tiers + Consolidated Notes (Bottom)
     right_x = start_x + col_w_l + Inches(0.20)
