@@ -173,10 +173,10 @@ def create_final_presentation(output_path):
     # SLIDE 2: Proposed Solution
     # Bold Headline Message: High-Frequency Real-Time Airfare Index Eliminating 15-Day MoSPI Survey Latency
     # Col 1: THE PROBLEM (Current MoSPI Manual Survey)
-    # Col 2: HOW IT ADDRESSES THE PROBLEM (VayuSuchak Automated Engine)
-    # Col 3: INNOVATION & UNIQUENESS (Unique VayuSuchak Advantages)
+    # Col 2: HOW WE SOLVE IT: (VayuSuchak Engine)
+    # Col 3: WHY IT IS DIFFERENT (Unique VayuSuchak Advantages)
     # Bottom: Full-Width Novelty Callout Box
-    # Executive Color Correction: Deep Sovereign Navy, Muted Brick & Deep Forest Teal
+    # Minimum 12pt body font throughout
     # =========================================================================
     s2 = prs.slides.add_slide(blank_layout)
     bg2 = s2.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, prs.slide_width, prs.slide_height)
@@ -188,152 +188,168 @@ def create_final_presentation(output_path):
         s2,
         "PROPOSED SOLUTION",
         bold_headline="High-Frequency Real-Time Airfare Index Eliminating 15-Day MoSPI Survey Latency",
-        title_font_size=23,
-        title_color=C_NAVY,
-        is_serif=True
+        title_font_size=23
     )
 
-    # Executive Color Palette matching Slide 4
-    C_NAVY_DEEP = RGBColor(30, 58, 138)     # #1E3A8A Executive Navy
-    C_RISK_MUTED = RGBColor(153, 27, 27)    # #991B1B Deep Muted Brick / Wine
-    C_MITIG_TEAL = RGBColor(15, 118, 110)   # #0F766E Deep Sovereign Teal
-    C_CARD_BG = RGBColor(248, 250, 252)     # #F8FAFC Subtle Off-White Slate
-    C_CARD_BORDER = RGBColor(226, 232, 240) # #E2E8F0 Clean 1px border
+    card_y = Inches(1.18)
+    card_h = Inches(5.38)
+    card_w = Inches(3.86)
+    card_gap = Inches(0.32)
+    start_x = Inches(0.55)
 
-    col_data_s2 = [
-        (
-            Inches(0.55), "THE PROBLEM", "CURRENT MOSPI MANUAL SURVEY",
-            C_RISK_MUTED, RGBColor(254, 226, 226),
-            [
+    s2_cards_data = [
+        {
+            "header_bg": RGBColor(254, 202, 202),
+            "header_border": RGBColor(239, 68, 68),
+            "card_bg": RGBColor(255, 245, 245),
+            "card_border": RGBColor(239, 68, 68),
+            "title": "THE PROBLEM",
+            "subtitle": "Current MoSPI Manual Survey",
+            "title_color": RGBColor(153, 27, 27),
+            "sub_color": RGBColor(127, 29, 29),
+            "accent_color": RGBColor(185, 28, 28),
+            "points": [
                 ("1. 15-Day Data Lag", "Manual physical survey delays limit policy responsiveness."),
                 ("2. Static Single Snapshot", "Only 1 single quote collected per route each month."),
                 ("3. Blind to Dynamic Pricing", "Completely misses algorithmic yield spikes and surges."),
                 ("4. Lead-Time Neglect", "Ignores critical emergency vs. advance booking price spreads.")
             ]
-        ),
-        (
-            Inches(4.68), "HOW IT ADDRESSES THE PROBLEM", "VAYUSUCHAK AUTOMATED ENGINE",
-            C_MITIG_TEAL, RGBColor(204, 251, 241),
-            [
+        },
+        {
+            "header_bg": RGBColor(187, 247, 208),
+            "header_border": RGBColor(34, 197, 94),
+            "card_bg": RGBColor(240, 253, 244),
+            "card_border": RGBColor(34, 197, 94),
+            "title": "HOW IT ADDRESSES THE PROBLEM",
+            "subtitle": "VayuSuchak Automated Engine",
+            "title_color": RGBColor(20, 83, 45),
+            "sub_color": RGBColor(21, 128, 61),
+            "accent_color": RGBColor(21, 128, 61),
+            "points": [
                 ("1. Rate-Limited Collection", "Automated compliant daily queries across 4 major airlines."),
                 ("2. 5 Booking Horizons", "Samples 5 forward horizons: T+1, T+7, T+14, T+30, T+45 days."),
                 ("3. Jevons Elementary Index", "UN/ILO geometric mean eliminates upward substitution bias."),
                 ("4. Cryptographic Provenance", "SHA-256 hashes + Merkle roots make tampering detectable.")
             ]
-        ),
-        (
-            Inches(8.81), "INNOVATION & UNIQUENESS", "UNIQUE VAYUSUCHAK ADVANTAGES",
-            C_NAVY_DEEP, RGBColor(219, 234, 254),
-            [
+        },
+        {
+            "header_bg": RGBColor(191, 219, 254),
+            "header_border": RGBColor(59, 130, 246),
+            "card_bg": RGBColor(239, 246, 255),
+            "card_border": RGBColor(59, 130, 246),
+            "title": "INNOVATION & UNIQUENESS",
+            "subtitle": "Unique VayuSuchak Advantages",
+            "title_color": RGBColor(30, 58, 138),
+            "sub_color": RGBColor(29, 78, 216),
+            "accent_color": RGBColor(29, 78, 216),
+            "points": [
                 ("1. Automated Daily Pipeline", "Automated daily pipeline cuts collection lag from ~15 days to under 24 hours."),
                 ("2. Multi-Horizon Coverage", "Multi-horizon coverage of 4 major airlines (IndiGo, Air India, SpiceJet, Akasa), extensible to OTAs."),
                 ("3. Verifiable Rigor", "UN/ILO formula with a hash-based audit trail."),
                 ("4. Open Sovereign Feed", "Direct REST API integration into MoSPI eSankhyiki & RBI MPC.")
             ]
-        )
+        }
     ]
 
-    col_w_s2 = Inches(3.97)
-    col_h_s2 = Inches(5.20)
-    col_y_s2 = Inches(1.15)
-
-    for col_i, (cx, title, subtitle, theme_col, sub_tint, points) in enumerate(col_data_s2):
-        # Outer Column Container: Clean white with subtle institutional border
-        c_col = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, col_y_s2, col_w_s2, col_h_s2)
-        c_col.adjustments[0] = 0.03
-        c_col.fill.solid()
-        c_col.fill.fore_color.rgb = C_WHITE
-        c_col.line.color.rgb = C_BORDER_LIGHT
-        c_col.line.width = Pt(1.2)
-
-        # Header Bar: Deep Executive Tones
-        h_box = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, col_y_s2, col_w_s2, Inches(0.56))
-        h_box.adjustments[0] = 0.18
-        h_box.fill.solid()
-        h_box.fill.fore_color.rgb = theme_col
-        h_box.line.fill.background()
+    for col_idx, col in enumerate(s2_cards_data):
+        cx = start_x + col_idx * (card_w + card_gap)
         
-        tf_h = h_box.text_frame
-        p_h = tf_h.paragraphs[0]
-        p_h.text = title
-        p_h.font.name = "Arial"
-        p_h.font.size = Pt(11) if len(title) > 28 else Pt(11.5)
-        p_h.font.bold = True
-        p_h.font.color.rgb = C_WHITE
-        p_h.alignment = PP_ALIGN.CENTER
+        # Outer Card Container
+        c_box = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, card_y, card_w, card_h)
+        c_box.adjustments[0] = 0.04
+        c_box.fill.solid()
+        c_box.fill.fore_color.rgb = col["card_bg"]
+        c_box.line.color.rgb = col["card_border"]
+        c_box.line.width = Pt(1.5)
+
+        # Top Header Block
+        hdr_h = Inches(0.85)
+        hdr = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, card_y, card_w, hdr_h)
+        hdr.adjustments[0] = 0.16
+        hdr.fill.solid()
+        hdr.fill.fore_color.rgb = col["header_bg"]
+        hdr.line.color.rgb = col["header_border"]
+        hdr.line.width = Pt(1.2)
+
+        tb_h = s2.shapes.add_textbox(cx + Inches(0.10), card_y + Inches(0.06), card_w - Inches(0.20), hdr_h - Inches(0.12))
+        tf_h = tb_h.text_frame
+        tf_h.word_wrap = True
+        tf_h.margin_top = tf_h.margin_bottom = tf_h.margin_left = tf_h.margin_right = 0
         
-        p_sub = tf_h.add_paragraph()
-        p_sub.text = subtitle
-        p_sub.font.name = "Arial"
-        p_sub.font.size = Pt(8.5)
-        p_sub.font.color.rgb = sub_tint
-        p_sub.alignment = PP_ALIGN.CENTER
+        p_ht = tf_h.paragraphs[0]
+        p_ht.text = col["title"]
+        p_ht.font.name = "Arial"
+        p_ht.font.size = Pt(13) if len(col["title"]) > 18 else Pt(15)
+        p_ht.font.bold = True
+        p_ht.font.color.rgb = col["title_color"]
+        p_ht.alignment = PP_ALIGN.CENTER
+        p_ht.space_after = Pt(1)
 
-        # Clean, Uncluttered Cards: Soft Off-White Background with Subtle Neutral Border
-        card_start_y = col_y_s2 + Inches(0.63)
-        step_y = Inches(1.11)
-        card_h = Inches(1.02)
-        for c_idx, (c_head, c_desc) in enumerate(points):
-            card_y_pos = card_start_y + c_idx * step_y
-            
-            card_shape = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx + Inches(0.10), card_y_pos, col_w_s2 - Inches(0.20), card_h)
-            card_shape.adjustments[0] = 0.08
-            card_shape.fill.solid()
-            card_shape.fill.fore_color.rgb = C_CARD_BG
-            card_shape.line.color.rgb = C_CARD_BORDER
-            card_shape.line.width = Pt(1.0)
+        p_hs = tf_h.add_paragraph()
+        p_hs.text = col["subtitle"]
+        p_hs.font.name = "Arial"
+        p_hs.font.size = Pt(12)
+        p_hs.font.bold = True
+        p_hs.font.color.rgb = col["sub_color"]
+        p_hs.alignment = PP_ALIGN.CENTER
 
-            tb_cd = s2.shapes.add_textbox(cx + Inches(0.14), card_y_pos + Inches(0.04), col_w_s2 - Inches(0.28), card_h - Inches(0.08))
-            tf_cd = tb_cd.text_frame
-            tf_cd.word_wrap = True
-            tf_cd.margin_left = tf_cd.margin_right = tf_cd.margin_top = tf_cd.margin_bottom = 0
-            
-            p_ch = tf_cd.paragraphs[0]
-            p_ch.text = c_head
-            p_ch.font.name = "Arial"
-            p_ch.font.size = Pt(11.5)
-            p_ch.font.bold = True
-            p_ch.font.color.rgb = theme_col
+        # Content Box with min 12pt body font
+        tb_c = s2.shapes.add_textbox(cx + Inches(0.20), card_y + hdr_h + Inches(0.15), card_w - Inches(0.40), card_h - hdr_h - Inches(0.22))
+        tf_c = tb_c.text_frame
+        tf_c.word_wrap = True
+        tf_c.margin_top = tf_c.margin_bottom = tf_c.margin_left = tf_c.margin_right = 0
 
-            p_cb = tf_cd.add_paragraph()
-            p_cb.text = c_desc
-            p_cb.font.name = "Arial"
-            p_cb.font.size = Pt(10.5)
-            p_cb.font.color.rgb = C_TEXT_DARK
-            p_cb.line_spacing = 1.08
+        for p_idx, (p_head, p_desc) in enumerate(col["points"]):
+            p_item = tf_c.paragraphs[0] if p_idx == 0 else tf_c.add_paragraph()
+            p_item.space_after = Pt(2)
 
-    # Bottom Full-Width Novelty Callout Box: Executive Navy & Warm Amber Typography
-    nov_y = Inches(6.45)
-    nov_h = Inches(0.80)
-    nov_box = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), nov_y, Inches(12.23), nov_h)
-    nov_box.adjustments[0] = 0.15
+            r_head = p_item.add_run()
+            r_head.text = p_head
+            r_head.font.name = "Arial"
+            r_head.font.size = Pt(13)
+            r_head.font.bold = True
+            r_head.font.color.rgb = col["accent_color"]
+
+            p_body = tf_c.add_paragraph()
+            p_body.space_after = Pt(10)
+            p_body.line_spacing = 1.15
+
+            r_desc = p_body.add_run()
+            r_desc.text = p_desc
+            r_desc.font.name = "Arial"
+            r_desc.font.size = Pt(12) # Strict 12pt minimum
+            r_desc.font.color.rgb = RGBColor(30, 41, 59)
+
+    # Bottom Full-Width Novelty Callout Box
+    nov_y = Inches(6.68)
+    nov_h = Inches(0.58)
+    nov_w = Inches(12.23)
+    nov_box = s2.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, start_x, nov_y, nov_w, nov_h)
+    nov_box.adjustments[0] = 0.2
     nov_box.fill.solid()
-    nov_box.fill.fore_color.rgb = RGBColor(15, 23, 42) # Deep Executive Navy
-    nov_box.line.color.rgb = RGBColor(71, 85, 105)     # Subtle Slate Border
-    nov_box.line.width = Pt(1.2)
+    nov_box.fill.fore_color.rgb = RGBColor(238, 242, 255) # Indigo soft tint
+    nov_box.line.color.rgb = RGBColor(99, 102, 241)
+    nov_box.line.width = Pt(1.5)
 
     tb_nov = nov_box.text_frame
     tb_nov.word_wrap = True
     tb_nov.margin_left = tb_nov.margin_right = tb_nov.margin_top = tb_nov.margin_bottom = 0
-    p_nov1 = tb_nov.paragraphs[0]
-    p_nov1.alignment = PP_ALIGN.CENTER
+    p_nov = tb_nov.paragraphs[0]
+    p_nov.alignment = PP_ALIGN.CENTER
 
-    r_nov_h = p_nov1.add_run()
-    r_nov_h.text = "ARCHITECTURAL NOVELTY & POLICY VALUE: "
-    r_nov_h.font.name = "Arial"
-    r_nov_h.font.size = Pt(11.5)
-    r_nov_h.font.bold = True
-    r_nov_h.font.color.rgb = RGBColor(245, 158, 11) # Warm Amber
-
-    p_nov2 = tb_nov.add_paragraph()
-    p_nov2.alignment = PP_ALIGN.CENTER
-
-    r_nov_b = p_nov2.add_run()
-    r_nov_b.text = "First open, auditable, multi-horizon airfare index using UN/ILO-compliant Jevons aggregation with a cryptographic audit trail."
+    r_nov_b = p_nov.add_run()
+    r_nov_b.text = "★ Novelty: "
     r_nov_b.font.name = "Arial"
-    r_nov_b.font.size = Pt(11)
+    r_nov_b.font.size = Pt(12.5)
     r_nov_b.font.bold = True
-    r_nov_b.font.color.rgb = RGBColor(241, 245, 249)
+    r_nov_b.font.color.rgb = RGBColor(67, 56, 202)
+
+    r_nov_t = p_nov.add_run()
+    r_nov_t.text = "First open, auditable, multi-horizon airfare index using UN/ILO-compliant Jevons aggregation with a cryptographic audit trail."
+    r_nov_t.font.name = "Arial"
+    r_nov_t.font.size = Pt(12)
+    r_nov_t.font.bold = True
+    r_nov_t.font.color.rgb = RGBColor(30, 41, 59)
 
     # =========================================================================
     # SLIDE 3: Technical Approach
