@@ -22,6 +22,11 @@ from typing import Optional, List, Dict
 import io
 import csv
 from datetime import datetime
+import os
+import sys
+
+# Ensure project root is in sys.path when script is executed directly
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from backend.database import FlightDatabaseManager, DB_PATH
 from backend.apix_engine import APIxEngine, DGCA_REPRESENTATIVE_CORRIDORS

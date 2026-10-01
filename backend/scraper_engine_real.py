@@ -16,8 +16,13 @@ import json
 import random
 import time
 import argparse
-from datetime import datetime, timedelta, timezone
+import os
+import sys
 
+# Ensure project root is in sys.path when script is executed directly
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from datetime import datetime, timedelta, timezone
 from backend.config import DATA_METADATA
 
 DEFAULT_USER_AGENT = DATA_METADATA.get(

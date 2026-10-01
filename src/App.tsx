@@ -128,8 +128,10 @@ export const App: React.FC = () => {
           const targetIdx = liveIdx !== -1 ? liveIdx : 11;
           const currentPoint = updated[targetIdx];
 
-          const shortDate = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
-          const livePeriodLabel = `Sep 2026 (Live - ${shortDate})`;
+          const now = new Date();
+          const monthYear = now.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+          const shortDate = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+          const livePeriodLabel = `${monthYear} (Live - ${shortDate})`;
 
           updated[targetIdx] = {
             ...currentPoint,
@@ -189,9 +191,13 @@ export const App: React.FC = () => {
       const targetIdx = liveIdx !== -1 ? liveIdx : updated.length - 1;
       const currentP = updated[targetIdx];
 
+      const now = new Date();
+      const monthYear = now.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+      const shortDate = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+
       updated[targetIdx] = {
         ...currentP,
-        periodLabel: `Sep 2026 (Live GDS - 22 Sep)`,
+        periodLabel: `${monthYear} (Live GDS - ${shortDate})`,
         jevonsIndex: batchJevons,
         dutotIndex: Number(result.dutotIndex.toFixed(1)),
         weightedLaspeyresIndex: Number(result.weightedLaspeyresIndex.toFixed(1)),

@@ -107,10 +107,10 @@ export const MOCK_CPI_HISTORICAL: CPIIndexPoint[] = [
   { date: '2026-06', periodLabel: 'Jun 2026', jevonsIndex: 112.6, dutotIndex: 113.9, weightedLaspeyresIndex: 112.1, officialMoSPICPIBaseline: 110.8, sampleCount: 20500, leadTimeFilter: 'ALL', yoyInflationRate: 7.2, momInflationRate: -4.7 },
   { date: '2026-07', periodLabel: 'Jul 2026', jevonsIndex: 107.4, dutotIndex: 108.1, weightedLaspeyresIndex: 107.0, officialMoSPICPIBaseline: 106.5, sampleCount: 18900, leadTimeFilter: 'ALL', yoyInflationRate: 5.4, momInflationRate: -4.6 },
   { date: '2026-08', periodLabel: 'Aug 2026', jevonsIndex: 109.8, dutotIndex: 110.6, weightedLaspeyresIndex: 109.4, officialMoSPICPIBaseline: 108.2, sampleCount: 21400, leadTimeFilter: 'ALL', yoyInflationRate: 6.1, momInflationRate: 2.2 },
-  { date: '2026-09', periodLabel: 'Sep 2026 (Live - 30 Sep)', jevonsIndex: 111.4, dutotIndex: 112.5, weightedLaspeyresIndex: 111.0, officialMoSPICPIBaseline: 109.5, sampleCount: 26150, leadTimeFilter: 'ALL', yoyInflationRate: 6.9, momInflationRate: 1.5 },
-  { date: '2026-10', periodLabel: 'Oct 2026 (Fcst)', jevonsIndex: 115.8, dutotIndex: 117.1, weightedLaspeyresIndex: 115.4, officialMoSPICPIBaseline: 113.8, sampleCount: 26000, leadTimeFilter: 'ALL', yoyInflationRate: 8.2, momInflationRate: 3.9 },
-  { date: '2026-11', periodLabel: 'Nov 2026 (Fcst)', jevonsIndex: 119.4, dutotIndex: 121.0, weightedLaspeyresIndex: 118.9, officialMoSPICPIBaseline: 117.2, sampleCount: 27500, leadTimeFilter: 'ALL', yoyInflationRate: 9.5, momInflationRate: 3.1 },
-  { date: '2026-12', periodLabel: 'Dec 2026 (Fcst)', jevonsIndex: 122.5, dutotIndex: 124.2, weightedLaspeyresIndex: 122.0, officialMoSPICPIBaseline: 120.1, sampleCount: 29000, leadTimeFilter: 'ALL', yoyInflationRate: 11.2, momInflationRate: 2.6 },
+  { date: '2026-09', periodLabel: 'Sep 2026', jevonsIndex: 111.4, dutotIndex: 112.5, weightedLaspeyresIndex: 111.0, officialMoSPICPIBaseline: 109.5, sampleCount: 26150, leadTimeFilter: 'ALL', yoyInflationRate: 6.9, momInflationRate: 1.5 },
+  { date: '2026-10', periodLabel: 'Oct 2026 (Live - 01 Oct)', jevonsIndex: 112.1, dutotIndex: 113.4, weightedLaspeyresIndex: 111.8, officialMoSPICPIBaseline: 110.2, sampleCount: 3650, leadTimeFilter: 'ALL', yoyInflationRate: 7.2, momInflationRate: 0.6 },
+  { date: '2026-11', periodLabel: 'Nov 2026 (Fcst)', jevonsIndex: 116.8, dutotIndex: 118.2, weightedLaspeyresIndex: 116.4, officialMoSPICPIBaseline: 114.5, sampleCount: 26000, leadTimeFilter: 'ALL', yoyInflationRate: 8.5, momInflationRate: 4.2 },
+  { date: '2026-12', periodLabel: 'Dec 2026 (Fcst)', jevonsIndex: 121.2, dutotIndex: 123.0, weightedLaspeyresIndex: 120.8, officialMoSPICPIBaseline: 118.9, sampleCount: 28500, leadTimeFilter: 'ALL', yoyInflationRate: 10.4, momInflationRate: 3.8 },
 ];
 
 // 30-Day Day-Wise (Daily) Airfare CPI Index & Daily Average Fare Tracking
@@ -167,11 +167,25 @@ export const MOCK_DAILY_CPI: DailyFarePoint[] = [
   { date: '2026-09-27', dayLabel: '27 Sep (Sun)', dailyJevonsIndex: 115.0, dailyAvgFare: 5810, movingAverage7d: 5522, scrapedQuotesCount: 3880, isWeekend: true },
   { date: '2026-09-28', dayLabel: '28 Sep (Mon)', dailyJevonsIndex: 111.4, dailyAvgFare: 5395, movingAverage7d: 5528, scrapedQuotesCount: 3750, isWeekend: false },
   { date: '2026-09-29', dayLabel: '29 Sep (Tue)', dailyJevonsIndex: 106.8, dailyAvgFare: 5179, movingAverage7d: 5518, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-09-30', dayLabel: '30 Sep (Wed - Today)', dailyJevonsIndex: 108.1, dailyAvgFare: 5244, movingAverage7d: 5513, scrapedQuotesCount: 3650, isWeekend: false }
+  { date: '2026-09-30', dayLabel: '30 Sep (Wed)', dailyJevonsIndex: 108.1, dailyAvgFare: 5244, movingAverage7d: 5513, scrapedQuotesCount: 3650, isWeekend: false },
+  { date: '2026-10-01', dayLabel: '01 Oct (Thu)', dailyJevonsIndex: 110.1, dailyAvgFare: 5341, movingAverage7d: 5511, scrapedQuotesCount: 3650, isWeekend: false }
 ];
 
 // Sample Outliers Detected & Excluded by Algorithm
 export const MOCK_OUTLIERS: OutlierRecord[] = [
+  {
+    id: 'out-301',
+    flightNumber: 'AI-4001',
+    corridor: 'DEL ↔ BOM',
+    airline: 'Air India',
+    observedFare: 20296,
+    expectedRouteMedianFare: 5341,
+    zScore: 3.9,
+    iqrBounds: [3472, 8279],
+    action: 'EXCLUDED_FROM_INDEX',
+    reason: 'LAST_MINUTE_SCALPING',
+    timestamp: '2026-10-01 02:00:15'
+  },
   {
     id: 'out-230',
     flightNumber: '6E-3930',

@@ -21,8 +21,13 @@ import time
 import urllib.robotparser
 import urllib.request
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Tuple
+import os
+import sys
 
+# Ensure project root is in sys.path when script is executed directly
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from typing import Dict, List, Optional, Tuple
 from backend.database import FlightDatabaseManager, DB_PATH
 from backend.apix_engine import DGCA_REPRESENTATIVE_CORRIDORS
 from backend.config import DATA_METADATA, BOOKING_HORIZONS

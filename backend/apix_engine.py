@@ -16,6 +16,11 @@ import math
 import numpy as np
 from datetime import datetime, timedelta
 from typing import List, Dict, Tuple, Optional
+import os
+import sys
+
+# Ensure project root is in sys.path when script is executed directly
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from backend.config import REPRESENTATIVE_CORRIDORS, BOOKING_HORIZONS
 
