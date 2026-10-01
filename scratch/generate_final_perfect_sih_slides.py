@@ -141,7 +141,7 @@ def create_final_presentation(output_path):
     tf_s1.margin_left = tf_s1.margin_top = tf_s1.margin_right = tf_s1.margin_bottom = 0
 
     s1_items = [
-        ("• Problem Statement ID –", "26056"),
+        ("• Problem Statement ID –", "SIH26056"),
         ("• Problem Statement Title-", "Development of a Real-time Airfare Price Index for India through Automated Web Scraping of Airline and Online Travel Aggregator Portals for Augmentation of the Consumer Price Index (CPI)."),
         ("• Theme-", "Smart Automation"),
         ("• PS Category-", "Software"),
@@ -228,7 +228,7 @@ def create_final_presentation(output_path):
             "points": [
                 ("1. Rate-Limited Collection", "Automated compliant daily queries across 4 major airlines."),
                 ("2. 5 Booking Horizons", "Samples 5 forward horizons: T+1, T+7, T+14, T+30, T+45 days."),
-                ("3. Jevons Elementary Index", "UN/ILO geometric mean eliminates upward substitution bias."),
+                ("3. Jevons Elementary Index", "UN/ILO geometric mean reduces upward substitution bias."),
                 ("4. Cryptographic Provenance", "SHA-256 hashes + Merkle roots make tampering detectable.")
             ]
         },
@@ -246,7 +246,7 @@ def create_final_presentation(output_path):
                 ("1. Automated Daily Pipeline", "Automated daily pipeline cuts collection lag from ~15 days to under 24 hours."),
                 ("2. Multi-Horizon Coverage", "Multi-horizon coverage of 4 major airlines (IndiGo, Air India, SpiceJet, Akasa), extensible to OTAs."),
                 ("3. Verifiable Rigor", "UN/ILO formula with a hash-based audit trail."),
-                ("4. Open Sovereign Feed", "Direct REST API integration into MoSPI eSankhyiki & RBI MPC.")
+                ("4. Open Sovereign Feed", "REST API designed for MoSPI eSankhyiki & RBI MPC.")
             ]
         }
     ]
@@ -408,9 +408,9 @@ def create_final_presentation(output_path):
     tech_bullets = [
         ("• Python 3.13 & FastAPI: ", "High-speed engine & REST API"),
         ("• Playwright Headless: ", "Compliant, rate-limited collection"),
-        ("• TypeScript & React: ", "MoSPI executive analytics portal"),
+        ("• TypeScript & React: ", "Policy analytics dashboard"),
         ("• SciPy & NumPy: ", "Dynamic IQR anomaly filtering"),
-        ("• TimescaleDB: ", "Sovereign time-series data archive"),
+        ("• PostgreSQL: ", "Sovereign time-series data archive"),
         ("• Cryptography (SHA-256): ", "Merkle audit ledger")
     ]
     for b_lbl, b_txt in tech_bullets:
@@ -620,9 +620,9 @@ def create_final_presentation(output_path):
     def_items = [
         ("• Elementary Aggregate: ", "Same route + same booking-horizon bucket + same cabin + non-stop."),
         ("• Axiomatic Rigor: ", "Jevons geometric mean per UN/ILO CPI Manual Ch. 10; satisfies the time-reversal test."),
-        ("• Base Period: ", "Base period: October 2025 = 100.0; new routes/carriers enter via chain-linking at the next January/rebase."),
+        ("• Base Period: ", "October 2025 = 100.0; new routes/carriers enter via chain-linking at the next January/rebase."),
         ("• Harmonized Weights: ", "Delhi–Mumbai 18.2% basket / 14.8% DGCA share, Bengaluru–Delhi 13.5% basket / 11.0% DGCA share, cited to DGCA Domestic City-Pair Traffic Report, Dec 2024."),
-        ("• Cryptographic Ledger: ", "SHA-256 hashing + Merkle batch roots make tampering detectable; Low-latency REST API (FastAPI) < 35 ms response latency.")
+        ("• Cryptographic Ledger: ", "SHA-256 hashing + Merkle batch roots make tampering detectable; Low-latency REST API (FastAPI).")
     ]
 
     for d_idx, (d_lbl, d_txt) in enumerate(def_items):
@@ -660,7 +660,7 @@ def create_final_presentation(output_path):
     add_template_top_bar(
         s4,
         "FEASIBILITY AND VIABILITY",
-        bold_headline="Operationally Feasible, Legally Sound, and Scalable Nationwide",
+        bold_headline="Compliance-Aware and Scalable Nationwide",
         title_font_size=23,
         title_color=C_NAVY,
         is_serif=True
@@ -681,7 +681,7 @@ def create_final_presentation(output_path):
                 ("Infrastructure Feasibility", "Leverages standard cloud and public web portals; zero airport hardware installation required."),
                 ("Operational Scalability", "Deployed across 12 core metro routes initially; scalable nationwide to 250+ UDAN regional corridors."),
                 ("Financial Feasibility", "Estimated operating cost: ₹4,500/month (hosting ₹1,200 + storage ₹1,800 + collection ₹1,500)."),
-                ("Authority Integration", "Native REST API and JSON feeds integrate directly into MoSPI eSankhyiki, RBI MPC, and DGCA portals.")
+                ("Authority Integration", "Native REST API and JSON feeds designed to integrate with MoSPI eSankhyiki, RBI MPC, and DGCA portals.")
             ]
         ),
         (
@@ -690,7 +690,7 @@ def create_final_presentation(output_path):
             [
                 ("Portal Layout Drift", "Airlines periodically alter front-end markup and CSS classes, risking scraper parser failure."),
                 ("Rate-Limits & Throttling", "High-frequency automated queries risk triggering HTTP 429/503 rate-limits or IP restrictions."),
-                ("Dynamic Pricing Outliers", "Algorithmic yield surges and last-minute booking scalping introduce extreme statistical noise."),
+                ("Dynamic Pricing Outliers", "Algorithmic yield surges and last-minute fare spikes introduce extreme statistical noise."),
                 ("Schedule Sparsity", "Infrequent or seasonal UDAN regional flight schedules risk creating missing daily quote gaps.")
             ]
         ),
@@ -700,7 +700,7 @@ def create_final_presentation(output_path):
             [
                 ("Modular Resilient Parsers", "Decoupled JSON network request interceptors with automated DOM selector breakage alerts."),
                 ("Compliant Pacing & MoUs", "Polite delays (1.5–3.0s), off-peak harvesting (2–4 AM), and roadmap to airline NDC feeds."),
-                ("Dynamic IQR Anomaly Scrubber", "Statistical bounds [Q1 - 1.5·IQR, Q3 + 2.0·IQR] dynamically prune extreme scalping spikes."),
+                ("Dynamic IQR Anomaly Scrubber", "Statistical bounds [Q1 - 1.5·IQR, Q3 + 2.0·IQR] dynamically prune extreme surge spikes."),
                 ("Phased Rollout & Fallback", "Phased expansion ordered by DGCA passenger volume share with forward-carry imputation.")
             ]
         )
@@ -864,13 +864,13 @@ def create_final_presentation(output_path):
 
     impact_cards = [
         (
-            "⚡ Zero Policy Lag (<24h vs ~15d)",
+            "⚡ Near-real-time Collection (<24h vs ~15d)",
             "Price collection cut from ~15 days to under 24 hours via rate-limited compliant harvesting.",
             RGBColor(37, 99, 235), RGBColor(239, 246, 255)
         ),
         (
-            "📊 Denser Route Coverage (3,650+/day)",
-            "3,650+ quotes/day across 12 routes x 4 airlines x 5 horizons (vs 1 single quote/route/month).",
+            "📊 Denser Route Coverage (240 quotes/run)",
+            "240 quotes/run across 12 routes × 4 airlines × 5 horizons (vs 1 single quote/route/month in manual survey).",
             RGBColor(14, 116, 144), RGBColor(240, 249, 255)
         ),
         (
@@ -879,8 +879,8 @@ def create_final_presentation(output_path):
             RGBColor(109, 40, 217), RGBColor(245, 243, 255)
         ),
         (
-            "🎯 Sovereign CPI Validation (r = 0.89)",
-            "Back-tested against official CPI air-fare component; sovereign series back-test planned with NSO.",
+            "🎯 Validation Planned",
+            "Back-test against the official CPI air-fare series planned with MoSPI NSO.",
             RGBColor(194, 65, 12), RGBColor(255, 247, 237)
         )
     ]
@@ -1059,7 +1059,7 @@ def create_final_presentation(output_path):
     p_cap4_b = tf_cap4.add_paragraph()
     p_cap4_b.alignment = PP_ALIGN.CENTER
     r_cap4_b = p_cap4_b.add_run()
-    r_cap4_b.text = "Live Benchmark: 111.4 • 12 Corridors Monitored • MoSPI eSankhyiki Aligned"
+    r_cap4_b.text = "Prototype benchmark: 111.4 • 12 Corridors Monitored"
     r_cap4_b.font.name = "Arial"
     r_cap4_b.font.size = Pt(9.5)
     r_cap4_b.font.bold = True
@@ -1108,7 +1108,7 @@ def create_final_presentation(output_path):
                 ],
                 [
                     ("UN, ILO, IMF, OECD, World Bank (2020). CPI Manual: Concepts & Methods, Ch. 10 Elementary Indices. ", False, None),
-                    ("[ilo.org/cpi-manual ↗]", True, "https://www.ilo.org/global/statistics-and-databases/standards-and-guidelines/manuals-and-guides/WCMS_761444/lang--en/index.htm")
+                    ("[ilo.org/cpi-manual ↗]", True, "https://www.ilo.org/global/statistics-and-databases/lang--en/index.htm")
                 ],
                 [
                     ("Diewert, W. E. (2004). 'Elementary Indices.' In Consumer Price Index Theory, IMF Handbook. ", False, None),
@@ -1123,11 +1123,11 @@ def create_final_presentation(output_path):
             [
                 [
                     ("DGCA India: Monthly Scheduled Domestic Passenger Traffic & Route Shares. ", False, None),
-                    ("[dgca.gov.in ↗]", True, "https://www.dgca.gov.in")
+                    ("[dgca.gov.in/traffic ↗]", True, "https://www.dgca.gov.in/digigov-portal/?page=4265/4206/servicename")
                 ],
                 [
                     ("MoSPI NSO: Consumer Price Index Concepts & Methods Guidelines (Base 2012=100). ", False, None),
-                    ("[mospi.gov.in ↗]", True, "https://mospi.gov.in")
+                    ("[mospi.gov.in/cpi ↗]", True, "https://mospi.gov.in/consumer-price-index")
                 ],
                 [
                     ("Direct Airline Portals: Daily Fare Quotes across IndiGo, Air India, SpiceJet, Akasa. ", False, None),
@@ -1143,16 +1143,14 @@ def create_final_presentation(output_path):
             RGBColor(15, 23, 42), RGBColor(248, 250, 252),
             [
                 [
-                    ("Index Formulation: UN/ILO Jevons Geometric Mean Specification & DGCA weighting. ", False, None),
-                    ("[ilo.org/manual ↗]", True, "https://www.ilo.org")
+                    ("Index Formulation: UN/ILO Jevons Geometric Mean Specification & DGCA weighting.", False, None)
                 ],
                 [
                     ("Harvester Engine: Playwright Headless with Rate-Limited, Robots.txt-Aware Policy. ", False, None),
-                    ("[playwright.dev ↗]", True, "https://playwright.dev")
+                    ("[playwright.dev/python ↗]", True, "https://playwright.dev/python/docs/intro")
                 ],
                 [
-                    ("Provenance Vault: SHA-256 Hashing + Merkle Batch Roots for Audit Integrity. ", False, None),
-                    ("[data.gov.in/ndsap ↗]", True, "https://data.gov.in")
+                    ("Provenance Vault: SHA-256 Hashing + Merkle Batch Roots for Audit Integrity.", False, None)
                 ],
                 [
                     ("Production Deployment: Live Edge Serverless Prototype Dashboard. ", False, None),
@@ -1170,12 +1168,8 @@ def create_final_presentation(output_path):
                     ("[GitHub Repository ↗]", True, "https://github.com/oshshivish-tech/sih26056_airfare_cpi")
                 ],
                 [
-                    ("NDSAP Open Data Compliance: Adheres to National Data Sharing and Accessibility Policy. ", False, None),
+                    ("Aligned with NDSAP: Adheres to National Data Sharing and Accessibility Policy. ", False, None),
                     ("[data.gov.in/ndsap ↗]", True, "https://data.gov.in")
-                ],
-                [
-                    ("OpenAPI 3.0 Documentation: Interactive REST specifications and Swagger UI for ministry integration. ", False, None),
-                    ("[API Documentation (/docs) ↗]", True, "https://sih26056-airfare-cpi.vercel.app/docs")
                 ],
                 [
                     ("Automated Pipeline Verification: Nightly unit tests validate Jevons index math and dynamic IQR bounds. ", False, None),
@@ -1209,7 +1203,7 @@ def create_final_presentation(output_path):
 
         for item_segments in q_items:
             p = tf.add_paragraph()
-            p.space_after = Pt(3.5)
+            p.space_after = Pt(7) if len(q_items) <= 3 else Pt(3.5)
             p.line_spacing = 1.15
 
             r_bullet = p.add_run()
