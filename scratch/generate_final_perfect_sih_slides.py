@@ -488,7 +488,7 @@ def create_final_presentation(output_path):
     p_lnk.alignment = PP_ALIGN.CENTER
 
     p_sub = tf_link.add_paragraph()
-    p_sub.text = "Edge Serverless • Real-Time MoSPI Ingestion"
+    p_sub.text = "Edge Serverless • Live Prototype Dashboard"
     p_sub.font.name = "Arial"
     p_sub.font.size = Pt(8.5)
     p_sub.font.color.rgb = RGBColor(100, 116, 139)
@@ -565,7 +565,7 @@ def create_final_presentation(output_path):
 
     tb_bb = banner_b.text_frame
     p_bb = tb_bb.paragraphs[0]
-    p_bb.text = "CORE INDEXING METHODOLOGY & SPECIFICATIONS (UN/ILO MANUAL CH. 10)"
+    p_bb.text = "CORE INDEXING METHODOLOGY & SPECIFICATIONS (UN/ILO CPI MANUAL)"
     p_bb.font.name = "Arial"
     p_bb.font.size = Pt(12)
     p_bb.font.bold = True
@@ -619,9 +619,9 @@ def create_final_presentation(output_path):
 
     def_items = [
         ("• Elementary Aggregate: ", "Same route + same booking-horizon bucket + same cabin + non-stop."),
-        ("• Axiomatic Rigor: ", "Jevons geometric mean per UN/ILO CPI Manual Ch. 10; satisfies the time-reversal test."),
+        ("• Axiomatic Rigor: ", "Jevons geometric mean per UN/ILO CPI Manual; satisfies the time-reversal test."),
         ("• Base Period: ", "October 2025 = 100.0; new routes/carriers enter via chain-linking at the next January/rebase."),
-        ("• Harmonized Weights: ", "Delhi–Mumbai 18.2% basket / 14.8% DGCA share, Bengaluru–Delhi 13.5% basket / 11.0% DGCA share, cited to DGCA Domestic City-Pair Traffic Report, Dec 2024."),
+        ("• Harmonized Weights: ", "Illustrative weights from DGCA city-pair data (e.g., Delhi–Mumbai 18.2% basket / 14.8% raw share, Bengaluru–Delhi 13.5% basket / 11.0% raw share)."),
         ("• Cryptographic Ledger: ", "SHA-256 hashing + Merkle batch roots make tampering detectable; Low-latency REST API (FastAPI).")
     ]
 
@@ -679,7 +679,7 @@ def create_final_presentation(output_path):
             C_NAVY_DEEP,
             [
                 ("Infrastructure Feasibility", "Leverages standard cloud and public web portals; zero airport hardware installation required."),
-                ("Operational Scalability", "Deployed across 12 core metro routes initially; scalable nationwide to 250+ UDAN regional corridors."),
+                ("Operational Scalability", "Piloted on 12 core metro routes initially; scalable nationwide to 250+ UDAN regional corridors."),
                 ("Financial Feasibility", "Estimated operating cost: ₹4,500/month (hosting ₹1,200 + storage ₹1,800 + collection ₹1,500)."),
                 ("Authority Integration", "Native REST API and JSON feeds designed to integrate with MoSPI eSankhyiki, RBI MPC, and DGCA portals.")
             ]
@@ -869,8 +869,8 @@ def create_final_presentation(output_path):
             RGBColor(37, 99, 235), RGBColor(239, 246, 255)
         ),
         (
-            "📊 Denser Route Coverage (240 quotes/run)",
-            "240 quotes/run across 12 routes × 4 airlines × 5 horizons (vs 1 single quote/route/month in manual survey).",
+            "📊 Denser Route Coverage (240 quotes per daily run)",
+            "240 quotes per daily run across 12 routes × 4 airlines × 5 horizons (vs 1 single quote/route/month in manual survey).",
             RGBColor(14, 116, 144), RGBColor(240, 249, 255)
         ),
         (
@@ -964,7 +964,7 @@ def create_final_presentation(output_path):
         (
             "🏛️ POLICY & INSTITUTIONAL",
             RGBColor(180, 83, 9), RGBColor(254, 252, 232),
-            ("Sovereign NSO feed: ", "automated API ingestion into MoSPI eSankhyiki and NDAP; abnormal fare surges flagged to DGCA for review")
+            ("Sovereign NSO feed: ", "API designed for ingestion into MoSPI eSankhyiki and NDAP; abnormal fare surges flagged to DGCA for review")
         )
     ]
 
@@ -1050,7 +1050,7 @@ def create_final_presentation(output_path):
     p_cap4 = tf_cap4.paragraphs[0]
     p_cap4.alignment = PP_ALIGN.CENTER
     r_cap4 = p_cap4.add_run()
-    r_cap4.text = "Geometric-mean (Jevons) aggregation avoids upward substitution bias (Diewert, 2004)."
+    r_cap4.text = "Geometric-mean (Jevons) aggregation reduces upward substitution bias (Diewert, 2004)."
     r_cap4.font.name = "Arial"
     r_cap4.font.size = Pt(10)
     r_cap4.font.bold = True
@@ -1068,7 +1068,7 @@ def create_final_presentation(output_path):
     p_cap4_c = tf_cap4.add_paragraph()
     p_cap4_c.alignment = PP_ALIGN.CENTER
     r_cap4_c = p_cap4_c.add_run()
-    r_cap4_c.text = "High-frequency daily collection eliminates 15-day policy latency for RBI MPC & MoSPI."
+    r_cap4_c.text = "High-frequency daily collection cuts 15-day policy latency for RBI MPC & MoSPI."
     r_cap4_c.font.name = "Arial"
     r_cap4_c.font.size = Pt(8.5)
     r_cap4_c.font.color.rgb = C_TEXT_MUTED
@@ -1107,12 +1107,12 @@ def create_final_presentation(output_path):
                     ("[doi:10.1257/jep.30.2.151 ↗]", True, "https://doi.org/10.1257/jep.30.2.151")
                 ],
                 [
-                    ("UN, ILO, IMF, OECD, World Bank (2020). CPI Manual: Concepts & Methods, Ch. 10 Elementary Indices. ", False, None),
-                    ("[ilo.org/cpi-manual ↗]", True, "https://www.ilo.org/global/statistics-and-databases/lang--en/index.htm")
+                    ("UN, ILO, IMF, OECD, World Bank (2020). CPI Manual: Concepts and Methods, Elementary Indices. ", False, None),
+                    ("[ilo.org/cpi-manual ↗]", True, "https://www.ilo.org/global/statistics-and-databases/publications/WCMS_761444/lang--en/index.htm")
                 ],
                 [
-                    ("Diewert, W. E. (2004). 'Elementary Indices.' In Consumer Price Index Theory, IMF Handbook. ", False, None),
-                    ("[imf.org/cpi-theory ↗]", True, "https://www.imf.org/external/pubs/ft/cpi/")
+                    ("Diewert, W. E. (2004). 'Elementary Indices,' CPI Manual: Theory and Practice (ILO et al., 2004). ", False, None),
+                    ("[ilo.org/cpi-theory ↗]", True, "https://webapps.ilo.org/CPI/CPI_Manual.html")
                 ]
             ]
         ),
@@ -1123,11 +1123,11 @@ def create_final_presentation(output_path):
             [
                 [
                     ("DGCA India: Monthly Scheduled Domestic Passenger Traffic & Route Shares. ", False, None),
-                    ("[dgca.gov.in/traffic ↗]", True, "https://www.dgca.gov.in/digigov-portal/?page=4265/4206/servicename")
+                    ("[dgca.gov.in ↗]", True, "https://www.dgca.gov.in/digigov-portal/?page=4265/4206/servicename")
                 ],
                 [
                     ("MoSPI NSO: Consumer Price Index Concepts & Methods Guidelines (Base 2012=100). ", False, None),
-                    ("[mospi.gov.in/cpi ↗]", True, "https://mospi.gov.in/consumer-price-index")
+                    ("[mospi.gov.in ↗]", True, "https://mospi.gov.in/consumer-price-index")
                 ],
                 [
                     ("Direct Airline Portals: Daily Fare Quotes across IndiGo, Air India, SpiceJet, Akasa. ", False, None),
@@ -1172,7 +1172,7 @@ def create_final_presentation(output_path):
                     ("[data.gov.in/ndsap ↗]", True, "https://data.gov.in")
                 ],
                 [
-                    ("Automated Pipeline Verification: Nightly unit tests validate Jevons index math and dynamic IQR bounds. ", False, None),
+                    ("Automated Pipeline Verification: Scheduled daily pipeline runs & unit tests validate Jevons index math. ", False, None),
                     ("[CI/CD Pipeline ↗]", True, "https://github.com/oshshivish-tech/sih26056_airfare_cpi/actions")
                 ]
             ]
