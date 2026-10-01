@@ -818,7 +818,7 @@ def create_final_presentation(output_path):
 
     # Three-Column Layout (Refined Option 4)
     col_y = Inches(1.15)
-    col_h = Inches(5.25)
+    col_h = Inches(6.05)
     c1_x = Inches(0.55)
     c1_w = Inches(3.75)
     c2_x = Inches(4.45)
@@ -836,7 +836,7 @@ def create_final_presentation(output_path):
     b_c1.line.color.rgb = C_BLUE_TEMPLATE
     b_c1.line.width = Pt(1.5)
 
-    tb_c1_h = s5.shapes.add_textbox(c1_x + Inches(0.12), col_y + Inches(0.08), c1_w - Inches(0.24), Inches(0.42))
+    tb_c1_h = s5.shapes.add_textbox(c1_x + Inches(0.12), col_y + Inches(0.08), c1_w - Inches(0.24), Inches(0.44))
     tf_c1_h = tb_c1_h.text_frame
     tf_c1_h.margin_left = tf_c1_h.margin_top = tf_c1_h.margin_right = tf_c1_h.margin_bottom = 0
     p_c1h = tf_c1_h.paragraphs[0]
@@ -876,20 +876,20 @@ def create_final_presentation(output_path):
         )
     ]
 
-    card_start_y = col_y + Inches(0.52)
-    card_h = Inches(1.06)
-    card_step = Inches(1.15)
+    card_start_y = col_y + Inches(0.55)
+    card_h = Inches(1.24)
+    card_step = Inches(1.35)
 
     for i_idx, (i_title, i_desc, i_col, i_bg) in enumerate(impact_cards):
         cy = card_start_y + i_idx * card_step
         ic_shape = s5.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, c1_x + Inches(0.10), cy, c1_w - Inches(0.20), card_h)
-        ic_shape.adjustments[0] = 0.10
+        ic_shape.adjustments[0] = 0.08
         ic_shape.fill.solid()
         ic_shape.fill.fore_color.rgb = i_bg
         ic_shape.line.color.rgb = i_col
         ic_shape.line.width = Pt(1.2)
 
-        tb_ic = s5.shapes.add_textbox(c1_x + Inches(0.16), cy + Inches(0.06), c1_w - Inches(0.32), card_h - Inches(0.12))
+        tb_ic = s5.shapes.add_textbox(c1_x + Inches(0.16), cy + Inches(0.08), c1_w - Inches(0.32), card_h - Inches(0.16))
         tf_ic = tb_ic.text_frame
         tf_ic.word_wrap = True
         tf_ic.margin_left = tf_ic.margin_top = tf_ic.margin_right = tf_ic.margin_bottom = 0
@@ -897,17 +897,17 @@ def create_final_presentation(output_path):
         p_it = tf_ic.paragraphs[0]
         p_it.text = i_title
         p_it.font.name = "Arial"
-        p_it.font.size = Pt(10.5)
+        p_it.font.size = Pt(11)
         p_it.font.bold = True
         p_it.font.color.rgb = i_col
-        p_it.space_after = Pt(2)
+        p_it.space_after = Pt(3)
 
         p_id = tf_ic.add_paragraph()
         p_id.text = i_desc
         p_id.font.name = "Arial"
         p_id.font.size = Pt(10)
         p_id.font.color.rgb = C_TEXT_DARK
-        p_id.line_spacing = 1.08
+        p_id.line_spacing = 1.14
 
     # =========================================================================
     # COLUMN 2: CATEGORIZED BENEFITS (4 Stacked Benefit Cards)
@@ -919,7 +919,7 @@ def create_final_presentation(output_path):
     b_c2.line.color.rgb = C_GREEN_TEMPLATE
     b_c2.line.width = Pt(1.5)
 
-    tb_c2_h = s5.shapes.add_textbox(c2_x + Inches(0.12), col_y + Inches(0.08), c2_w - Inches(0.24), Inches(0.42))
+    tb_c2_h = s5.shapes.add_textbox(c2_x + Inches(0.12), col_y + Inches(0.08), c2_w - Inches(0.24), Inches(0.44))
     tf_c2_h = tb_c2_h.text_frame
     tf_c2_h.margin_left = tf_c2_h.margin_top = tf_c2_h.margin_right = tf_c2_h.margin_bottom = 0
     p_c2_h = tf_c2_h.paragraphs[0]
@@ -959,18 +959,18 @@ def create_final_presentation(output_path):
         )
     ]
 
-    b_step_y = Inches(1.15)
-    b_sub_h = Inches(1.06)
+    b_step_y = Inches(1.35)
+    b_sub_h = Inches(1.24)
     for b_idx, (b_title, b_theme, b_bg, (b_lbl, b_desc)) in enumerate(benefit_boxes):
-        by = col_y + Inches(0.52) + b_idx * b_step_y
+        by = col_y + Inches(0.55) + b_idx * b_step_y
         b_sub = s5.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, c2_x + Inches(0.10), by, c2_w - Inches(0.20), b_sub_h)
-        b_sub.adjustments[0] = 0.10
+        b_sub.adjustments[0] = 0.08
         b_sub.fill.solid()
         b_sub.fill.fore_color.rgb = b_bg
         b_sub.line.color.rgb = b_theme
         b_sub.line.width = Pt(1.2)
 
-        tb_sub = s5.shapes.add_textbox(c2_x + Inches(0.14), by + Inches(0.06), c2_w - Inches(0.28), b_sub_h - Inches(0.12))
+        tb_sub = s5.shapes.add_textbox(c2_x + Inches(0.14), by + Inches(0.08), c2_w - Inches(0.28), b_sub_h - Inches(0.16))
         tf_sub = tb_sub.text_frame
         tf_sub.word_wrap = True
         tf_sub.margin_left = tf_sub.margin_top = tf_sub.margin_right = tf_sub.margin_bottom = 0
@@ -978,13 +978,13 @@ def create_final_presentation(output_path):
         p_sh = tf_sub.paragraphs[0]
         p_sh.text = b_title
         p_sh.font.name = "Arial"
-        p_sh.font.size = Pt(10.5)
+        p_sh.font.size = Pt(11)
         p_sh.font.bold = True
         p_sh.font.color.rgb = b_theme
-        p_sh.space_after = Pt(2)
+        p_sh.space_after = Pt(3)
 
         p_sb = tf_sub.add_paragraph()
-        p_sb.line_spacing = 1.08
+        p_sb.line_spacing = 1.14
         r_sb1 = p_sb.add_run()
         r_sb1.text = b_lbl
         r_sb1.font.name = "Arial"
@@ -1008,71 +1008,61 @@ def create_final_presentation(output_path):
     b_c3.line.color.rgb = C_BLUE_TEMPLATE
     b_c3.line.width = Pt(1.5)
 
-    tb_c3_h = s5.shapes.add_textbox(c3_x + Inches(0.10), col_y + Inches(0.10), c3_w - Inches(0.20), Inches(0.26))
+    tb_c3_h = s5.shapes.add_textbox(c3_x + Inches(0.10), col_y + Inches(0.08), c3_w - Inches(0.20), Inches(0.30))
     tf_c3_h = tb_c3_h.text_frame
     p_c3_h = tf_c3_h.paragraphs[0]
     p_c3_h.text = "PROTOTYPE IMAGE 1: Dashboard"
     p_c3_h.font.name = "Arial"
-    p_c3_h.font.size = Pt(10.5)
+    p_c3_h.font.size = Pt(11)
     p_c3_h.font.bold = True
     p_c3_h.font.color.rgb = C_RED_TEMPLATE
 
-    chart_y4 = col_y + Inches(0.42)
+    chart_y4 = col_y + Inches(0.40)
     chart_w4 = c3_w - Inches(0.20)
-    chart_h4 = Inches(4.00)
+    chart_h4 = Inches(4.40)
     if os.path.exists(proto_chart):
         s5.shapes.add_picture(proto_chart, c3_x + Inches(0.10), chart_y4, chart_w4, chart_h4)
 
-    tb_cap4 = s5.shapes.add_textbox(c3_x + Inches(0.10), col_y + Inches(4.48), chart_w4, Inches(0.70))
+    # Highlight Card below Chart
+    sub_box_y = col_y + Inches(4.88)
+    sub_box_h = Inches(1.05)
+    sub_box = s5.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, c3_x + Inches(0.10), sub_box_y, chart_w4, sub_box_h)
+    sub_box.adjustments[0] = 0.06
+    sub_box.fill.solid()
+    sub_box.fill.fore_color.rgb = C_BLUE_LIGHT_BG
+    sub_box.line.color.rgb = RGBColor(191, 219, 254)
+    sub_box.line.width = Pt(1.0)
+
+    tb_cap4 = s5.shapes.add_textbox(c3_x + Inches(0.14), sub_box_y + Inches(0.06), chart_w4 - Inches(0.08), sub_box_h - Inches(0.12))
     tf_cap4 = tb_cap4.text_frame
     tf_cap4.word_wrap = True
+    tf_cap4.margin_left = tf_cap4.margin_top = tf_cap4.margin_right = tf_cap4.margin_bottom = 0
+
     p_cap4 = tf_cap4.paragraphs[0]
     p_cap4.alignment = PP_ALIGN.CENTER
     r_cap4 = p_cap4.add_run()
-    r_cap4.text = "Geometric-mean (Jevons) aggregation avoids upward bias (Diewert, 2004). Route breakdown in live prototype."
+    r_cap4.text = "Geometric-mean (Jevons) aggregation avoids upward substitution bias (Diewert, 2004)."
     r_cap4.font.name = "Arial"
-    r_cap4.font.size = Pt(9.5)
+    r_cap4.font.size = Pt(10)
     r_cap4.font.bold = True
     r_cap4.font.color.rgb = C_NAVY
 
-    # Bottom of Slide 5: Live Prototype Link Banner Pill + QR Code!
-    pill_proto = s5.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), Inches(6.55), Inches(12.23), Inches(0.80))
-    pill_proto.adjustments[0] = 0.2
-    pill_proto.fill.solid()
-    pill_proto.fill.fore_color.rgb = RGBColor(16, 185, 129) # Emerald Green
-    pill_proto.line.fill.background()
+    p_cap4_b = tf_cap4.add_paragraph()
+    p_cap4_b.alignment = PP_ALIGN.CENTER
+    r_cap4_b = p_cap4_b.add_run()
+    r_cap4_b.text = "Live Benchmark: 111.4 • 12 Corridors Monitored • MoSPI eSankhyiki Aligned"
+    r_cap4_b.font.name = "Arial"
+    r_cap4_b.font.size = Pt(9.5)
+    r_cap4_b.font.bold = True
+    r_cap4_b.font.color.rgb = RGBColor(2, 132, 199)
 
-    # Embed QR Code on right side of banner
-    if os.path.exists(qr_code_img):
-        s5.shapes.add_picture(qr_code_img, Inches(11.95), Inches(6.58), Inches(0.74), Inches(0.74))
-
-    tf_pp = pill_proto.text_frame
-    tf_pp.margin_left = tf_pp.margin_right = tf_pp.margin_top = tf_pp.margin_bottom = 0
-    p_pp = tf_pp.paragraphs[0]
-    p_pp.alignment = PP_ALIGN.LEFT
-
-    r_pp1 = p_pp.add_run()
-    r_pp1.text = "  🚀 Live Interactive Prototype: "
-    r_pp1.font.name = "Arial"
-    r_pp1.font.size = Pt(13)
-    r_pp1.font.bold = True
-    r_pp1.font.color.rgb = C_WHITE
-
-    r_pp2 = p_pp.add_run()
-    r_pp2.text = "https://sih26056-airfare-cpi.vercel.app ↗"
-    r_pp2.font.name = "Arial"
-    r_pp2.font.size = Pt(13)
-    r_pp2.font.bold = True
-    r_pp2.font.underline = True
-    r_pp2.font.color.rgb = C_WHITE
-    r_pp2.hyperlink.address = "https://sih26056-airfare-cpi.vercel.app"
-
-    p_pp_sub = tf_pp.add_paragraph()
-    r_pp3 = p_pp_sub.add_run()
-    r_pp3.text = "   Open API for ministries, regulators and researchers | Scan QR code on right to explore live"
-    r_pp3.font.name = "Arial"
-    r_pp3.font.size = Pt(12)
-    r_pp3.font.color.rgb = RGBColor(240, 253, 244)
+    p_cap4_c = tf_cap4.add_paragraph()
+    p_cap4_c.alignment = PP_ALIGN.CENTER
+    r_cap4_c = p_cap4_c.add_run()
+    r_cap4_c.text = "High-frequency daily collection eliminates 15-day policy latency for RBI MPC & MoSPI."
+    r_cap4_c.font.name = "Arial"
+    r_cap4_c.font.size = Pt(8.5)
+    r_cap4_c.font.color.rgb = C_TEXT_MUTED
 
     # =========================================================================
     # SLIDE 6: Research and References
