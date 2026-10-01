@@ -666,10 +666,17 @@ def create_final_presentation(output_path):
         is_serif=True
     )
 
+    # Executive Color Correction: Deep Sovereign Navy, Muted Brick & Deep Teal
+    C_NAVY_DEEP = RGBColor(30, 58, 138)     # #1E3A8A Executive Navy
+    C_RISK_MUTED = RGBColor(153, 27, 27)    # #991B1B Deep Muted Brick / Wine
+    C_MITIG_TEAL = RGBColor(15, 118, 110)   # #0F766E Deep Sovereign Teal
+    C_CARD_BG = RGBColor(248, 250, 252)     # #F8FAFC Subtle Off-White Slate
+    C_CARD_BORDER = RGBColor(226, 232, 240) # #E2E8F0 Clean 1px border
+
     col_data_s4 = [
         (
-            Inches(0.55), "⚙️ ANALYSIS OF FEASIBILITY", "TECHNICAL, OPERATIONAL & ECONOMIC",
-            RGBColor(37, 99, 235), RGBColor(239, 246, 255),
+            Inches(0.55), "ANALYSIS OF FEASIBILITY", "TECHNICAL, OPERATIONAL & ECONOMIC",
+            C_NAVY_DEEP,
             [
                 ("Infrastructure Feasibility", "Leverages standard cloud and public web portals; zero airport hardware installation required."),
                 ("Operational Scalability", "Deployed across 12 core metro routes initially; scalable nationwide to 250+ UDAN regional corridors."),
@@ -678,8 +685,8 @@ def create_final_presentation(output_path):
             ]
         ),
         (
-            Inches(4.68), "⚠️ POTENTIAL CHALLENGES & RISKS", "SYSTEMIC & EXTRACTION VULNERABILITIES",
-            RGBColor(220, 38, 38), RGBColor(254, 242, 242),
+            Inches(4.68), "POTENTIAL CHALLENGES & RISKS", "SYSTEMIC & EXTRACTION VULNERABILITIES",
+            C_RISK_MUTED,
             [
                 ("Portal Layout Drift", "Airlines periodically alter front-end markup and CSS classes, risking scraper parser failure."),
                 ("Rate-Limits & Throttling", "High-frequency automated queries risk triggering HTTP 429/503 rate-limits or IP restrictions."),
@@ -688,8 +695,8 @@ def create_final_presentation(output_path):
             ]
         ),
         (
-            Inches(8.81), "🛡️ STRATEGIES FOR OVERCOMING CHALLENGES", "RISKS & MITIGATION ENGINE",
-            RGBColor(22, 163, 74), RGBColor(240, 253, 244),
+            Inches(8.81), "STRATEGIES FOR OVERCOMING CHALLENGES", "RISKS & MITIGATION ENGINE",
+            C_MITIG_TEAL,
             [
                 ("Modular Resilient Parsers", "Decoupled JSON network request interceptors with automated DOM selector breakage alerts."),
                 ("Compliant Pacing & MoUs", "Polite delays (1.5–3.0s), off-peak harvesting (2–4 AM), and roadmap to airline NDC feeds."),
@@ -700,14 +707,16 @@ def create_final_presentation(output_path):
     ]
 
     col_w_s4 = Inches(3.97)
-    for col_i, (cx, title, subtitle, theme_col, bg_col, cards) in enumerate(col_data_s4):
+    for col_i, (cx, title, subtitle, theme_col, cards) in enumerate(col_data_s4):
+        # Outer Column Container: Clean white with subtle institutional border
         c_col = s4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, Inches(1.15), col_w_s4, Inches(5.20))
         c_col.adjustments[0] = 0.03
         c_col.fill.solid()
         c_col.fill.fore_color.rgb = C_WHITE
-        c_col.line.color.rgb = theme_col
-        c_col.line.width = Pt(1.5)
+        c_col.line.color.rgb = C_BORDER_LIGHT
+        c_col.line.width = Pt(1.2)
 
+        # Header Bar: Deep Executive Tones
         h_box = s4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, Inches(1.15), col_w_s4, Inches(0.56))
         h_box.adjustments[0] = 0.18
         h_box.fill.solid()
@@ -726,11 +735,11 @@ def create_final_presentation(output_path):
         p_sub = tf_h.add_paragraph()
         p_sub.text = subtitle
         p_sub.font.name = "Arial"
-        p_sub.font.size = Pt(9)
+        p_sub.font.size = Pt(8.5)
         p_sub.font.color.rgb = RGBColor(241, 245, 249)
         p_sub.alignment = PP_ALIGN.CENTER
 
-        # Perfectly symmetric cards across all 3 columns
+        # Clean, Uncluttered Cards: Soft Off-White Background with Subtle Neutral Border
         card_start_y = Inches(1.78)
         step_y = Inches(1.11)
         card_h = Inches(1.02)
@@ -738,10 +747,10 @@ def create_final_presentation(output_path):
             card_y = card_start_y + c_idx * step_y
             
             card_shape = s4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx + Inches(0.10), card_y, col_w_s4 - Inches(0.20), card_h)
-            card_shape.adjustments[0] = 0.10
+            card_shape.adjustments[0] = 0.08
             card_shape.fill.solid()
-            card_shape.fill.fore_color.rgb = bg_col
-            card_shape.line.color.rgb = theme_col
+            card_shape.fill.fore_color.rgb = C_CARD_BG
+            card_shape.line.color.rgb = C_CARD_BORDER
             card_shape.line.width = Pt(1.0)
 
             tb_cd = s4.shapes.add_textbox(cx + Inches(0.14), card_y + Inches(0.04), col_w_s4 - Inches(0.28), card_h - Inches(0.08))
@@ -752,26 +761,26 @@ def create_final_presentation(output_path):
             p_ch = tf_cd.paragraphs[0]
             p_ch.text = c_head
             p_ch.font.name = "Arial"
-            p_ch.font.size = Pt(11.5)
+            p_ch.font.size = Pt(11)
             p_ch.font.bold = True
             p_ch.font.color.rgb = theme_col
 
             p_cb = tf_cd.add_paragraph()
             p_cb.text = c_desc
             p_cb.font.name = "Arial"
-            p_cb.font.size = Pt(11)
+            p_cb.font.size = Pt(10)
             p_cb.font.color.rgb = C_TEXT_DARK
             p_cb.line_spacing = 1.05
 
-    # Bottom Compact ROADMAP Strip (part of Strategies for Overcoming Challenges)
+    # Bottom Compact ROADMAP Strip: Executive Navy & Warm Amber Typography
     road_y = Inches(6.45)
     road_h = Inches(0.80)
     road_box = s4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.55), road_y, Inches(12.23), road_h)
     road_box.adjustments[0] = 0.15
     road_box.fill.solid()
-    road_box.fill.fore_color.rgb = RGBColor(15, 23, 42) # Dark Slate
-    road_box.line.color.rgb = RGBColor(56, 189, 248)
-    road_box.line.width = Pt(1.5)
+    road_box.fill.fore_color.rgb = RGBColor(15, 23, 42) # Deep Executive Navy
+    road_box.line.color.rgb = RGBColor(71, 85, 105)     # Subtle Slate Border
+    road_box.line.width = Pt(1.2)
 
     tb_rd = road_box.text_frame
     tb_rd.word_wrap = True
@@ -779,18 +788,18 @@ def create_final_presentation(output_path):
     p_rd1 = tb_rd.paragraphs[0]
     p_rd1.alignment = PP_ALIGN.CENTER
     r_rd_h = p_rd1.add_run()
-    r_rd_h.text = "📍 STRATEGIES FOR OVERCOMING CHALLENGES — IMPLEMENTATION ROADMAP: "
+    r_rd_h.text = "STRATEGIES FOR OVERCOMING CHALLENGES — IMPLEMENTATION ROADMAP: "
     r_rd_h.font.name = "Arial"
-    r_rd_h.font.size = Pt(12)
+    r_rd_h.font.size = Pt(11.5)
     r_rd_h.font.bold = True
-    r_rd_h.font.color.rgb = RGBColor(56, 189, 248)
+    r_rd_h.font.color.rgb = RGBColor(245, 158, 11) # Warm Amber
 
     p_rd2 = tb_rd.add_paragraph()
     p_rd2.alignment = PP_ALIGN.CENTER
     r_rd_b = p_rd2.add_run()
     r_rd_b.text = "Phase 1: 12 metro routes pilot (Current)  ➔  Phase 2: Top 50 commercial routes expansion  ➔  Phase 3: UDAN regional corridors + official airline API/NDC integration"
     r_rd_b.font.name = "Arial"
-    r_rd_b.font.size = Pt(12)
+    r_rd_b.font.size = Pt(11)
     r_rd_b.font.bold = True
     r_rd_b.font.color.rgb = RGBColor(241, 245, 249)
 
