@@ -135,7 +135,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
           <div className="p-4 bg-slate-950/80 rounded-xl border border-slate-800 font-mono text-[11px] text-slate-300 space-y-1">
             <div className="text-sky-400 font-bold"># Preview Summary (MoSPI Airfare Sub-Index)</div>
             <div>Base Year: 2025 = 100.0</div>
-            <div>Current Index (Sep 2026): {currentPoint.jevonsIndex.toFixed(1)}</div>
+            <div>Current Index ({currentPoint.periodLabel.split('(')[0].trim()}): {currentPoint.jevonsIndex.toFixed(1)}</div>
             <div>YoY Airfare Inflation: +{currentPoint.yoyInflationRate}%</div>
             <div>Total Quotes Verified: {currentPoint.sampleCount.toLocaleString()}</div>
           </div>

@@ -233,6 +233,7 @@ export const App: React.FC = () => {
         isScraping={isScraping}
         latestIndex={latestPoint.jevonsIndex}
         yoyInflation={latestPoint.yoyInflationRate}
+        periodLabel={latestPoint.periodLabel}
       />
 
       {/* Main Page Body */}

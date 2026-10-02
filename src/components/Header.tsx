@@ -13,6 +13,7 @@ interface HeaderProps {
   isScraping: boolean;
   latestIndex: number;
   yoyInflation: number;
+  periodLabel?: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -27,7 +28,10 @@ export const Header: React.FC<HeaderProps> = ({
   isScraping,
   latestIndex,
   yoyInflation,
+  periodLabel,
 }) => {
+  const monthTag = periodLabel ? periodLabel.split(' ')[0] : 'Oct';
+
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur-md">
       {/* Top Ticker Ribbon */}
@@ -38,7 +42,7 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
             </span>
-            LIVE MOSPI AIRFARE CPI: <strong className="ml-1 text-white">{latestIndex.toFixed(1)}</strong> (Sep MTD Composite)
+            LIVE MOSPI AIRFARE CPI: <strong className="ml-1 text-white">{latestIndex.toFixed(1)}</strong> ({monthTag} MTD Composite)
           </span>
           <span className="text-slate-400">|</span>
           <span className="text-slate-300">

@@ -17,6 +17,30 @@ export const CPIMetricsOverview: React.FC<CPIMetricsOverviewProps> = ({
   outlierCount,
   onOpenOutlierModal
 }) => {
+  // Dynamically derive current month and YoY comparison period (1 year prior)
+  const parsePeriodInfo = () => {
+    if (currentPoint.date && currentPoint.date.includes('-')) {
+      const [yearStr, monthStr] = currentPoint.date.split('-');
+      const year = parseInt(yearStr, 10);
+      const monthIdx = parseInt(monthStr, 10) - 1;
+      const d = new Date(year, monthIdx, 1);
+      const mShort = d.toLocaleString('en-US', { month: 'short' });
+      return {
+        monthUpper: mShort.toUpperCase(),
+        comparisonLabel: `vs ${mShort} ${year - 1}`
+      };
+    }
+    const parts = (currentPoint.periodLabel || '').trim().split(' ');
+    const mShort = parts[0] || 'Oct';
+    const year = parseInt(parts[1], 10) || 2026;
+    return {
+      monthUpper: mShort.toUpperCase(),
+      comparisonLabel: `vs ${mShort} ${year - 1}`
+    };
+  };
+
+  const { monthUpper, comparisonLabel } = parsePeriodInfo();
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
       {/* Metric 1: Current CPI Airfare Index */}
@@ -26,7 +50,7 @@ export const CPIMetricsOverview: React.FC<CPIMetricsOverviewProps> = ({
         </div>
         <div className="flex items-center space-x-2 text-xs font-semibold text-sky-400 mb-1">
           <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
-          <span>AIRFARE CPI (SEP MTD)</span>
+          <span>AIRFARE CPI ({monthUpper} MTD)</span>
         </div>
         <div className="flex items-baseline space-x-2 my-1">
           <span className="text-3xl font-extrabold tracking-tight text-white font-mono">
@@ -61,7 +85,7 @@ export const CPIMetricsOverview: React.FC<CPIMetricsOverviewProps> = ({
           <span className="text-3xl font-extrabold tracking-tight text-white font-mono">
             +{currentPoint.yoyInflationRate}%
           </span>
-          <span className="text-xs text-slate-400 font-medium">vs Sep 2025</span>
+          <span className="text-xs text-slate-400 font-medium">{comparisonLabel}</span>
         </div>
         <div className="text-xs text-slate-400 mt-3 flex items-center justify-between">
           <span>eSankhyiki Release Lag: <strong className="text-slate-200">~30 Days</strong></span>
