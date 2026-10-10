@@ -246,6 +246,7 @@ export const MOCK_OUTLIERS: OutlierRecord[] = [
     reason: 'LAST_MINUTE_SCALPING',
     timestamp: '2026-10-06 02:00:15'
   },
+  {
     id: 'out-305',
     flightNumber: '6E-4005',
     corridor: 'DEL ↔ BOM',
