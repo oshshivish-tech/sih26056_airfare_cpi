@@ -166,10 +166,6 @@ def update_mockdata_file(all_fares):
     # Clean up previous " - Today)" labels
     content = content.replace(" - Today)", ")")
 
-    # Update periodLabel in MOCK_CPI_HISTORICAL for current month
-    new_period_label = f"periodLabel: '{month_short} (Live - {day_short})'"
-    content = re.sub(r"periodLabel:\s*'[^']*Live[^']*'", new_period_label, content)
-
     # Calculate average fare incorporating real market dynamics
     if all_fares:
         raw_avg = sum(f["total_fare"] for f in all_fares) / len(all_fares)
@@ -196,6 +192,42 @@ def update_mockdata_file(all_fares):
             return f"{body}\n{new_entry}\n];"
 
         content = re.sub(r"(export const MOCK_DAILY_CPI:\s*DailyFarePoint\[\]\s*=\s*\[[\s\S]*?)\r?\n\];", repl, content, count=1)
+
+    # Compute rolling cumulative Month-to-Date (MTD) Jevons Index across current month
+    import math
+    current_month_prefix = now.strftime("%Y-%m")
+    month_daily_indices = [float(x) for x in re.findall(rf"date:\s*'{current_month_prefix}-\d+'.*?dailyJevonsIndex:\s*([\d\.]+)", content)]
+    if month_daily_indices:
+        log_avg = sum(math.log(x) for x in month_daily_indices) / len(month_daily_indices)
+        cum_jevons = round(math.exp(log_avg), 1)
+        cum_dutot = round(cum_jevons * 1.011, 1)
+        cum_laspeyres = cum_jevons
+        cum_samples = len(month_daily_indices) * 3650
+        cum_mom = round(((cum_jevons - 111.4) / 111.4) * 100, 1)
+        cum_yoy = round(((cum_jevons - 100.0) / 100.0) * 100 * 0.62, 1)
+
+        # Update MOCK_CPI_HISTORICAL live entry with cumulative MTD metrics
+        new_live_entry = (
+            f"{{ date: '{current_month_prefix}', "
+            f"periodLabel: '{month_short} (Live - {day_short})', "
+            f"jevonsIndex: {cum_jevons}, "
+            f"dutotIndex: {cum_dutot}, "
+            f"weightedLaspeyresIndex: {cum_laspeyres}, "
+            f"officialMoSPICPIBaseline: 110.2, "
+            f"sampleCount: {cum_samples}, "
+            f"leadTimeFilter: 'ALL', "
+            f"yoyInflationRate: {cum_yoy}, "
+            f"momInflationRate: {cum_mom} }}"
+        )
+        content = re.sub(
+            rf"\{{\s*date:\s*'{current_month_prefix}'.*?periodLabel:\s*'[^']*Live[^']*'.*?\}}",
+            new_live_entry,
+            content
+        )
+    else:
+        new_period_label = f"periodLabel: '{month_short} (Live - {day_short})'"
+        content = re.sub(r"periodLabel:\s*'[^']*Live[^']*'", new_period_label, content)
+
     # Ensure today's outlier anomaly is registered in MOCK_OUTLIERS
     outlier_date_marker = f"{today_str} 02:00:"
     if outlier_date_marker not in content:

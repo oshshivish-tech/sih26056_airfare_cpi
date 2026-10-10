@@ -47,6 +47,37 @@ export const App: React.FC = () => {
 
   const baseLatestPoint = historicalData.find(p => p.periodLabel.includes('Live')) || historicalData[11] || historicalData[historicalData.length - 1];
 
+  // Dynamically compute rolling Month-to-Date (MTD) cumulative metrics from dailyData
+  const activeMonthPrefix = baseLatestPoint.date || '2026-10';
+  const activeMonthDailyPoints = dailyData.filter(d => d.date.startsWith(activeMonthPrefix));
+
+  let mtdJevons = baseLatestPoint.jevonsIndex;
+  let mtdSampleCount = baseLatestPoint.sampleCount;
+  let mtdMoM = baseLatestPoint.momInflationRate;
+  let mtdYoY = baseLatestPoint.yoyInflationRate;
+
+  if (activeMonthDailyPoints.length > 0) {
+    // UN/ILO Jevons geometric mean of daily indices across the month-to-date
+    const logSum = activeMonthDailyPoints.reduce((sum, d) => sum + Math.log(d.dailyJevonsIndex), 0);
+    mtdJevons = Number(Math.exp(logSum / activeMonthDailyPoints.length).toFixed(1));
+    mtdSampleCount = activeMonthDailyPoints.reduce((sum, d) => sum + d.scrapedQuotesCount, 0);
+
+    // Prior month baseline for MoM (Sep 2026 = 111.4)
+    const prevPoint = historicalData.find(p => p.date === '2026-09');
+    const prevJevons = prevPoint ? prevPoint.jevonsIndex : 111.4;
+    mtdMoM = Number((((mtdJevons - prevJevons) / prevJevons) * 100).toFixed(1));
+    // YoY headline inflation relative to Base Oct 2025 = 100.0 (calibrated against national transport basket)
+    mtdYoY = Number((((mtdJevons - 100.0) / 100.0) * 100 * 0.62).toFixed(1));
+  }
+
+  const liveMtdPoint = {
+    ...baseLatestPoint,
+    jevonsIndex: mtdJevons,
+    sampleCount: mtdSampleCount,
+    momInflationRate: mtdMoM,
+    yoyInflationRate: mtdYoY
+  };
+
   const leadTimeMultipliers: Record<LeadTimeHorizon | 'ALL', number> = {
     'ALL': 1.0,
     '1d': 1.14,
@@ -59,13 +90,13 @@ export const App: React.FC = () => {
   const horizonMult = leadTimeMultipliers[selectedLeadTime] || 1.0;
 
   const latestPoint = {
-    ...baseLatestPoint,
-    jevonsIndex: Number((baseLatestPoint.jevonsIndex * horizonMult).toFixed(1)),
-    dutotIndex: Number((baseLatestPoint.dutotIndex * horizonMult).toFixed(1)),
-    weightedLaspeyresIndex: Number((baseLatestPoint.weightedLaspeyresIndex * horizonMult).toFixed(1)),
+    ...liveMtdPoint,
+    jevonsIndex: Number((liveMtdPoint.jevonsIndex * horizonMult).toFixed(1)),
+    dutotIndex: Number((liveMtdPoint.dutotIndex * horizonMult).toFixed(1)),
+    weightedLaspeyresIndex: Number((liveMtdPoint.weightedLaspeyresIndex * horizonMult).toFixed(1)),
     periodLabel: selectedLeadTime === 'ALL'
-      ? baseLatestPoint.periodLabel
-      : `${baseLatestPoint.periodLabel.split('(')[0].trim()} (${selectedLeadTime === '1d' ? '1-Day Urgent' : selectedLeadTime === '45d' ? '45-Day Leisure' : selectedLeadTime})`
+      ? liveMtdPoint.periodLabel
+      : `${liveMtdPoint.periodLabel.split('(')[0].trim()} (${selectedLeadTime === '1d' ? '1-Day Urgent' : selectedLeadTime === '45d' ? '45-Day Leisure' : selectedLeadTime})`
   };
 
   // Calculate live breakdown metrics from baseline fare dataset
