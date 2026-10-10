@@ -108,7 +108,7 @@ export const MOCK_CPI_HISTORICAL: CPIIndexPoint[] = [
   { date: '2026-07', periodLabel: 'Jul 2026', jevonsIndex: 107.4, dutotIndex: 108.1, weightedLaspeyresIndex: 107.0, officialMoSPICPIBaseline: 106.5, sampleCount: 18900, leadTimeFilter: 'ALL', yoyInflationRate: 5.4, momInflationRate: -4.6 },
   { date: '2026-08', periodLabel: 'Aug 2026', jevonsIndex: 109.8, dutotIndex: 110.6, weightedLaspeyresIndex: 109.4, officialMoSPICPIBaseline: 108.2, sampleCount: 21400, leadTimeFilter: 'ALL', yoyInflationRate: 6.1, momInflationRate: 2.2 },
   { date: '2026-09', periodLabel: 'Sep 2026', jevonsIndex: 111.4, dutotIndex: 112.5, weightedLaspeyresIndex: 111.0, officialMoSPICPIBaseline: 109.5, sampleCount: 26150, leadTimeFilter: 'ALL', yoyInflationRate: 6.9, momInflationRate: 1.5 },
-  { date: '2026-10', periodLabel: 'Oct 2026 (Live - 09 Oct)', jevonsIndex: 112.1, dutotIndex: 113.4, weightedLaspeyresIndex: 111.8, officialMoSPICPIBaseline: 110.2, sampleCount: 3650, leadTimeFilter: 'ALL', yoyInflationRate: 7.2, momInflationRate: 0.6 },
+  { date: '2026-10', periodLabel: 'Oct 2026 (Live - 10 Oct)', jevonsIndex: 112.1, dutotIndex: 113.4, weightedLaspeyresIndex: 111.8, officialMoSPICPIBaseline: 110.2, sampleCount: 3650, leadTimeFilter: 'ALL', yoyInflationRate: 7.2, momInflationRate: 0.6 },
   { date: '2026-11', periodLabel: 'Nov 2026 (Fcst)', jevonsIndex: 116.8, dutotIndex: 118.2, weightedLaspeyresIndex: 116.4, officialMoSPICPIBaseline: 114.5, sampleCount: 26000, leadTimeFilter: 'ALL', yoyInflationRate: 8.5, momInflationRate: 4.2 },
   { date: '2026-12', periodLabel: 'Dec 2026 (Fcst)', jevonsIndex: 121.2, dutotIndex: 123.0, weightedLaspeyresIndex: 120.8, officialMoSPICPIBaseline: 118.9, sampleCount: 28500, leadTimeFilter: 'ALL', yoyInflationRate: 10.4, momInflationRate: 3.8 },
 ];
@@ -176,11 +176,25 @@ export const MOCK_DAILY_CPI: DailyFarePoint[] = [
   { date: '2026-10-06', dayLabel: '06 Oct (Tue)', dailyJevonsIndex: 107.1, dailyAvgFare: 5196, movingAverage7d: 5476, scrapedQuotesCount: 3650, isWeekend: false },
   { date: '2026-10-07', dayLabel: '07 Oct (Wed)', dailyJevonsIndex: 107.4, dailyAvgFare: 5208, movingAverage7d: 5471, scrapedQuotesCount: 3650, isWeekend: false },
   { date: '2026-10-08', dayLabel: '08 Oct (Thu)', dailyJevonsIndex: 110.3, dailyAvgFare: 5350, movingAverage7d: 5472, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-10-09', dayLabel: '09 Oct (Fri - Today)', dailyJevonsIndex: 118.7, dailyAvgFare: 5759, movingAverage7d: 5485, scrapedQuotesCount: 3650, isWeekend: true }
+  { date: '2026-10-09', dayLabel: '09 Oct (Fri)', dailyJevonsIndex: 118.7, dailyAvgFare: 5759, movingAverage7d: 5485, scrapedQuotesCount: 3650, isWeekend: true },
+  { date: '2026-10-10', dayLabel: '10 Oct (Sat - Today)', dailyJevonsIndex: 121.4, dailyAvgFare: 5890, movingAverage7d: 5493, scrapedQuotesCount: 3650, isWeekend: true }
 ];
 
 // Sample Outliers Detected & Excluded by Algorithm
 export const MOCK_OUTLIERS: OutlierRecord[] = [
+  {
+    id: 'out-310',
+    flightNumber: 'AI-4010',
+    corridor: 'BOM ↔ BLR',
+    airline: 'Air India',
+    observedFare: 28272,
+    expectedRouteMedianFare: 5890,
+    zScore: 4.8,
+    iqrBounds: [3828, 9130],
+    action: 'EXCLUDED_FROM_INDEX',
+    reason: 'LAST_MINUTE_SCALPING',
+    timestamp: '2026-10-10 02:00:15'
+  },
   {
     id: 'out-309',
     flightNumber: '6E-4009',
