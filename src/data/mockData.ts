@@ -201,11 +201,25 @@ export const MOCK_DAILY_CPI: DailyFarePoint[] = [
   { date: '2026-11-01', dayLabel: '01 Nov (Sun)', dailyJevonsIndex: 120.6, dailyAvgFare: 5851, movingAverage7d: 5514, scrapedQuotesCount: 3650, isWeekend: true },
   { date: '2026-11-02', dayLabel: '02 Nov (Mon)', dailyJevonsIndex: 110.1, dailyAvgFare: 5341, movingAverage7d: 5524, scrapedQuotesCount: 3650, isWeekend: false },
   { date: '2026-11-03', dayLabel: '03 Nov (Tue)', dailyJevonsIndex: 105.8, dailyAvgFare: 5133, movingAverage7d: 5523, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-11-04', dayLabel: '04 Nov (Wed - Today)', dailyJevonsIndex: 109.0, dailyAvgFare: 5288, movingAverage7d: 5517, scrapedQuotesCount: 3650, isWeekend: false }
+  { date: '2026-11-04', dayLabel: '04 Nov (Wed)', dailyJevonsIndex: 109.0, dailyAvgFare: 5288, movingAverage7d: 5517, scrapedQuotesCount: 3650, isWeekend: false },
+  { date: '2026-11-05', dayLabel: '05 Nov (Thu - Today)', dailyJevonsIndex: 109.8, dailyAvgFare: 5324, movingAverage7d: 5508, scrapedQuotesCount: 3650, isWeekend: false }
 ];
 
 // Sample Outliers Detected & Excluded by Algorithm
 export const MOCK_OUTLIERS: OutlierRecord[] = [
+  {
+    id: 'out-405',
+    flightNumber: 'AI-4105',
+    corridor: 'DEL ↔ BOM',
+    airline: 'Air India',
+    observedFare: 20231,
+    expectedRouteMedianFare: 5324,
+    zScore: 4.3,
+    iqrBounds: [3461, 8252],
+    action: 'EXCLUDED_FROM_INDEX',
+    reason: 'LAST_MINUTE_SCALPING',
+    timestamp: '2026-11-05 02:00:15'
+  },
   {
     id: 'out-404',
     flightNumber: '6E-4104',
