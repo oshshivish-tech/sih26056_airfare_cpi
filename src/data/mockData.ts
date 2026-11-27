@@ -223,11 +223,25 @@ export const MOCK_DAILY_CPI: DailyFarePoint[] = [
   { date: '2026-11-23', dayLabel: '23 Nov (Mon)', dailyJevonsIndex: 110.7, dailyAvgFare: 5371, movingAverage7d: 5568, scrapedQuotesCount: 3650, isWeekend: false },
   { date: '2026-11-24', dayLabel: '24 Nov (Tue)', dailyJevonsIndex: 108.2, dailyAvgFare: 5247, movingAverage7d: 5567, scrapedQuotesCount: 3650, isWeekend: false },
   { date: '2026-11-25', dayLabel: '25 Nov (Wed)', dailyJevonsIndex: 109.4, dailyAvgFare: 5304, movingAverage7d: 5566, scrapedQuotesCount: 3650, isWeekend: false },
-  { date: '2026-11-26', dayLabel: '26 Nov (Thu - Today)', dailyJevonsIndex: 110.9, dailyAvgFare: 5379, movingAverage7d: 5558, scrapedQuotesCount: 3650, isWeekend: false }
+  { date: '2026-11-26', dayLabel: '26 Nov (Thu)', dailyJevonsIndex: 110.9, dailyAvgFare: 5379, movingAverage7d: 5558, scrapedQuotesCount: 3650, isWeekend: false },
+  { date: '2026-11-27', dayLabel: '27 Nov (Fri - Today)', dailyJevonsIndex: 116.5, dailyAvgFare: 5651, movingAverage7d: 5548, scrapedQuotesCount: 3650, isWeekend: true }
 ];
 
 // Sample Outliers Detected & Excluded by Algorithm
 export const MOCK_OUTLIERS: OutlierRecord[] = [
+  {
+    id: 'out-427',
+    flightNumber: '6E-4127',
+    corridor: 'BLR ↔ DEL',
+    airline: 'IndiGo',
+    observedFare: 27125,
+    expectedRouteMedianFare: 5651,
+    zScore: 4.5,
+    iqrBounds: [3673, 8759],
+    action: 'EXCLUDED_FROM_INDEX',
+    reason: 'LAST_MINUTE_SCALPING',
+    timestamp: '2026-11-27 02:00:15'
+  },
   {
     id: 'out-426',
     flightNumber: 'AI-4126',
